@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.LogPriceMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.LogPrice" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="log_dept" property="logDept" jdbcType="VARCHAR" />
+    <result column="log_person" property="logPerson" jdbcType="VARCHAR" />
+    <result column="log_price" property="logPrice" jdbcType="DOUBLE" />
+    <result column="log_state" property="logState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    log_id, log_dept, log_person, log_price, log_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from log_price
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log_price
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.LogPrice" >
+    insert into log_price (log_id, log_dept, log_person, 
+      log_price, log_state)
+    values (#{logId,jdbcType=INTEGER}, #{logDept,jdbcType=VARCHAR}, #{logPerson,jdbcType=VARCHAR}, 
+      #{logPrice,jdbcType=DOUBLE}, #{logState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertLogPrice" parameterType="scau.com.lprapm.entity.LogPrice" useGeneratedKeys="true" keyProperty="logId">
+    insert into log_price (log_id, log_dept, log_person,
+    log_price, log_state)
+    values (#{logId,jdbcType=INTEGER}, #{logDept,jdbcType=VARCHAR}, #{logPerson,jdbcType=VARCHAR},
+    #{logPrice,jdbcType=DOUBLE}, #{logState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.LogPrice" >
+    insert into log_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="logDept != null" >
+        log_dept,
+      </if>
+      <if test="logPerson != null" >
+        log_person,
+      </if>
+      <if test="logPrice != null" >
+        log_price,
+      </if>
+      <if test="logState != null" >
+        log_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="logDept != null" >
+        #{logDept,jdbcType=VARCHAR},
+      </if>
+      <if test="logPerson != null" >
+        #{logPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="logPrice != null" >
+        #{logPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="logState != null" >
+        #{logState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.LogPrice" >
+    update log_price
+    <set >
+      <if test="logDept != null" >
+        log_dept = #{logDept,jdbcType=VARCHAR},
+      </if>
+      <if test="logPerson != null" >
+        log_person = #{logPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="logPrice != null" >
+        log_price = #{logPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="logState != null" >
+        log_state = #{logState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.LogPrice" >
+    update log_price
+    set log_dept = #{logDept,jdbcType=VARCHAR},
+      log_person = #{logPerson,jdbcType=VARCHAR},
+      log_price = #{logPrice,jdbcType=DOUBLE},
+      log_state = #{logState,jdbcType=VARCHAR}
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+</mapper>

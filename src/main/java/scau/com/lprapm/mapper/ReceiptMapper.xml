@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.ReceiptMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Receipt" >
+    <id column="receipt_id" property="receiptId" jdbcType="INTEGER" />
+    <result column="receipt_name" property="receiptName" jdbcType="VARCHAR" />
+    <result column="receipt_phone" property="receiptPhone" jdbcType="VARCHAR" />
+    <result column="receipt_address" property="receiptAddress" jdbcType="VARCHAR" />
+    <result column="receipt_state" property="receiptState" jdbcType="VARCHAR" />
+    <result column="receipt_time" property="receiptTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    receipt_id, receipt_name, receipt_phone, receipt_address, receipt_state, receipt_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from receipt
+    where receipt_id = #{receiptId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from receipt
+    where receipt_id = #{receiptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.Receipt" >
+    insert into receipt (receipt_id, receipt_name, receipt_phone, 
+      receipt_address, receipt_state, receipt_time
+      )
+    values (#{receiptId,jdbcType=INTEGER}, #{receiptName,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR}, 
+      #{receiptAddress,jdbcType=VARCHAR}, #{receiptState,jdbcType=VARCHAR}, #{receiptTime,jdbcType=DATE}
+      )
+  </insert>
+  <insert id="insertReceipt" parameterType="scau.com.lprapm.entity.Receipt" useGeneratedKeys="true" keyProperty="receiptId">
+    insert into receipt (receipt_id, receipt_name, receipt_phone,
+    receipt_address, receipt_state, receipt_time
+    )
+    values (#{receiptId,jdbcType=INTEGER}, #{receiptName,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR},
+    #{receiptAddress,jdbcType=VARCHAR}, #{receiptState,jdbcType=VARCHAR}, #{receiptTime,jdbcType=DATE}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Receipt" >
+    insert into receipt
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="receiptId != null" >
+        receipt_id,
+      </if>
+      <if test="receiptName != null" >
+        receipt_name,
+      </if>
+      <if test="receiptPhone != null" >
+        receipt_phone,
+      </if>
+      <if test="receiptAddress != null" >
+        receipt_address,
+      </if>
+      <if test="receiptState != null" >
+        receipt_state,
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="receiptId != null" >
+        #{receiptId,jdbcType=INTEGER},
+      </if>
+      <if test="receiptName != null" >
+        #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPhone != null" >
+        #{receiptPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptAddress != null" >
+        #{receiptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptState != null" >
+        #{receiptState,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        #{receiptTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Receipt" >
+    update receipt
+    <set >
+      <if test="receiptName != null" >
+        receipt_name = #{receiptName,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptPhone != null" >
+        receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptAddress != null" >
+        receipt_address = #{receiptAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptState != null" >
+        receipt_state = #{receiptState,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptTime != null" >
+        receipt_time = #{receiptTime,jdbcType=DATE},
+      </if>
+    </set>
+    where receipt_id = #{receiptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Receipt" >
+    update receipt
+    set receipt_name = #{receiptName,jdbcType=VARCHAR},
+      receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
+      receipt_address = #{receiptAddress,jdbcType=VARCHAR},
+      receipt_state = #{receiptState,jdbcType=VARCHAR},
+      receipt_time = #{receiptTime,jdbcType=DATE}
+    where receipt_id = #{receiptId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.OrdersMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Orders" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="oe_id" property="oeId" jdbcType="INTEGER" />
+    <result column="receipt_id" property="receiptId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="pur_id" property="purId" jdbcType="INTEGER" />
+    <result column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="is_pur" property="isPur" jdbcType="VARCHAR" />
+    <result column="is_ask_pur" property="isAskPur" jdbcType="VARCHAR" />
+    <result column="is_ask_log" property="isAskLog" jdbcType="VARCHAR" />
+    <result column="is_sure" property="isSure" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+    <result column="end_time" property="endTime" jdbcType="DATE" />
+    <result column="order_address" property="orderAddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_id, goods_id, oe_id, receipt_id, user_id, pur_id, log_id, user_name, is_pur, 
+    is_ask_pur, is_ask_log, is_sure, create_time, end_time, order_address
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.Orders" >
+    insert into orders (order_id, goods_id, oe_id, 
+      receipt_id, user_id, pur_id, 
+      log_id, user_name, is_pur, 
+      is_ask_pur, is_ask_log, is_sure, 
+      create_time, end_time, order_address
+      )
+    values (#{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{oeId,jdbcType=INTEGER}, 
+      #{receiptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{purId,jdbcType=INTEGER}, 
+      #{logId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{isPur,jdbcType=VARCHAR}, 
+      #{isAskPur,jdbcType=VARCHAR}, #{isAskLog,jdbcType=VARCHAR}, #{isSure,jdbcType=VARCHAR}, 
+      NOW(), #{endTime,jdbcType=DATE}, #{orderAddress,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="oeId != null" >
+        oe_id,
+      </if>
+      <if test="receiptId != null" >
+        receipt_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="purId != null" >
+        pur_id,
+      </if>
+      <if test="logId != null" >
+        log_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="isPur != null" >
+        is_pur,
+      </if>
+      <if test="isAskPur != null" >
+        is_ask_pur,
+      </if>
+      <if test="isAskLog != null" >
+        is_ask_log,
+      </if>
+      <if test="isSure != null" >
+        is_sure,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="endTime != null" >
+        end_time,
+      </if>
+      <if test="orderAddress != null" >
+        order_address,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="oeId != null" >
+        #{oeId,jdbcType=INTEGER},
+      </if>
+      <if test="receiptId != null" >
+        #{receiptId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="purId != null" >
+        #{purId,jdbcType=INTEGER},
+      </if>
+      <if test="logId != null" >
+        #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPur != null" >
+        #{isPur,jdbcType=VARCHAR},
+      </if>
+      <if test="isAskPur != null" >
+        #{isAskPur,jdbcType=VARCHAR},
+      </if>
+      <if test="isAskLog != null" >
+        #{isAskLog,jdbcType=VARCHAR},
+      </if>
+      <if test="isSure != null" >
+        #{isSure,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        #{endTime,jdbcType=DATE},
+      </if>
+      <if test="orderAddress != null" >
+        #{orderAddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Orders" >
+    update orders
+    <set >
+      <if test="goodsId != null" >
+        goods_id = #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="oeId != null" >
+        oe_id = #{oeId,jdbcType=INTEGER},
+      </if>
+      <if test="receiptId != null" >
+        receipt_id = #{receiptId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="purId != null" >
+        pur_id = #{purId,jdbcType=INTEGER},
+      </if>
+      <if test="logId != null" >
+        log_id = #{logId,jdbcType=INTEGER},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="isPur != null" >
+        is_pur = #{isPur,jdbcType=VARCHAR},
+      </if>
+      <if test="isAskPur != null" >
+        is_ask_pur = #{isAskPur,jdbcType=VARCHAR},
+      </if>
+      <if test="isAskLog != null" >
+        is_ask_log = #{isAskLog,jdbcType=VARCHAR},
+      </if>
+      <if test="isSure != null" >
+        is_sure = #{isSure,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+      <if test="endTime != null" >
+        end_time = #{endTime,jdbcType=DATE},
+      </if>
+      <if test="orderAddress != null" >
+        order_address = #{orderAddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Orders" >
+    update orders
+    set goods_id = #{goodsId,jdbcType=INTEGER},
+      oe_id = #{oeId,jdbcType=INTEGER},
+      receipt_id = #{receiptId,jdbcType=INTEGER},
+      user_id = #{userId,jdbcType=INTEGER},
+      pur_id = #{purId,jdbcType=INTEGER},
+      log_id = #{logId,jdbcType=INTEGER},
+      user_name = #{userName,jdbcType=VARCHAR},
+      is_pur = #{isPur,jdbcType=VARCHAR},
+      is_ask_pur = #{isAskPur,jdbcType=VARCHAR},
+      is_ask_log = #{isAskLog,jdbcType=VARCHAR},
+      is_sure = #{isSure,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=DATE},
+      end_time = #{endTime,jdbcType=DATE},
+      order_address = #{orderAddress,jdbcType=VARCHAR}
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+</mapper>

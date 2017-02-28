@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>login</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/font-awesome-4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/app/login.css"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row login-bg">
+    </div>
+    <div class="row login-box">
+        <div class="row login-logo">
+            <h1>LOGISTICS</h1>
+        </div>
+        <div class="row login-main">
+            <div class="login-mainwrap">
+                <form class="form-horizontal" id="loginForm" role="form">
+                    <div class="form-group has-feedback">
+                        <label for="userEmail" class="col-sm-3 control-label title text-right">账号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control txt" id="userEmail" name="userEmail" placeholder="邮箱账号">
+                            <span class="fa fa-check form-control-feedback feedback-span hide"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword" class="col-sm-3 control-label title">密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control txt" id="userPassword" name="userPassword" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkcode" class="col-sm-3 control-label title">验证码：</label>
+                        <div class="col-sm-5">
+                            <input type="text" id="checkcode" class="form-control txt" name="userCheckCode" placeholder="验证码"/>
+                            <p class="responseError error"></p>
+                        </div>
+                        <div class="col-sm-4">
+                            <span class="yzm">
+                                <img id="verifycode" src="user/verifycode" class="img-thumbnail" alt="换一张" />
+                            </span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-5">
+                            <button type="submit" class="btn btn-button btn-login">登录</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="reset" class="btn btn-button btn-reset">重置</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-9 col-sm-3 text-right">
+                            <a class="text-muted" href="register.html">请注册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['assets/js/common'], function () {
+        require(['app/login']);
+    });
+</script>
+</body>
+</html>

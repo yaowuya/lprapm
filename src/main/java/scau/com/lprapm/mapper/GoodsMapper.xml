@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.GoodsMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Goods" >
+    <id column="goods_id" property="goodsId" jdbcType="INTEGER" />
+    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
+    <result column="goods_number" property="goodsNumber" jdbcType="DOUBLE" />
+    <result column="goods_volume" property="goodsVolume" jdbcType="DOUBLE" />
+    <result column="goods_perweight" property="goodsPerweight" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    goods_id, goods_name, goods_number, goods_volume, goods_perweight
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from goods
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.Goods" >
+    insert into goods (goods_id, goods_name, goods_number, 
+      goods_volume, goods_perweight)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsNumber,jdbcType=DOUBLE}, 
+      #{goodsVolume,jdbcType=DOUBLE}, #{goodsPerweight,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertGoods" parameterType="scau.com.lprapm.entity.Goods" useGeneratedKeys="true" keyProperty="goodsId" >
+    insert into goods (goods_id, goods_name, goods_number,
+    goods_volume, goods_perweight)
+    values (#{goodsId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsNumber,jdbcType=DOUBLE},
+    #{goodsVolume,jdbcType=DOUBLE}, #{goodsPerweight,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Goods" >
+    insert into goods
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        goods_id,
+      </if>
+      <if test="goodsName != null" >
+        goods_name,
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number,
+      </if>
+      <if test="goodsVolume != null" >
+        goods_volume,
+      </if>
+      <if test="goodsPerweight != null" >
+        goods_perweight,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="goodsId != null" >
+        #{goodsId,jdbcType=INTEGER},
+      </if>
+      <if test="goodsName != null" >
+        #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumber != null" >
+        #{goodsNumber,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsVolume != null" >
+        #{goodsVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsPerweight != null" >
+        #{goodsPerweight,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Goods" >
+    update goods
+    <set >
+      <if test="goodsName != null" >
+        goods_name = #{goodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="goodsNumber != null" >
+        goods_number = #{goodsNumber,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsVolume != null" >
+        goods_volume = #{goodsVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="goodsPerweight != null" >
+        goods_perweight = #{goodsPerweight,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Goods" >
+    update goods
+    set goods_name = #{goodsName,jdbcType=VARCHAR},
+      goods_number = #{goodsNumber,jdbcType=DOUBLE},
+      goods_volume = #{goodsVolume,jdbcType=DOUBLE},
+      goods_perweight = #{goodsPerweight,jdbcType=DOUBLE}
+    where goods_id = #{goodsId,jdbcType=INTEGER}
+  </update>
+</mapper>

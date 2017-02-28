@@ -1,0 +1,139 @@
+.sidebar {
+  width: 205px;
+  background: #313541;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 8;
+}
+.sidebar .logo {
+  width: 205px;
+  height: 86px;
+  background: #00B38B;
+  border-bottom: 1px solid #00B38B;
+  text-align: center;
+}
+.sidebar .logo h1 {
+  color: white;
+  font-size: 200%;
+  font-weight: bold;
+  padding-top: 13%;
+}
+.sidebar .side-menu {
+  width: 100%;
+  height: auto;
+}
+
+/*-------------------------------*/
+
+/*           Wrappers            */
+
+/*-------------------------------*/
+#sidebar-wrapper {
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -webkit-transition: all 0.5s ease;
+  height: auto;
+  transition: all 0.5s ease;
+  width: 100%;
+  z-index: 1000;
+  position: relative;
+}
+#sidebar-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/*-------------------------------*/
+
+/*     Sidebar nav styles        */
+
+/*-------------------------------*/
+.sidebar-nav {
+  list-style: none;
+  margin: 0;
+  padding: 25px 0px 0px 0px;
+  width: 100%;
+  height: auto;
+}
+.sidebar-nav li {
+  display: inline-block;
+  line-height: 20px;
+  position: relative;
+  width: 100%;
+}
+.sidebar-nav li a {
+  color: #dddddd;
+  display: block;
+  padding: 20px 15px;
+  text-decoration: none;
+  text-align: center;
+  font-size: 108%;
+}
+.sidebar-nav i {
+  padding: 0 0 4% 47%;
+  display: block;
+  font-size: 120%;
+}
+.sidebar-nav ul {
+  padding-left: 10%;
+}
+.sidebar-nav li a:hover, .sidebar-nav li a:active, .sidebar-nav li a:focus {
+  background-color: transparent;
+  color: #f7aa47;
+  text-decoration: none;
+}
+.sidebar-nav li a.active1 {
+  color: #f7aa47;
+}
+
+/* 页面右边部分 */
+.main-content {
+  margin-left: 205px;
+  background: #fff;
+}
+
+/* 头部 */
+.main-content .header {
+  height: 86px;
+  border-bottom: 1px solid #e5e4ee;
+  position: relative;
+  z-index: 9;  /*padding: 3% 0% 0% 0%;*/
+}
+.header h2 {
+  display: inline-block;
+  float: left;
+  font-weight: normal;
+  font-size: 200%;
+  color: #454545;
+  margin-left: 2%;
+  line-height: 86px;
+}
+.header-right {
+  margin: -5% 0 0 33%;
+}
+.header-right span {
+  display: inline-block;
+  font-size: 16px;
+}
+.header-right span:nth-of-type(1){
+  font-size: 20px;
+  font-weight: bold;
+}
+.header-right span:nth-of-type(2){
+  margin-right: 29px;
+}
+/*.header-right .dropdown {
+  display: inline-block;
+  background: none;
+}
+.header-right .dropdown-menu {
+  min-width: 98px;
+}*/
+.content {
+  position: relative;
+  /* height:600px; */
+}
+.userNameColor{
+  color:#00B38B;
+}

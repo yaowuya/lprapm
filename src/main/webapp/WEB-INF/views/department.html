@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>部门管理</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css" />
+</head>
+
+<body>
+    <div class="content-theme">
+        <h3>部门管理</h3>
+    </div>
+    <div class="content-nav"></div>
+    <div class="content-main">
+        <div class="row content-main-btn">
+            <div class="col-xs-3">
+                <button class="btn btn-success" data-toggle="modal" id="btn-dept-add">
+                    <span class="fa fa-fw fa-plus"></span> 添加
+                </button>
+            </div>
+            <div class="col-xs-9 text-right">
+                <form class="form-inline" role="form" id="searchForm">
+                    <div class="form-group">
+                        <label class="sr-only" for="deptName">部门名称</label>
+                        <input type="text" class="form-control" id="deptName" name="deptName" placeholder="请输入部门名称">
+                    </div>
+                    <button type="button" class="btn btn-success" id="deptNameBtn">
+                        <span class="fa fa-fw fa-search"></span> 查询
+                    </button>
+                </form>
+            </div>
+        </div>
+        <div class="row content-main-table">
+            <table class="dept-table"></table>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+
+                    </h4>
+                    </div>
+                    <form class="modal-body form-horizontal" role="form" id="addDeptForm">
+                        <input type="text" class="hide" name="deptId" value="">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">部门名称</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="deptName" placeholder="请输入部门名称" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">部门描述</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="deptDesc" placeholder="输入部门描述" required>
+                            </div>
+                        </div>
+                        <button type="reset" class="btn hide" id="resetBtn">
+                            重置
+                        </button>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-success" id="submitBtn">
+                            提交
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+    <script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+    <script type="text/javascript">
+    require(['../../assets/js/common.js'], function() {
+        require(['app/department']);
+    });
+    </script>
+</body>
+
+</html>

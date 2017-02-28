@@ -1,0 +1,73 @@
+.login-bg {
+    background: url(../../imgs/bg_login.jpg) center 0 no-repeat #313541;
+    min-width: 1000px;
+    height: 450px;
+}
+.login-box{
+    margin-top: -340px;
+}
+.login-logo{
+    width: 232px;
+    margin: 0 auto;
+}
+.login-logo h1{
+    font-size: 42px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+}
+.login-main{
+    background: #fff;
+    width: 418px;
+    height: auto;
+    margin: 109px auto;
+}
+.login-mainwrap{
+    padding: 20px 40px;
+}
+.login-mainwrap .feedback-span{
+    top:17px;
+}
+.login-mainwrap .yzm{
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    margin: 14px 0 0 7px;
+    line-height: 41px;
+}
+.login-mainwrap .title{
+    font-size: 15px;
+    color: #454545;
+    line-height: 50px;
+    font-weight: 100;
+}
+.login-mainwrap .txt{
+    padding: 5px 5px;
+    border: 1px solid #cdcdcd;
+    margin: 13px 0;
+    border-radius: 0px;
+}
+.login-mainwrap img{
+    width:100%;
+    border: 0px;
+    outline-width: 0px;
+    vertical-align: top;
+    cursor: pointer;
+}
+.login-mainwrap .btn-button{
+    width: 102px;
+    height: 42px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 2px;
+}
+.login-mainwrap .btn-login{
+    background: #00B38B;
+}
+.login-mainwrap .btn-reset{
+    background: #999999;
+    margin-left: -9px;
+}
+.responseError{
+    display:none;
+}

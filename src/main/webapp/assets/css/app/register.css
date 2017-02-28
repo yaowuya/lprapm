@@ -1,0 +1,76 @@
+.register-bg {
+    background: url(../../imgs/bg_register.jpg) center 0 no-repeat #313541;
+    min-width: 1000px;
+    height: 450px;
+}
+.register-box{
+    margin-top: -340px;
+}
+.register-logo{
+    width: 232px;
+    margin: 0 auto;
+}
+.register-logo h1{
+    font-size: 42px;
+    font-weight: bold;
+    color:white;
+    text-align: center;
+}
+.register-main{
+    background: #fff;
+    width: 485px;
+    height: auto;
+    margin: 109px auto;
+}
+.register-mainwrap{
+    padding: 20px 40px;
+}
+.register-mainwrap .feedback-span{
+    top:4px;
+}
+.register-mainwrap .yzm{
+    float: left;
+    display: inline-block;
+    overflow: hidden;
+    margin: 14px 0 0 -10px;
+    line-height: 41px;
+}
+.register-mainwrap .title{
+    font-size: 15px;
+    color: #454545;
+    line-height: 35px;
+    font-weight: 100;
+}
+.register-mainwrap .txt{
+    padding: 5px 5px;
+    border: 1px solid #cdcdcd;
+    border-radius: 0px;
+    /*margin-top: 13px;*/
+}
+.register-mainwrap img{
+    width:100%;
+    border: 0px;
+    outline-width: 0px;
+    vertical-align: top;
+}
+.register-mainwrap .sex-check{
+    padding-top: 15px;
+}
+.register-mainwrap .ensure-agree{
+    margin-top: -10px;
+    padding-left: 21px;
+}
+.register-mainwrap .btn-button{
+    width: 102px;
+    height: 42px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 2px;
+}
+.register-mainwrap .btn-register{
+    background: #00B38B;
+}
+.register-mainwrap .btn-reset{
+    background: #999999;
+    margin-left: 12px;
+}

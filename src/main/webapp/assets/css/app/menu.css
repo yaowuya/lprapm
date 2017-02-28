@@ -1,0 +1,62 @@
+body {
+
+  /* 去掉iframe中横向滚动条 */
+  overflow-x: hidden;
+}
+/*固定table不换行*/
+table{
+  table-layout: fixed;
+}
+.content-theme {
+  height: 73px;
+  width: 100%;
+  background: #fff;
+  /* border-bottom: 1px solid #d7d5e0; */
+}
+.content-theme h3 {
+  float: left;
+  display: block;
+  line-height: 73px;
+  font-weight: normal;
+  font-size: 22px;
+  color: #454545;
+  margin-left: 3%;
+}
+.content-main {
+  background: #f6f5fa;
+  padding: 0px 10px 0px 20px;
+}
+.content-nav {
+  width: 100%;
+  border-bottom: 1px solid #d7d5e0;
+  background: #fff;
+}
+.content-nav ul.nav{
+  padding: 0 3% 0 3%;
+}
+.content-nav ul.nav li.active a{
+  color: #FF6000;
+}
+.content-main-btn {
+  height: auto;
+  position: relative;
+  padding: 35px 23px 26px 22px;
+}
+.content-main-btn .form-control {
+  height: 27px;
+  margin-right: 20px;
+}
+.content-main-table {
+  margin: 0 2%;
+  background: #fff;
+  border: 1px solid #dbd9e1;
+}
+.modal {
+  top: 6%;
+}
+/*.modal-body{
+  overflow-y: scroll;
+}*/
+#inputGroup{
+  padding:0px 15px;
+}

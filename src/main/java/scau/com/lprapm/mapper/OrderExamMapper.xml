@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.OrderExamMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.OrderExam" >
+    <id column="oe_id" property="oeId" jdbcType="INTEGER" />
+    <result column="oe_state" property="oeState" jdbcType="VARCHAR" />
+    <result column="oe_person" property="oePerson" jdbcType="VARCHAR" />
+    <result column="oe_dept" property="oeDept" jdbcType="VARCHAR" />
+    <result column="oe_reason" property="oeReason" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    oe_id, oe_state, oe_person, oe_dept, oe_reason
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_exam
+    where oe_id = #{oeId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_exam
+    where oe_id = #{oeId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.OrderExam" >
+    insert into order_exam (oe_id, oe_state, oe_person, 
+      oe_dept, oe_reason)
+    values (#{oeId,jdbcType=INTEGER}, #{oeState,jdbcType=VARCHAR}, #{oePerson,jdbcType=VARCHAR}, 
+      #{oeDept,jdbcType=VARCHAR}, #{oeReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertOrderExam" parameterType="scau.com.lprapm.entity.OrderExam" useGeneratedKeys="true" keyProperty="oeId">
+    insert into order_exam (oe_id, oe_state, oe_person,
+    oe_dept, oe_reason)
+    values (#{oeId,jdbcType=INTEGER}, #{oeState,jdbcType=VARCHAR}, #{oePerson,jdbcType=VARCHAR},
+    #{oeDept,jdbcType=VARCHAR}, #{oeReason,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.OrderExam" >
+    insert into order_exam
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="oeId != null" >
+        oe_id,
+      </if>
+      <if test="oeState != null" >
+        oe_state,
+      </if>
+      <if test="oePerson != null" >
+        oe_person,
+      </if>
+      <if test="oeDept != null" >
+        oe_dept,
+      </if>
+      <if test="oeReason != null" >
+        oe_reason,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="oeId != null" >
+        #{oeId,jdbcType=INTEGER},
+      </if>
+      <if test="oeState != null" >
+        #{oeState,jdbcType=VARCHAR},
+      </if>
+      <if test="oePerson != null" >
+        #{oePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="oeDept != null" >
+        #{oeDept,jdbcType=VARCHAR},
+      </if>
+      <if test="oeReason != null" >
+        #{oeReason,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.OrderExam" >
+    update order_exam
+    <set >
+      <if test="oeState != null" >
+        oe_state = #{oeState,jdbcType=VARCHAR},
+      </if>
+      <if test="oePerson != null" >
+        oe_person = #{oePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="oeDept != null" >
+        oe_dept = #{oeDept,jdbcType=VARCHAR},
+      </if>
+      <if test="oeReason != null" >
+        oe_reason = #{oeReason,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where oe_id = #{oeId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.OrderExam" >
+    update order_exam
+    set oe_state = #{oeState,jdbcType=VARCHAR},
+      oe_person = #{oePerson,jdbcType=VARCHAR},
+      oe_dept = #{oeDept,jdbcType=VARCHAR},
+      oe_reason = #{oeReason,jdbcType=VARCHAR}
+    where oe_id = #{oeId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,23 @@
+.content-main-panel {
+    height: auto;
+    padding: 35px 23px 15px 22px;
+}
+.content-main-panel .form-group {
+    margin-top: 30px;
+}
+.content-main-panel button.btn-addPO {
+    padding: 6px 51px;
+}
+.content-main-btn .label-date{
+    padding: 7px 0px 0px 23px;
+    font-weight: 100;
+}
+#searchPOP .input-group{
+    display: inline-block;
+}
+#searchPOPBtn{
+    padding: 6px 48px;
+}
+.selectAskPur .dropdown-menu{
+    top: 125%;
+}

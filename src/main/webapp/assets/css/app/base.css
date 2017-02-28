@@ -1,0 +1,131 @@
+/*基本css*/
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote, dl, dt, dd, ul, ol, li, pre, form, fieldset, legend, button, input, textarea, th, td, img {
+    border: medium none;
+    margin: 0;
+    padding: 0;
+}
+body, button, input, select, textarea {
+    font: 14px 'Microsoft Yahei', tahoma, Srial, helvetica, sans-serif;
+}
+body {
+    background: #efefef;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-size: 100%;
+}
+em {
+    font-style: normal;
+}
+ul, ol {
+    list-style: none;
+}
+input {
+    box-sizing: content-box;
+}
+a {
+    text-decoration: none;
+    color: #333;
+}
+a:hover {
+    text-decoration: none;
+    color: #F23E47;
+    -moz-transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+    transition: all 0.3s ease-in;
+}
+img {
+    border: 0px;
+    outline-width: 0px;
+    vertical-align: top;
+}
+.clearfix:after {
+    clear: both;
+    content: "\200B";
+    display: block;
+    height: 0;
+}
+.clearfix {
+    *zoom: 1;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: inherit;
+}
+button {
+    overflow: visible;
+}
+button, select {
+    text-transform: none;
+}
+button, html input[type="button"], input[type="reset"], input[type="submit"] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+button[disabled], html input[disabled] {
+    cursor: default;
+}
+button::-moz-focus-inner, input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+input {
+    line-height: normal;
+}
+/*固定table不换行 超出部分用省略号代替并隐藏*/
+table{
+  table-layout: fixed;
+}
+.table-even-row-style td{
+    height:35px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.table-uneven-row-style td{
+    height:35px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.error {
+    color: red;
+}
+.form-control {
+    display: block;
+    width: 100%;
+    padding:3px 12px;
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+.form-control:focus {
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075), 0 0 8px rgba(102, 175, 233, .6);
+}
+
+/*设置容器全面覆盖body*/
+.container {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    min-width: 1000px;
+    overflow: hidden;
+}
+.container-fluid {
+    margin: 0px;
+    padding: 0px;
+    position: relative;
+    min-width: 1000px;
+    overflow: hidden;
+}
+.modal-header{
+    background-color: #00B38B;
+    color:white;
+}
+/*.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    padding-right:0px;
+    padding-left: 0px;
+}*/

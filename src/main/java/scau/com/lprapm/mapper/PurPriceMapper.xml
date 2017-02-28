@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.PurPriceMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.PurPrice" >
+    <id column="pur_id" property="purId" jdbcType="INTEGER" />
+    <result column="pur_dept" property="purDept" jdbcType="VARCHAR" />
+    <result column="pur_person" property="purPerson" jdbcType="VARCHAR" />
+    <result column="pur_price" property="purPrice" jdbcType="DOUBLE" />
+    <result column="pur_state" property="purState" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    pur_id, pur_dept, pur_person, pur_price, pur_state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pur_price
+    where pur_id = #{purId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pur_price
+    where pur_id = #{purId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.PurPrice" >
+    insert into pur_price (pur_id, pur_dept, pur_person, 
+      pur_price, pur_state)
+    values (#{purId,jdbcType=INTEGER}, #{purDept,jdbcType=VARCHAR}, #{purPerson,jdbcType=VARCHAR}, 
+      #{purPrice,jdbcType=DOUBLE}, #{purState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertPurPrice" parameterType="scau.com.lprapm.entity.PurPrice" useGeneratedKeys="true" keyProperty="purId">
+    insert into pur_price (pur_id, pur_dept, pur_person,
+    pur_price, pur_state)
+    values (#{purId,jdbcType=INTEGER}, #{purDept,jdbcType=VARCHAR}, #{purPerson,jdbcType=VARCHAR},
+    #{purPrice,jdbcType=DOUBLE}, #{purState,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.PurPrice" >
+    insert into pur_price
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="purId != null" >
+        pur_id,
+      </if>
+      <if test="purDept != null" >
+        pur_dept,
+      </if>
+      <if test="purPerson != null" >
+        pur_person,
+      </if>
+      <if test="purPrice != null" >
+        pur_price,
+      </if>
+      <if test="purState != null" >
+        pur_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="purId != null" >
+        #{purId,jdbcType=INTEGER},
+      </if>
+      <if test="purDept != null" >
+        #{purDept,jdbcType=VARCHAR},
+      </if>
+      <if test="purPerson != null" >
+        #{purPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="purPrice != null" >
+        #{purPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="purState != null" >
+        #{purState,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.PurPrice" >
+    update pur_price
+    <set >
+      <if test="purDept != null" >
+        pur_dept = #{purDept,jdbcType=VARCHAR},
+      </if>
+      <if test="purPerson != null" >
+        pur_person = #{purPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="purPrice != null" >
+        pur_price = #{purPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="purState != null" >
+        pur_state = #{purState,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where pur_id = #{purId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.PurPrice" >
+    update pur_price
+    set pur_dept = #{purDept,jdbcType=VARCHAR},
+      pur_person = #{purPerson,jdbcType=VARCHAR},
+      pur_price = #{purPrice,jdbcType=DOUBLE},
+      pur_state = #{purState,jdbcType=VARCHAR}
+    where pur_id = #{purId,jdbcType=INTEGER}
+  </update>
+</mapper>

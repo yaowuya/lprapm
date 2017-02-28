@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>角色权限管理</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-select.css">
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css"/>
+</head>
+
+<body>
+<div class="content-theme">
+    <h3>角色配置</h3>
+</div>
+<div class="content-nav">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#roleUser" id="firsta">用户角色配置</a></li>
+        <li><a data-toggle="tab" href="#roleAction">角色权限配置</a></li>
+        <li><a data-toggle="tab" href="#roleMenu">角色菜单配置</a></li>
+    </ul>
+</div>
+<div class="content-main">
+    <div class="tab-content">
+        <!-- 用户角色配置 -->
+        <div id="roleUser" class="tab-pane fade in active">
+            <div class="row content-main-btn">
+                <div class="col-xs-3">
+                    <button class="btn btn-success" data-toggle="modal" id="RoleUserAdd">
+                        <span class="fa fa-fw fa-plus"></span> 添加
+                    </button>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <form class="form-inline" role="form" id="userForm">
+                        <div class="form-group">
+                            <label class="sr-only">用户邮箱</label>
+                            <input type="text" class="form-control" class="userEmail" name="userEmail" placeholder="请输入用户邮箱">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">角色名称</label>
+                            <input type="text" class="form-control" class="roleName" name="roleName" placeholder="请输入角色名称">
+                        </div>
+                        <button type="button" class="btn btn-success" id="RoleUserBtn">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row content-main-table">
+                <table class="roleUser-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="roleUserModal" tabindex="-1" role="dialog" aria-labelledby="roleUserModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="roleUserModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addroleUserForm">
+                            <input type="text" class="hide" name="Id" value="">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择用户</label>
+                                <div class="col-sm-8">
+                                    <select name="userId" class="selectpicker form-control selectUser"
+                                            required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择角色</label>
+                                <div class="col-sm-8">
+                                    <select name="roleId" class="selectpicker form-control selectRoleUser"
+                                            required></select>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn hide" id="resetRoleUserBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitRoleUserBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+        <!-- 角色权限不配置 -->
+        <div id="roleAction" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <div class="col-xs-3">
+                    <button class="btn btn-success" data-toggle="modal" id="RoleActionAdd">
+                        <span class="fa fa-fw fa-plus"></span> 添加
+                    </button>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <form class="form-inline" role="form" id="actionForm">
+                        <div class="form-group">
+                            <label class="sr-only">角色名称</label>
+                            <input type="text" class="form-control" class="roleName" name="roleName" placeholder="请输入角色名称">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">权限名称</label>
+                            <input type="text" class="form-control" class="actionName" name="actionName" placeholder="请输入权限名称">
+                        </div>
+                        <button type="button" class="btn btn-success" id="RoleActionBtn">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row content-main-table">
+                <table class="roleAction-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="roleActionModal" tabindex="-1" role="dialog" aria-labelledby="roleActionModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="roleActionModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addroleActionForm">
+                            <input type="text" class="hide" name="Id" value="">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择角色</label>
+                                <div class="col-sm-8">
+                                    <select name="roleId" class="selectpicker form-control selectRoleAction"
+                                            required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择权限</label>
+                                <div class="col-sm-8">
+                                    <select name="actionId" class="selectpicker form-control selectAction"
+                                            required></select>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn hide" id="resetRoleActionBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitRoleActionBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+        <div id="roleMenu" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <div class="col-xs-3">
+                    <button class="btn btn-success" data-toggle="modal" id="RoleMenuAdd">
+                        <span class="fa fa-fw fa-plus"></span> 添加
+                    </button>
+                </div>
+                <div class="col-xs-9 text-right">
+                    <form class="form-inline" role="form" id="userForm">
+                        <div class="form-group">
+                            <label class="sr-only">角色名称</label>
+                            <input type="text" class="form-control" class="roleName" name="roleName" placeholder="请输入角色名称">
+                        </div>
+                        <div class="form-group">
+                            <label class="sr-only">菜单名称</label>
+                            <input type="text" class="form-control" class="menuName" name="menuName" placeholder="请输入菜单名称">
+                        </div>
+                        <button type="button" class="btn btn-success" id="RoleMenuBtn">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row content-main-table">
+                <table class="roleMenu-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="roleMenuModal" tabindex="-1" role="dialog" aria-labelledby="roleMenuModalLabel"
+                 aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="roleMenuModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addroleMenuForm">
+                            <input type="text" class="hide" name="Id" value="">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择角色</label>
+                                <div class="col-sm-8">
+                                    <select name="roleId" class="selectpicker form-control selectRoleMenu"
+                                            required></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择菜单</label>
+                                <div class="col-sm-8">
+                                    <select name="menuId" class="selectpicker form-control selectMenu"
+                                            required></select>
+                                </div>
+                            </div>
+                            <button type="reset" class="btn hide" id="resetRoleMenuBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitRoleMenuBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['../../assets/js/common.js'], function () {
+        require(['app/roleSet']);
+    });
+</script>
+</body>
+
+</html>

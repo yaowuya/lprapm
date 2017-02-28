@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.DepartmentMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Department" >
+    <id column="dept_id" property="deptId" jdbcType="INTEGER" />
+    <result column="dept_name" property="deptName" jdbcType="VARCHAR" />
+    <result column="dept_desc" property="deptDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dept_id deptId, dept_name deptName, dept_desc deptDesc
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from department
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </select>
+  <select id="searchDeptByName" parameterType="map" resultType="java.util.LinkedHashMap">
+    select
+    <include refid="Base_Column_List" />
+    from department
+    where 1=1
+    <if test="deptName!=null and dept!=''">
+      and dept_name LIKE CONCAT('%',#{deptName},'%')
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from department
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.Department" >
+    insert into department (dept_id, dept_name, dept_desc
+      )
+    values (#{deptId,jdbcType=INTEGER}, #{deptName,jdbcType=VARCHAR}, #{deptDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Department" >
+    insert into department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        dept_id,
+      </if>
+      <if test="deptName != null" >
+        dept_name,
+      </if>
+      <if test="deptDesc != null" >
+        dept_desc,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="deptId != null" >
+        #{deptId,jdbcType=INTEGER},
+      </if>
+      <if test="deptName != null" >
+        #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptDesc != null" >
+        #{deptDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Department" >
+    update department
+    <set >
+      <if test="deptName != null" >
+        dept_name = #{deptName,jdbcType=VARCHAR},
+      </if>
+      <if test="deptDesc != null" >
+        dept_desc = #{deptDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Department" >
+    update department
+    set dept_name = #{deptName,jdbcType=VARCHAR},
+      dept_desc = #{deptDesc,jdbcType=VARCHAR}
+    where dept_id = #{deptId,jdbcType=INTEGER}
+  </update>
+</mapper>

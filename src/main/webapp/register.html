@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>register</title>
+    <link rel="stylesheet" type="text/css" href="assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/font-awesome-4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/app/register.css"/>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row register-bg">
+    </div>
+    <div class="row register-box">
+        <div class="row register-logo">
+            <h1>LOGISTICS</h1>
+        </div>
+        <div class="row register-main">
+            <div class="register-mainwrap">
+                <form class="form-horizontal" id="registerForm" role="form">
+                    <div class="form-group">
+                        <label for="userEmail" class="col-sm-3 control-label title text-right">账号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control txt" id="userEmail" name="userEmail"
+                                   placeholder="请输入邮箱账号" required>
+                            <span class="fa fa-check form-control-feedback feedback-span hide"></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword" class="col-sm-3 control-label title">密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="userPassword" class="form-control txt" id="userPassword"
+                                   placeholder="请输入密码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPasswordEnsure" class="col-sm-3 control-label title">确认密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="userPasswordEnsure" class="form-control txt" id="userPasswordEnsure"
+                                   placeholder="请确认密码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userTrueName" class="col-sm-3 control-label title">真实姓名：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control txt" id="userTrueName" name="userTrueName"
+                                   placeholder="请输入真实姓名" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userPhone" class="col-sm-3 control-label title">手机号码：</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control txt" id="userPhone" name="userPhone"
+                                   placeholder="请输入手机号码" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label title">性别：</label>
+                        <label class="checkbox-inline sex-check">
+                            <input type="radio" name="userSex" id="optionsRadios3" value="man" checked>
+                            男
+                        </label>
+                        <label class="checkbox-inline sex-check">
+                            <input type="radio" name="userSex" id="optionsRadios4" value="woman"> 女
+                        </label>
+                    </div>
+                    <div class="form-group">
+                        <div class="checkbox ensure-agree">
+                            <label class="col-sm-offset-3">
+                                <input id="agree" type="checkbox" name="agree" value="agree me">请同意我们的协议
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-5">
+                            <button type="submit" class="btn btn-button btn-register">注册</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="reset" class="btn btn-button btn-reset">重置</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-9 col-sm-3 text-right">
+                            <a class="text-muted" href="login.html">登录</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['assets/js/common'], function () {
+        require(['app/register']);
+    });
+</script>
+</body>
+</html>
