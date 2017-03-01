@@ -1,12 +1,359 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="">
+    <title>物流订单管理</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-select.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/purchaseOrder.css"/>
 </head>
+
 <body>
-    <h1>物流订单管理</h1>
+<div class="content-theme">
+    <h3>物流订单管理</h3>
+</div>
+<div class="content-nav">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#addLogOrder">录入物流订单</a></li>
+        <li><a data-toggle="tab" href="#manageLogOrder">物流订单管理</a></li>
+        <li><a data-toggle="tab" href="#logOrderPrice">物流询价管理</a></li>
+        <li><a data-toggle="tab" href="#signContract">签订合同管理</a></li>
+        <li><a data-toggle="tab" href="#orderTrack">订单跟踪</a></li>
+    </ul>
+</div>
+<div class="content-main">
+    <div class="tab-content">
+        <!-- 录入采购订单 -->
+        <div id="addLogOrder" class="tab-pane fade in active">
+            <div class="row content-main-panel">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">货物名称:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称" required>
+                        </div>
+                        <label class="col-sm-2 control-label">货物数量:</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="goodsNumber" placeholder="请输入货物数量" min="0"
+                                   required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">货物体积:</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="goodsVolume" placeholder="请输入货物体积" min="0"
+                                   required>
+                        </div>
+                        <label class="col-sm-2 control-label">货物单位重量:</label>
+                        <div class="col-sm-3">
+                            <input type="number" class="form-control" name="goodsPerweight" placeholder="请输入货物单位重量"
+                                   min="0" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收货人名称:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入收货人名称" required>
+                        </div>
+                        <label class="col-sm-2 control-label">收货人电话:</label>
+                        <div class="col-sm-3">
+                            <input type="text" class="form-control" name="receiptPhone" placeholder="请输入收货人电话" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label label-date">期望送达日期:</label>
+                        <div class="col-sm-3 date">
+                            <input class="form-control Time" type="text" value="" id="addLOTime" name="endTime" placeholder="请选择时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">订单地址:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="orderAddress" placeholder="请输入订单地址" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收货地址:</label>
+                        <div class="col-sm-8">
+                            <input type="text" class="form-control" name="receiptAddress" placeholder="请输入收货地址"
+                                   required>
+                        </div>
+                    </div>
+                    <input type="text" class="hide" name="isPur" value="否"/>
+                    <input type="text" class="hide" name="oeState" value="否"/>
+                    <input type="text" class="hide" name="purState" value="否"/>
+                    <input type="text" class="hide" name="logState" value="否"/>
+                    <input type="text" class="hide" name="receiptState" value="否"/>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-4">
+                            <button type="button" class="btn btn-success btn-addPO btn-submitLO">提交</button>
+                        </div>
+                        <div class="col-sm-4">
+                            <button type="reset" class="btn btn-default btn-addPO btn-resetLO">重置</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- 物流订单管理 -->
+        <div id="manageLogOrder" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-inline" role="form" id="searchMLOForm">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label label-date">创建时间:</label>
+                        <div class="col-sm-3 input-group date" >
+                            <input class="form-control Time" id="createMLOTime" type="text" value=""
+                                   name="createTime" placeholder="请选择时间">
+                        </div>
+                        <div class="col-sm-1 input-group date">
+                            <span class="pull-right sapn-date">到</span>
+                        </div>
+                        <div class="col-sm-3 input-group date" >
+                            <input class="form-control Time" id="endMLOTime" type="text" value="" name="endTime" placeholder="请选择时间">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="goodsName">货物名称</label>
+                        <input type="text" class="form-control" id="goodsName" name="goodsName"
+                               placeholder="请输入货物名称">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only" for="receiptName">接收人名称</label>
+                        <input type="text" class="form-control" id="receiptName" name="receiptName"
+                               placeholder="请输入接收人名称">
+                    </div>
+                    <button type="button" class="btn btn-success" id="searchMLOBtn">
+                        <span class="fa fa-fw fa-search"></span> 查询
+                    </button>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="MLO-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" scrolling="no">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addMLOForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">货物名称:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称"
+                                           required>
+                                </div>
+                                <label class="col-sm-2 control-label">货物数量:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="goodsNumber" placeholder="请输入货物数量"
+                                           min="0"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">货物体积:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="goodsVolume" placeholder="请输入货物体积"
+                                           min="0"
+                                           required>
+                                </div>
+                                <label class="col-sm-2  control-label">单位重量:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="goodsPerweight"
+                                           placeholder="请输入货物单位重量"
+                                           min="0" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">收货人名称:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="receiptName" placeholder="请输入收货人名称"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3  control-label">收货人电话:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="receiptPhone" placeholder="请输入收货人电话"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label label-date">期望送达日期:</label>
+                                <div class="col-sm-8 date">
+                                    <input class="form-control Time" type="text" id="editMLOTime" value="" name="endTime"
+                                           placeholder="请选择时间">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">订单地址:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="orderAddress" placeholder="请输入订单地址"
+                                           required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">收货地址:</label>
+                                <div class="col-sm-8">
+                                    <input type="text" class="form-control" name="receiptAddress" placeholder="请输入收货地址"
+                                           required>
+                                </div>
+                            </div>
+                            <input type="text" class="hide" name="createTime" value=""/>
+                            <input type="text" class="hide" name="isPur" value=""/>
+                            <input type="text" class="hide" name="oeState" value=""/>
+                            <input type="text" class="hide" name="purState" value=""/>
+                            <input type="text" class="hide" name="logState" value=""/>
+                            <input type="text" class="hide" name="receiptState" value=""/>
+                            <input type="text" class="hide" name="userName" value=""/>
+                            <input type="text" class="hide" name="isAskPur" value=""/>
+                            <input type="text" class="hide" name="isAskLog" value=""/>
+                            <input type="text" class="hide" name="isSure" value=""/>
+                            <input type="text" class="hide" name="orderId" value="">
+                            <input type="text" class="hide" name="oeId" value="">
+                            <input type="text" class="hide" name="goodsId" value="">
+                            <input type="text" class="hide" name="receiptId" value="">
+                            <input type="text" class="hide" name="userId" value="">
+                            <input type="text" class="hide" name="purId" value="">
+                            <input type="text" class="hide" name="logId" value="">
+                            <button type="reset" class="btn hide" id="resetBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+        <!-- 物流询价管理     -->
+        <div id="logOrderPrice" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchLOPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <select name="isAskLog" class="selectpicker form-control selectAskPur" title="请选择采购询价状态">
+                                <option value="">请选择</option>
+                                <option value="是">已经物流询价</option>
+                                <option value="否">未物流询价</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">货物名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName"
+                               placeholder="请输入货物名称">
+                        </div>
+                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName"
+                               placeholder="请输入接收人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
+                        <div class="col-sm-4">
+                            <input class="form-control Time" type="text" 
+                                   name="createTime" id="createLOPTime" placeholder="请选择创建时间"  style="width:92%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endLOPTime" placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-4 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchLOPBtn">
+                                <span class="fa fa-fw fa-search"></span> 查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="LOPrice-table"></table>
+            </div>
+        </div>
+        <!-- 签订合同管理 -->
+        <div id="signContract" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchSCForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <select name="isSure" class="selectpicker form-control selectAskPur" title="请选择采购询价状态">
+                                <option value="">请选择</option>
+                                <option value="是">已经物流询价</option>
+                                <option value="否">未物流询价</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">货物名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName"
+                               placeholder="请输入货物名称">
+                        </div>
+                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName"
+                               placeholder="请输入接收人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
+                        <div class="col-sm-4">
+                            <input class="form-control Time" type="text" 
+                                   name="createTime" id="createSCTime" placeholder="请选择创建时间"  style="width:92%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endSCTime" placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-4 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchSCBtn">
+                                <span class="fa fa-fw fa-search"></span> 查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="SCrice-table"></table>
+            </div>
+        </div>
+        <!-- 订单跟踪 -->
+        <div id="orderTrack" class="tab-pane fade"></div>
+    </div>
+</div>
+<script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['../../assets/js/common.js'], function () {
+        require(['app/logOrder']);
+    });
+</script>
 </body>
+
 </html>

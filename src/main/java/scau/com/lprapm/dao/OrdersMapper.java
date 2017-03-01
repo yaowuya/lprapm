@@ -42,6 +42,9 @@ public interface OrdersMapper {
             "where o.goods_id=g.goods_id and o.oe_id=oe.oe_id and " +
             " o.receipt_id=r.receipt_id and o.pur_id=pp.pur_id and " +
             " o.log_id=lp.log_id and user_id=#{userId}" +
+            " <if test=\"isPur != null and isPur != '' \">" +
+            "    and is_pur=#{isPur}" +
+            " </if>" +
             " <if test=\"createTime != null and createTime != '' \">" +
             "    and <![CDATA[create_time >= #{createTime}]]>" +
             " </if>" +
@@ -59,7 +62,7 @@ public interface OrdersMapper {
 
     @Select("<script>" +
             "select order_id orderId, o.goods_id goodsId, " +
-            " o.receipt_id receiptId, user_id userId, o.pur_id purId, " +
+            " o.receipt_id receiptId, user_id userId, o.pur_id purId," +
             " user_name userName, is_pur isPur,is_ask_pur isAskPur, " +
             " create_time createTime, end_time endTime, " +
             " order_address orderAddress, goods_name goodsName, " +

@@ -24,6 +24,7 @@ require.config({
     'jqueryConfirm': 'plugins/jquery-confirm',
     'datepicker':'plugins/bootstrap-datetimepicker',
     'moment':'plugins/moment-with-locales',
+    'timePicker':'package/timePicker',
   },
   shim: {
     'bootstrap': {

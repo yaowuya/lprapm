@@ -21,8 +21,6 @@ define(['ajaxPackage', 'moment', 'select', 'datepicker', 'jqueryValidate', 'angu
 
             } else if (ahref == "signContract") {
 
-            } else if (ahref == "orderTrack") {
-
             } else {
                 console.log("多余的li");
             }
@@ -90,7 +88,7 @@ define(['ajaxPackage', 'moment', 'select', 'datepicker', 'jqueryValidate', 'angu
                     /* Act on the event */
                     var form = $(this).closest('form');
                     var formData = form.serializeArray();
-                    console.log(formData);
+                    // console.log(formData);
                     Lprapm.Ajax.request({
                         url: '/purchaseOrder/insertPO',
                         data: formData,
@@ -290,6 +288,10 @@ define(['ajaxPackage', 'moment', 'select', 'datepicker', 'jqueryValidate', 'angu
                     sortable: true, //是否启用排序
                     sortOrder: 'asc', //定义排序方式 'asc' 或者 'desc'
                     sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
+                    queryParams:function(params){//用来向后台传请求参数,有queryParams就不用data:
+                        $.extend(params,{"isPur":"是"});//searchParams返回的是参数格式  return {N_id:abc}
+                        return params;
+                    },
                     url: '/purchaseOrder/searchPO', //请求接口
                     columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                     detailView: true, //详细查看按钮
