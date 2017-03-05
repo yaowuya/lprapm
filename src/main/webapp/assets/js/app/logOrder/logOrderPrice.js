@@ -31,10 +31,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                                 btnClass: 'btn-success',
                                 action: function() {
                                     Lprapm.Ajax.request({
-                                        url: '/purchaseOrder/revokePOP',
+                                        url: '/orders/revokeLOP',
                                         data: {
                                             "orderId": row.orderId,
-                                            "purId": row.purId
+                                            "logId": row.logId
                                         },
                                         success: function(response) {
                                             if (response.success) {
@@ -58,7 +58,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.isAskPur == "是") {
+                if (row.isAskLog == "是") {
                     $.confirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotate',
@@ -67,10 +67,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     });
                 } else {
                     Lprapm.Ajax.request({
-                        url: '/purchaseOrder/askLOP',
+                        url: '/orders/askOrders',
                         data: {
                             "orderId": row.orderId,
-                            "isAskPur": "是"
+                            "isAskLog": "是"
                         },
                         success: function(response) {
                             if (response.success) {
@@ -203,11 +203,11 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
                 queryParams: function(params) { //用来向后台传请求参数,有queryParams就不用data:
                     $.extend(params, {
-                        "purState": "是"
+                        "isPur": "否"
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
-                url: '/purchaseOrder/searchPOP', //请求接口
+                url: '/orders/searchOrders', //请求接口
                 columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                 detailView: true, //详细查看按钮
                 detailFormatter: detailFormatter, //显示详细查看数据
@@ -261,7 +261,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 e.preventDefault();
                 // console.log(searchParams());
                 $table.bootstrapTable('refresh', {
-                    url: '/purchaseOrder/searchLOP',
+                    url: '/orders/searchOrders',
                     query: searchParams()
                 });
             });

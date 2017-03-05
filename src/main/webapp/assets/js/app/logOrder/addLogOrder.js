@@ -14,7 +14,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 var formData = form.serializeArray();
                 console.log(formData);
                 Lprapm.Ajax.request({
-                    url: '/purchaseOrder/insertPO',
+                    url: '/orders/insertOrders',
                     data: formData,
                     success: function(response) {
                         if (response.success) {

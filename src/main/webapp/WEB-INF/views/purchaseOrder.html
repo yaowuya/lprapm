@@ -27,8 +27,8 @@
         <li class="active"><a data-toggle="tab" href="#addPurOrder">录入采购订单</a></li>
         <li><a data-toggle="tab" href="#managePurOrder">采购订单管理</a></li>
         <li><a data-toggle="tab" href="#purOrderPrice">采购询价管理</a></li>
+        <li><a data-toggle="tab" href="#signContract">发起采购管理</a></li>
         <li><a data-toggle="tab" href="#logOrderPrice">物流询价管理</a></li>
-        <li><a data-toggle="tab" href="#signContract">签订合同管理</a></li>
     </ul>
 </div>
 <div class="content-main">
@@ -298,15 +298,64 @@
             </div>
         </div>
         <!-- 物流询价管理 -->
-        <div id="logOrderPrice" class="tab-pane fade"></div>
+        <div id="logOrderPrice" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchLOPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <select name="isAskLog" class="selectpicker form-control selectAskPur" title="请选择物流询价状态">
+                                <option value="">请选择</option>
+                                <option value="是">已经物流询价</option>
+                                <option value="否">未物流询价</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">货物名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName"
+                                   placeholder="请输入货物名称">
+                        </div>
+                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName"
+                                   placeholder="请输入接收人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
+                        <div class="col-sm-4">
+                            <input class="form-control Time" type="text"
+                                   name="createTime" id="createLOPTime" placeholder="请选择创建时间" style="width:92%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endLOPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-4 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchLOPBtn"
+                                    style="padding: 6px 48px;">
+                                <span class="fa fa-fw fa-search"></span> 查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="LOPrice-table"></table>
+            </div>
+        </div>
         <!-- 签订合同管理 -->
-        <div id="signContract" class="tab-pane fade"></div>
+        <div id="signContract" class="tab-pane fade">
+
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
 <script type="text/javascript">
     require(['../../assets/js/common.js'], function () {
-        require(['app/purchaseOrder']);
+        require(['app/purOrder/purchaseOrder']);
     });
 </script>
 </body>

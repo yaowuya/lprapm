@@ -28,7 +28,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                                 btnClass: 'btn-success',
                                 action: function() {
                                     Lprapm.Ajax.request({
-                                        url: '/purchaseOrder/deletePO',
+                                        url: '/orders/deleteOrders',
                                         data: {
                                             "orderId": row.orderId,
                                             "oeId": row.oeId,
@@ -188,7 +188,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
-                url: '/purchaseOrder/searchPO', //请求接口
+                url: '/orders/searchOrders', //请求接口
                 columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                 detailView: true, //详细查看按钮
                 detailFormatter: detailFormatter, //显示详细查看数据
@@ -245,7 +245,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 e.preventDefault();
                 // console.log(searchParams());
                 $table.bootstrapTable('refresh', {
-                    url: '/purchaseOrder/searchPO',
+                    url: '/orders/searchOrders',
                     query: searchParams()
                 });
             });
@@ -277,7 +277,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 var formData = {};
                 formData = $addForm.serializeArray();
                 Lprapm.Ajax.request({
-                    url: '/purchaseOrder/updatePO',
+                    url: '/orders/updateOrders',
                     data: formData,
                     success: function(response) {
                         if (response.success) {
