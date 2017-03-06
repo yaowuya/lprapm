@@ -6,8 +6,9 @@ define(['ajaxPackage',
         'app/purOrder/managePurchaseOrder',
         'app/purOrder/purOrderPrice',
         'app/purOrder/logOrderPrice',
+        'app/purOrder/startPur'
         'jqueryConfirm'],
-    function (Lprapm, AddPurchaseOrder, ManagePurchaseOrder, PurOrderPrice, LogOrderPrice) {
+    function (Lprapm, AddPurchaseOrder, ManagePurchaseOrder, PurOrderPrice, LogOrderPrice, StartPur) {
         var contentLi = $(".content-nav .nav li"),
             tableColumn = [];
 
@@ -24,6 +25,8 @@ define(['ajaxPackage',
                 PurOrderPrice.purOrderPrice();
             } else if (ahref == "logOrderPrice") {
                 LogOrderPrice.logOrderPrice();
+            } else if (ahref == "startPur") {
+                StartPur.startPur();
             } else {
                 console.log("多余的li");
             }

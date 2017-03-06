@@ -1,21 +1,24 @@
 define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
-    function(Lprapm, timePicker) {
-        
-        var logOrderPrice = function() {
-            var $table = $(".LOPrice-table"),
+    function (Lprapm, timePicker) {
+        /**
+         * 采购询价管理
+         * @return {[type]} [description]
+         */
+        var startPur = function () {
+            var $table = $(".SPrice-table"),
                 tableColumn = [];
 
             /*显示下拉框*/
-            $('#logOrderPrice .selectAskPur').selectpicker('show');
+            $('#purOrderPrice .purState').selectpicker('show');
             // 加载日期下来框
-            timePicker.picker("#createLOPTime", "#endLOPTime");
+            timePicker.picker("#createSPTime", "#endSPTime");
 
             var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
-                'click .edit': function(event, value, row, index) {
+                'click .edit': function (event, value, row, index) {
                     // console.log("edit:", row);
                     editTable(row);
                 },
-                'click .remove': function(event, value, row, index) {
+                'click .remove': function (event, value, row, index) {
                     // console.log("remove:", row);
                     $.confirm({
                         closeIcon: true,
@@ -29,14 +32,14 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                             },
                             确定: {
                                 btnClass: 'btn-success',
-                                action: function() {
+                                action: function () {
                                     Lprapm.Ajax.request({
-                                        url: '/orders/revokeLOP',
+                                        url: '/orders/revokeSP',
                                         data: {
                                             "orderId": row.orderId,
-                                            "logId": row.logId
+                                            "purId": row.purId
                                         },
-                                        success: function(response) {
+                                        success: function (response) {
                                             if (response.success) {
                                                 $table.bootstrapTable("refresh");
                                                 $.confirm({
@@ -58,7 +61,8 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.isAskLog == "是") {
+                timePicker.picker("#editMPOTime", null);
+                if (row.isAskPur == "是") {
                     $.confirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotate',
@@ -70,9 +74,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                         url: '/orders/askOrders',
                         data: {
                             "orderId": row.orderId,
-                            "isAskLog": "是"
+                            "isAskPur": "是"
                         },
-                        success: function(response) {
+                        success: function (response) {
                             if (response.success) {
                                 $table.bootstrapTable("refresh");
                                 $.confirm({
@@ -88,6 +92,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     });
                 }
             }
+
             var commonrow = {
                 field: 'operate',
                 title: '采购询价操作',
@@ -153,23 +158,23 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: '收货地址'
             }, {
-                field: 'isAskLog',
+                field: 'isAskPur',
                 visible: true,
-                title: '是否物流询价'
+                title: '是否采购询价'
             }, {
-                field: 'logState',
+                field: 'purState',
                 visible: true,
                 title: '询价是否回复'
             }, {
-                field: 'logDept',
+                field: 'purDept',
                 visible: false,
                 title: '审核部门'
             }, {
-                field: 'logPerson',
+                field: 'purPerson',
                 visible: false,
                 title: '审核人'
             }, {
-                field: 'logPrice',
+                field: 'purPrice',
                 visible: true,
                 title: '采购报价'
             }, {
@@ -188,10 +193,6 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 field: 'purId',
                 visible: false,
                 title: 'purId'
-            }, {
-                field: 'logId',
-                visible: false,
-                title: 'logId'
             }];
             /*表格加载*/
             $table.bootstrapTable({
@@ -201,9 +202,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 sortable: true, //是否启用排序
                 sortOrder: 'asc', //定义排序方式 'asc' 或者 'desc'
                 sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
-                queryParams: function(params) { //用来向后台传请求参数,有queryParams就不用data:
+                queryParams: function (params) { //用来向后台传请求参数,有queryParams就不用data:
                     $.extend(params, {
-                        "isPur": "否"
+                        "purSate": "确认采购"
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
@@ -211,12 +212,12 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                 detailView: true, //详细查看按钮
                 detailFormatter: detailFormatter, //显示详细查看数据
-                onLoadSuccess: function(response) { //请求成功，返回数据
+                onLoadSuccess: function (response) { //请求成功，返回数据
                     // 数据操作
                     // 自动显示过长的数据
                     // console.log(response.data);
                     var arrow = $(".title-class");
-                    $.each(arrow, function(index, val) {
+                    $.each(arrow, function (index, val) {
                         /* iterate through array or object */
                         $(this).attr("title", val.innerText);
                     });
@@ -226,7 +227,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             function getColumns(params) {
                 var columns = [];
                 // columns.push(state);
-                $.each(params, function(index, val) {
+                $.each(params, function (index, val) {
                     /* iterate through array or object */
                     var row = {};
                     row.field = val.field;
@@ -242,22 +243,23 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function detailFormatter(index, row) {
-                    var html = [];
-                    $.each(tableColumn, function(index, val) {
-                        /* iterate through array or object */
-                        if (val["field"].indexOf('Id') < 0) {
-                            $.each(row, function(key, value) {
-                                /* iterate through array or object */
-                                if (val["field"] == key) {
-                                    html.push('<p><b>' + val["title"] + ':</b> ' + value + '</p>');
-                                }
-                            });
-                        }
-                    });
-                    return html.join('');
-                }
-                /*点击查询按钮*/
-            $("#searchLOPBtn").click(function(e) {
+                var html = [];
+                $.each(tableColumn, function (index, val) {
+                    /* iterate through array or object */
+                    if (val["field"].indexOf('Id') < 0) {
+                        $.each(row, function (key, value) {
+                            /* iterate through array or object */
+                            if (val["field"] == key) {
+                                html.push('<p><b>' + val["title"] + ':</b> ' + value + '</p>');
+                            }
+                        });
+                    }
+                });
+                return html.join('');
+            }
+
+            /*点击查询按钮*/
+            $("#searchSPBtn").click(function (e) {
                 e.preventDefault();
                 // console.log(searchParams());
                 $table.bootstrapTable('refresh', {
@@ -267,18 +269,17 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             });
 
             function searchParams() {
-                var sendParams = $("#searchLOPForm").serializeArray();
-                $.each(sendParams, function(index, val) {
+                var sendParams = $("#searchSPForm").serializeArray();
+                $.each(sendParams, function (index, val) {
                     /* iterate through array or object */
                     sendParams[val["name"]] = $.trim(val["value"]);
                 });
                 // console.log(sendParams);
                 return sendParams;
             }
-
         }
 
         return {
-            "logOrderPrice": logOrderPrice
+            "startPur": startPur
         }
     })

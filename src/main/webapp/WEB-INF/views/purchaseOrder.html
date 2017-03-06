@@ -27,7 +27,7 @@
         <li class="active"><a data-toggle="tab" href="#addPurOrder">录入采购订单</a></li>
         <li><a data-toggle="tab" href="#managePurOrder">采购订单管理</a></li>
         <li><a data-toggle="tab" href="#purOrderPrice">采购询价管理</a></li>
-        <li><a data-toggle="tab" href="#signContract">发起采购管理</a></li>
+        <li><a data-toggle="tab" href="#startPur">发起采购管理</a></li>
         <li><a data-toggle="tab" href="#logOrderPrice">物流询价管理</a></li>
     </ul>
 </div>
@@ -73,7 +73,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-date">期望送达日期:</label>
                         <div class="col-sm-3 date">
-                            <input class="form-control Time" type="text" value="" id="addPOTime" name="endTime" placeholder="请选择时间">
+                            <input class="form-control Time" type="text" value="" id="addPOTime" name="endTime"
+                                   placeholder="请选择时间">
                         </div>
                     </div>
                     <div class="form-group">
@@ -111,15 +112,16 @@
                 <form class="form-inline" role="form" id="searchMPOForm">
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-date">创建时间:</label>
-                        <div class="col-sm-3 input-group date" >
+                        <div class="col-sm-3 input-group date">
                             <input class="form-control Time" id="createMPOTime" type="text" value=""
                                    name="createTime" placeholder="请选择时间">
                         </div>
                         <div class="col-sm-1 input-group date">
                             <span class="pull-right sapn-date">到</span>
                         </div>
-                        <div class="col-sm-3 input-group date" >
-                            <input class="form-control Time" id="endMPOTime" type="text" value="" name="endTime" placeholder="请选择时间">
+                        <div class="col-sm-3 input-group date">
+                            <input class="form-control Time" id="endMPOTime" type="text" value="" name="endTime"
+                                   placeholder="请选择时间">
                         </div>
                     </div>
                     <div class="form-group">
@@ -198,7 +200,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label label-date">期望送达日期:</label>
                                 <div class="col-sm-8 date">
-                                    <input class="form-control Time" type="text" id="editMPOTime" value="" name="endTime"
+                                    <input class="form-control Time" type="text" id="editMPOTime" value=""
+                                           name="endTime"
                                            placeholder="请选择时间">
                                 </div>
                             </div>
@@ -265,25 +268,26 @@
                         <label class="col-sm-1 control-label">货物名称</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="goodsName"
-                               placeholder="请输入货物名称">
+                                   placeholder="请输入货物名称">
                         </div>
                         <label class="col-sm-2 control-label">接收人名称</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="receiptName"
-                               placeholder="请输入接收人名称">
+                                   placeholder="请输入接收人名称">
                         </div>
                     </div>
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
                         <div class="col-sm-4">
-                            <input class="form-control Time" type="text" 
-                                   name="createTime" id="createPOPTime" placeholder="请选择创建时间"  style="width:92%;">
+                            <input class="form-control Time" type="text"
+                                   name="createTime" id="createPOPTime" placeholder="请选择创建时间" style="width:92%;">
                         </div>
                         <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>
                         </div>
                         <div class="col-sm-2">
-                            <input class="form-control Time" type="text" name="endTime" id="endPOPTime" placeholder="请选择创建时间">
+                            <input class="form-control Time" type="text" name="endTime" id="endPOPTime"
+                                   placeholder="请选择创建时间">
                         </div>
                         <div class="col-sm-4 input-group">
                             <button type="button" class="btn btn-success pull-right" id="searchPOPBtn">
@@ -346,9 +350,53 @@
                 <table class="LOPrice-table"></table>
             </div>
         </div>
-        <!-- 签订合同管理 -->
-        <div id="signContract" class="tab-pane fade">
-
+        <!-- 发起采购管理 -->
+        <div id="startPur" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchSPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <div class="col-sm-4">
+                            <select name="purState" class="selectpicker form-control purState" title="请选择发起采购状态">
+                                <option value="">请选择</option>
+                                <option value="是">已经发起采购</option>
+                                <option value="否">未发起采购</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">货物名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName"
+                                   placeholder="请输入货物名称">
+                        </div>
+                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName"
+                                   placeholder="请输入接收人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
+                        <div class="col-sm-4">
+                            <input class="form-control Time" type="text"
+                                   name="createTime" id="createSPTime" placeholder="请选择创建时间" style="width:92%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endSPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-4 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchSPBtn">
+                                <span class="fa fa-fw fa-search"></span> 查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="SPrice-table"></table>
+            </div>
         </div>
     </div>
 </div>

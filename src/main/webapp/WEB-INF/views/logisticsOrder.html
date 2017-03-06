@@ -269,7 +269,7 @@
                                 <option value="否">未审核</option>
                             </select>
                         </div>
-                        <label class="col-sm-2 control-label">收货人</label>
+                        <label class="col-sm-1 control-label">收货人</label>
                         <div class="col-sm-2">
                             <input type="text" class="form-control" name="receiptName"
                                placeholder="请输入收货人名称">
@@ -278,14 +278,15 @@
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
                         <div class="col-sm-3">
-                            <input class="form-control Time" type="text" 
-                                   name="createTime" id="createLOPTime" placeholder="请选择创建时间" style="width:88%;">
+                            <input class="form-control Time" type="text"
+                                   name="createTime" id="createLOPTime" placeholder="请选择开始创建时间" style="width:88%;">
                         </div>
                         <!-- <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>
                         </div> -->
                         <div class="col-sm-2">
-                            <input class="form-control Time" type="text" name="endTime" id="endLOPTime" placeholder="请选择创建时间">
+                            <input class="form-control Time" type="text" name="endTime" id="endLOPTime"
+                                   placeholder="请选择截止创建时间" style="width:143%">
                         </div>
                         
                         <label class="col-sm-2 control-label">货物名称</label>
@@ -293,8 +294,9 @@
                             <input type="text" class="form-control" name="goodsName"
                                placeholder="请输入货物名称">
                         </div>
-                        <div class="col-sm-3 input-group">
-                            <button type="button" class="btn btn-success pull-right" id="searchLOPBtn">
+                        <div class="col-sm-2 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchLOPBtn"
+                                    style="padding:6px 30px;">
                                 <span class="fa fa-fw fa-search"></span> 查询
                             </button>
                         </div>
