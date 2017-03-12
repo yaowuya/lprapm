@@ -1,7 +1,9 @@
 package scau.com.lprapm.dao;
 
+import org.springframework.stereotype.Repository;
 import scau.com.lprapm.entity.LogPrice;
 
+@Repository
 public interface LogPriceMapper {
     int deleteByPrimaryKey(Integer logId);
 

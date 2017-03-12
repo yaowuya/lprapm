@@ -1,17 +1,17 @@
 define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
     function (Lprapm, timePicker) {
-        /**
-         * 采购询价管理
-         * @return {[type]} [description]
-         */
-        var purOrderPrice = function () {
-            var $table = $(".POPrice-table"),
+
+        var replyLog = function () {
+            var $table = $(".RL-table"),
+                $modal = $("#myModal"),
+                $addForm = $("#addRLForm"),
                 tableColumn = [];
+            var username = sessionStorage.getItem("User");
 
             /*显示下拉框*/
-            $('#purOrderPrice .selectAskPur').selectpicker('show');
+            $('#replyLog .selectAskPur').selectpicker('show');
             // 加载日期下来框
-            timePicker.picker("#createPOPTime", "#endPOPTime");
+            timePicker.picker("#createRLTime", "#endRLTime");
 
             var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
                 'click .edit': function (event, value, row, index) {
@@ -20,20 +20,13 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 },
                 'click .remove': function (event, value, row, index) {
                     // console.log("remove:", row);
-                    if (row.purState == "采购中" || row.purState == "采购完成") {
-                        $.confirm({
-                            animation: 'rotateYR',
-                            closeAnimation: 'rotate',
-                            backgroundDismiss: true,
-                            content: '已经在采购,不能撤销采购询价',
-                        });
-                    } else {
+                    if (row.logState == "已回复") {
                         $.confirm({
                             closeIcon: true,
                             closeIconClass: 'fa fa-close',
                             columnClass: 'small',
-                            title: '撤销询价',
-                            content: '确定要撤销询价吗？',
+                            title: '撤销回复',
+                            content: '确定要撤销回复吗？',
                             buttons: {
                                 取消: {
                                     btnClass: 'btn-default',
@@ -42,10 +35,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                                     btnClass: 'btn-success',
                                     action: function () {
                                         Lprapm.Ajax.request({
-                                            url: '/orders/revokePOP',
+                                            url: '/logistic/revokeReplyLog',
                                             data: {
-                                                "orderId": row.orderId,
-                                                "purId": row.purId
+                                                "logId": row.logId,
                                             },
                                             success: function (response) {
                                                 if (response.success) {
@@ -65,46 +57,77 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                                 },
                             }
                         });
+                    } else {
+                        $.confirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotate',
+                            backgroundDismiss: true,
+                            content: '物流已经进行或还未回复,不能撤销回复',
+                        });
                     }
                 }
             }
 
             function editTable(row) {
-                timePicker.picker("#editMPOTime", null);
-                if (row.isAskPur == "是") {
+                if (row.oeState == "通过") {
+                    $("#addRLForm").find('input[name="logPerson"]').val(username);
+                    $("#myModalLabel").text("修改");
+                    $.each(row, function (index, value) {
+                        /* iterate through array or object */
+                        if (index != "logState") {
+                            $addForm.find("input[name=" + index + "]").val(value);
+                        }
+                    });
+                    showModal();
+                } else {
                     $.confirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotate',
                         backgroundDismiss: true,
-                        content: '已经询价,不能再次询价',
-                    });
-                } else {
-                    Lprapm.Ajax.request({
-                        url: '/orders/askOrders',
-                        data: {
-                            "orderId": row.orderId,
-                            "isAskPur": "是"
-                        },
-                        success: function (response) {
-                            if (response.success) {
-                                $table.bootstrapTable("refresh");
-                                $.confirm({
-                                    animation: 'rotateYR',
-                                    closeAnimation: 'rotate',
-                                    backgroundDismiss: true,
-                                    content: response.messages,
-                                });
-                            } else {
-                                $.dialog(response.messages);
-                            }
-                        }
+                        content: '已经回复,不能再次回复',
                     });
                 }
             }
 
+            function showModal() {
+                $modal.modal("show");
+            }
+
+            /*关闭重置表单*/
+            $modal.on('hide.bs.modal', function () {
+                $("#resetRLBtn").click();
+            });
+            $("#submitRLBtn").click(function (event) {
+                /* 点击提交按钮 */
+                submitData();
+            });
+
+            function submitData() {
+                var formData = {};
+                formData = $addForm.serializeArray();
+                Lprapm.Ajax.request({
+                    url: '/logistic/checkReplyLog',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            $table.bootstrapTable("refresh");
+                            $.confirm({
+                                animation: 'rotateYR',
+                                closeAnimation: 'rotate',
+                                backgroundDismiss: true,
+                                content: response.messages,
+                            });
+                            $modal.modal('hide');
+                        } else {
+                            $.dialog(response.messages);
+                        }
+                    }
+                });
+            }
+
             var commonrow = {
                 field: 'operate',
-                title: '采购询价操作',
+                title: '操作',
                 width: 120,
                 align: 'center',
                 events: operateEvent,
@@ -113,10 +136,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
 
             function operateFormatter(value, row, index) {
                 return [
-                    '<a class="edit" href="javascript:void(0)" title="发起询价" style="margin-right:5px;">',
+                    '<a class="edit" href="javascript:void(0)" title="物流回复" style="margin-right:5px;">',
                     '<i class="glyphicon glyphicon-edit"></i>',
                     '</a> ',
-                    '<a class="remove" href="javascript:void(0)" title="撤销询价">',
+                    '<a class="remove" href="javascript:void(0)" title="撤销回复">',
                     '<i class="glyphicon glyphicon-share-alt"></i>',
                     '</a>'
                 ].join("");
@@ -155,35 +178,27 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: '订单地址'
             }, {
-                field: 'receiptName',
-                visible: true,
-                title: '收货人名称'
-            }, {
-                field: 'receiptPhone',
-                visible: false,
-                title: '收货人电话'
-            }, {
-                field: 'receiptAddress',
-                visible: false,
-                title: '收货地址'
-            }, {
                 field: 'isAskPur',
-                visible: true,
+                visible: false,
                 title: '是否采购询价'
             }, {
-                field: 'purState',
+                field: 'logState',
                 visible: true,
                 title: '询价回复状态'
             }, {
-                field: 'purDept',
+                field: 'oeState',
+                visible: true,
+                title: '审核状态'
+            }, {
+                field: 'logDept',
                 visible: false,
                 title: '审核部门'
             }, {
-                field: 'purPerson',
+                field: 'logPerson',
                 visible: false,
                 title: '审核人'
             }, {
-                field: 'purPrice',
+                field: 'logPrice',
                 visible: true,
                 title: '采购报价'
             }, {
@@ -191,17 +206,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: 'goodsId'
             }, {
-                field: 'receiptId',
+                field: 'logId',
                 visible: false,
-                title: 'receiptId'
-            }, {
-                field: 'userId',
-                visible: false,
-                title: 'userId'
-            }, {
-                field: 'purId',
-                visible: false,
-                title: 'purId'
+                title: 'logId'
             }];
             /*表格加载*/
             $table.bootstrapTable({
@@ -213,11 +220,11 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
                 queryParams: function (params) { //用来向后台传请求参数,有queryParams就不用data:
                     $.extend(params, {
-                        "isPur": "是"
+                        "oeState": "通过"
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
-                url: '/orders/searchOrders', //请求接口
+                url: '/logistic/searchExamLog', //请求接口
                 columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                 detailView: true, //详细查看按钮
                 detailFormatter: detailFormatter, //显示详细查看数据
@@ -268,17 +275,17 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             /*点击查询按钮*/
-            $("#searchPOPBtn").click(function (e) {
+            $("#searchRLBtn").click(function (e) {
                 e.preventDefault();
                 // console.log(searchParams());
                 $table.bootstrapTable('refresh', {
-                    url: '/orders/searchOrders',
+                    url: '/logistic/searchExamLog',
                     query: searchParams()
                 });
             });
 
             function searchParams() {
-                var sendParams = $("#searchPOPForm").serializeArray();
+                var sendParams = $("#searchRLForm").serializeArray();
                 $.each(sendParams, function (index, val) {
                     /* iterate through array or object */
                     sendParams[val["name"]] = $.trim(val["value"]);
@@ -289,6 +296,6 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
         }
 
         return {
-            "purOrderPrice": purOrderPrice
+            "replyLog": replyLog
         }
     })

@@ -154,6 +154,10 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 visible: true,
                 title: '是否签订合同'
             }, {
+                field: 'purState',
+                visible: true,
+                title: '采购询价状态'
+            }, {
                 field: 'oeId',
                 visible: false,
                 title: 'oeId'
@@ -233,7 +237,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 var html = [];
                 $.each(tableColumn, function (index, val) {
                     /* iterate through array or object */
-                    if (val["visible"] == true) {
+                    if (val["field"].indexOf('Id') < 0) {
                         $.each(row, function (key, value) {
                             /* iterate through array or object */
                             if (val["field"] == key) {

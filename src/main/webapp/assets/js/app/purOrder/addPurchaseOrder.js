@@ -8,6 +8,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             var submitBtn = $("#addPurOrder .btn-submitPO");
             timePicker.picker("#addPOTime", null);
             submitBtn.click(function (event) {
+                event.stopPropagation;
                 /* Act on the event */
                 var form = $(this).closest('form');
                 var formData = form.serializeArray();

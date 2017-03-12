@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import scau.com.lprapm.dao.*;
 import scau.com.lprapm.entity.*;
 import scau.com.lprapm.service.inter.OrdersService;
+import sun.rmi.runtime.Log;
 
 import java.util.List;
 import java.util.Map;
@@ -75,9 +76,9 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public void revokePOP(Map<String, Object> params) {
         Orders orders = new Orders();
+        PurPrice purPrice = new PurPrice();
         orders.setOrderId(Integer.parseInt(params.get("orderId").toString()));
         orders.setIsAskPur("否");
-        PurPrice purPrice = new PurPrice();
         purPrice.setPurId(Integer.parseInt(params.get("purId").toString()));
         purPrice.setPurDept(null);
         purPrice.setPurPerson(null);
@@ -91,6 +92,7 @@ public class OrdersServiceImpl implements OrdersService {
     public void revokeLOP(Map<String, Object> params) {
         Orders orders = new Orders();
         LogPrice logPrice = new LogPrice();
+        OrderExam orderExam = new OrderExam();
         orders.setOrderId(Integer.parseInt(params.get("orderId").toString()));
         orders.setIsAskLog("否");
         logPrice.setLogId(Integer.parseInt(params.get("logId").toString()));
@@ -98,8 +100,37 @@ public class OrdersServiceImpl implements OrdersService {
         logPrice.setLogPerson(null);
         logPrice.setLogPrice(null);
         logPrice.setLogState("否");
+        orderExam.setOeId(Integer.parseInt(params.get("oeId").toString()));
+        orderExam.setOeDept(null);
+        orderExam.setOePerson(null);
+        orderExam.setOeReason(null);
+        orderExam.setOeState("否");
         logPriceMapper.updateByPrimaryKey(logPrice);
+        orderExamMapper.updateByPrimaryKey(orderExam);
         ordersMapper.updateByPrimaryKeySelective(orders);
+    }
+
+    @Override
+    public void askSP(Map<String, Object> params) {
+        ordersMapper.askSP(params);
+    }
+
+    @Override
+    public void revokeSP(Map<String, Object> params) {
+        PurPrice purPrice = new PurPrice();
+        purPrice.setPurId(Integer.parseInt(params.get("purId").toString()));
+        purPrice.setPurState("已回复");
+        purPriceMapper.updateByPrimaryKeySelective(purPrice);
+    }
+
+    @Override
+    public void askLOP(Map<String, Object> params) {
+        ordersMapper.askLOP(params);
+    }
+
+    @Override
+    public void revokeSC(Map<String, Object> params) {
+        ordersMapper.revokeSC(params);
     }
 
 }

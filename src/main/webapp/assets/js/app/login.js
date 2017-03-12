@@ -36,7 +36,7 @@ define(['ajaxPackage', 'messageCN'], function(ajaxPackage) {
                         window.location.href = "/redirect/index";
                     } else {
                         var loginResponse = response.data.User;
-                        console.log(loginResponse);
+                        // console.log(loginResponse);
                         $("#userEmail").val(loginResponse.userEmail);
                         $("userPassword").val(loginResponse.userPassword);
                         if($.trim(response.messages)==$.trim("loginError")){

@@ -9,7 +9,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 tableColumn = [];
 
             /*显示下拉框*/
-            $('#purOrderPrice .purState').selectpicker('show');
+            $('#startPur .purState').selectpicker('show');
             // 加载日期下来框
             timePicker.picker("#createSPTime", "#endSPTime");
 
@@ -20,61 +20,69 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 },
                 'click .remove': function (event, value, row, index) {
                     // console.log("remove:", row);
-                    $.confirm({
-                        closeIcon: true,
-                        closeIconClass: 'fa fa-close',
-                        columnClass: 'small',
-                        title: '撤销询价',
-                        content: '确定要撤销询价吗？',
-                        buttons: {
-                            取消: {
-                                btnClass: 'btn-default',
-                            },
-                            确定: {
-                                btnClass: 'btn-success',
-                                action: function () {
-                                    Lprapm.Ajax.request({
-                                        url: '/orders/revokeSP',
-                                        data: {
-                                            "orderId": row.orderId,
-                                            "purId": row.purId
-                                        },
-                                        success: function (response) {
-                                            if (response.success) {
-                                                $table.bootstrapTable("refresh");
-                                                $.confirm({
-                                                    animation: 'rotateYR',
-                                                    closeAnimation: 'rotate',
-                                                    backgroundDismiss: true,
-                                                    content: response.messages
-                                                });
-                                            } else {
-                                                $.dialog('撤销失败');
+                    if (row.purState == "采购中" || row.purState == "采购完成") {
+                        $.confirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotate',
+                            backgroundDismiss: true,
+                            content: '已经在采购,不能撤销采购',
+                        });
+                    } else {
+                        $.confirm({
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close',
+                            columnClass: 'small',
+                            title: '撤销采购',
+                            content: '确定要撤销采购吗？',
+                            buttons: {
+                                取消: {
+                                    btnClass: 'btn-default',
+                                },
+                                确定: {
+                                    btnClass: 'btn-success',
+                                    action: function () {
+                                        Lprapm.Ajax.request({
+                                            url: '/orders/revokeSP',
+                                            data: {
+                                                "purId": row.purId
+                                            },
+                                            success: function (response) {
+                                                if (response.success) {
+                                                    $table.bootstrapTable("refresh");
+                                                    $.confirm({
+                                                        animation: 'rotateYR',
+                                                        closeAnimation: 'rotate',
+                                                        backgroundDismiss: true,
+                                                        content: response.messages
+                                                    });
+                                                } else {
+                                                    $.dialog('撤销失败');
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            },
-                        }
-                    });
+                                        });
+                                    }
+                                },
+                            }
+                        });
+                    }
                 }
             }
 
             function editTable(row) {
                 timePicker.picker("#editMPOTime", null);
-                if (row.isAskPur == "是") {
+                if (row.purState == "发起采购中") {
                     $.confirm({
                         animation: 'rotateYR',
                         closeAnimation: 'rotate',
                         backgroundDismiss: true,
-                        content: '已经询价,不能再次询价',
+                        content: '已经发起采购,不能再次发起采购',
                     });
                 } else {
                     Lprapm.Ajax.request({
-                        url: '/orders/askOrders',
+                        url: '/orders/askSP',
                         data: {
-                            "orderId": row.orderId,
-                            "isAskPur": "是"
+                            "purId": row.purId,
+                            "purState": "发起采购中"
                         },
                         success: function (response) {
                             if (response.success) {
@@ -95,7 +103,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
 
             var commonrow = {
                 field: 'operate',
-                title: '采购询价操作',
+                title: '发起采购操作',
                 width: 120,
                 align: 'center',
                 events: operateEvent,
@@ -104,10 +112,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
 
             function operateFormatter(value, row, index) {
                 return [
-                    '<a class="edit" href="javascript:void(0)" title="发起询价" style="margin-right:5px;">',
+                    '<a class="edit" href="javascript:void(0)" title="发起采购" style="margin-right:5px;">',
                     '<i class="glyphicon glyphicon-edit"></i>',
                     '</a> ',
-                    '<a class="remove" href="javascript:void(0)" title="撤销询价">',
+                    '<a class="remove" href="javascript:void(0)" title="撤销采购">',
                     '<i class="glyphicon glyphicon-share-alt"></i>',
                     '</a>'
                 ].join("");
@@ -164,7 +172,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }, {
                 field: 'purState',
                 visible: true,
-                title: '询价是否回复'
+                title: '询价回复状态'
             }, {
                 field: 'purDept',
                 visible: false,
@@ -204,7 +212,8 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
                 queryParams: function (params) { //用来向后台传请求参数,有queryParams就不用data:
                     $.extend(params, {
-                        "purSate": "确认采购"
+                        "isPur": "是",
+                        "purState": '"已回复","发起采购中","采购中"'
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
@@ -272,7 +281,11 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 var sendParams = $("#searchSPForm").serializeArray();
                 $.each(sendParams, function (index, val) {
                     /* iterate through array or object */
-                    sendParams[val["name"]] = $.trim(val["value"]);
+                    if (val["name"] == "purState" && val["value"] == "") {
+                        sendParams[val["name"]] = '"已回复","发起采购中"';
+                    } else {
+                        sendParams[val["name"]] = $.trim(val["value"]);
+                    }
                 });
                 // console.log(sendParams);
                 return sendParams;

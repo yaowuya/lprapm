@@ -17,43 +17,53 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 },
                 'click .remove': function(event, value, row, index) {
                     // console.log("remove:", row);
-                    $.confirm({
-                        closeIcon: true,
-                        closeIconClass: 'fa fa-close',
-                        columnClass: 'small',
-                        title: '撤销询价',
-                        content: '确定要撤销询价吗？',
-                        buttons: {
-                            取消: {
-                                btnClass: 'btn-default',
-                            },
-                            确定: {
-                                btnClass: 'btn-success',
-                                action: function() {
-                                    Lprapm.Ajax.request({
-                                        url: '/orders/revokeLOP',
-                                        data: {
-                                            "orderId": row.orderId,
-                                            "logId": row.logId
-                                        },
-                                        success: function(response) {
-                                            if (response.success) {
-                                                $table.bootstrapTable("refresh");
-                                                $.confirm({
-                                                    animation: 'rotateYR',
-                                                    closeAnimation: 'rotate',
-                                                    backgroundDismiss: true,
-                                                    content: response.messages
-                                                });
-                                            } else {
-                                                $.dialog('撤销失败');
+                    if (row.logState == "已出发") {
+                        $.confirm({
+                            animation: 'rotateYR',
+                            closeAnimation: 'rotate',
+                            backgroundDismiss: true,
+                            content: '货已经出发,不能撤销询价',
+                        });
+                    } else {
+                        $.confirm({
+                            closeIcon: true,
+                            closeIconClass: 'fa fa-close',
+                            columnClass: 'small',
+                            title: '撤销询价',
+                            content: '确定要撤销询价吗？',
+                            buttons: {
+                                取消: {
+                                    btnClass: 'btn-default',
+                                },
+                                确定: {
+                                    btnClass: 'btn-success',
+                                    action: function () {
+                                        Lprapm.Ajax.request({
+                                            url: '/orders/revokeLOP',
+                                            data: {
+                                                "orderId": row.orderId,
+                                                "logId": row.logId,
+                                                "oeId": row.oeId
+                                            },
+                                            success: function (response) {
+                                                if (response.success) {
+                                                    $table.bootstrapTable("refresh");
+                                                    $.confirm({
+                                                        animation: 'rotateYR',
+                                                        closeAnimation: 'rotate',
+                                                        backgroundDismiss: true,
+                                                        content: response.messages
+                                                    });
+                                                } else {
+                                                    $.dialog('撤销失败');
+                                                }
                                             }
-                                        }
-                                    });
-                                }
-                            },
-                        }
-                    });
+                                        });
+                                    }
+                                },
+                            }
+                        });
+                    }
                 }
             }
 
@@ -67,10 +77,12 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     });
                 } else {
                     Lprapm.Ajax.request({
-                        url: '/orders/askOrders',
+                        url: '/orders/askLOP',
                         data: {
                             "orderId": row.orderId,
-                            "isAskLog": "是"
+                            "isAskLog": "是",
+                            "oeId": row.oeId,
+                            "oeState": "审核中"
                         },
                         success: function(response) {
                             if (response.success) {
@@ -90,7 +102,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
             var commonrow = {
                 field: 'operate',
-                title: '采购询价操作',
+                title: '物流询价操作',
                 width: 120,
                 align: 'center',
                 events: operateEvent,
@@ -157,9 +169,25 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: true,
                 title: '是否物流询价'
             }, {
+                field: 'oeState',
+                visible: true,
+                title: '审核状态'
+            }, {
+                field: 'oeDept',
+                visible: false,
+                title: '审核部门'
+            }, {
+                field: 'oePerson',
+                visible: false,
+                title: '审核人'
+            }, {
+                field: 'oeReason',
+                visible: false,
+                title: '审核原因'
+            }, {
                 field: 'logState',
                 visible: true,
-                title: '询价是否回复'
+                title: '询价回复状态'
             }, {
                 field: 'logDept',
                 visible: false,
@@ -171,7 +199,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }, {
                 field: 'logPrice',
                 visible: true,
-                title: '采购报价'
+                title: '物流报价'
             }, {
                 field: 'goodsId',
                 visible: false,
@@ -192,6 +220,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 field: 'logId',
                 visible: false,
                 title: 'logId'
+            }, {
+                field: 'oeId',
+                visible: false,
+                title: 'oeId'
             }];
             /*表格加载*/
             $table.bootstrapTable({

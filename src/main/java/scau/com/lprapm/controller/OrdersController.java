@@ -148,7 +148,7 @@ public class OrdersController extends BaseController {
             jsonResult = new JsonResult(true, "发起询价成功");
         } catch (Exception e) {
             e.printStackTrace();
-            jsonResult = new JsonResult(false, "发起询价成功");
+            jsonResult = new JsonResult(false, "发起询价失败");
         }
         return jsonResult;
     }
@@ -174,6 +174,27 @@ public class OrdersController extends BaseController {
     }
 
     /**
+     * 物流询价管理
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("askLOP")
+    public JsonResult askLOP() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            ordersService.askOrders(params);
+            ordersService.askLOP(params);
+            jsonResult = new JsonResult(true, "物流询价成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "物流询价失败");
+        }
+        return jsonResult;
+    }
+
+    /**
      * 物流询价管理 撤销采购询价
      *
      * @return
@@ -189,6 +210,68 @@ public class OrdersController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             jsonResult = new JsonResult(false, "撤销物流询价失败");
+        }
+        return jsonResult;
+    }
+
+
+    /**
+     * 发起采购
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("askSP")
+    public JsonResult askSP() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            ordersService.askSP(params);
+            jsonResult = new JsonResult(true, "发起采购成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "发起采购失败");
+        }
+        return jsonResult;
+    }
+
+    /**
+     * 撤销采购
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("revokeSP")
+    public JsonResult revokeSP() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            ordersService.revokeSP(params);
+            jsonResult = new JsonResult(true, "撤销采购成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "撤销采购失败");
+        }
+        return jsonResult;
+    }
+
+
+    /**
+     * 撤销物流签订物流合同
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("revokeSC")
+    public JsonResult revokeSC() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            ordersService.revokeSC(params);
+            jsonResult = new JsonResult(true, "撤销成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "撤销失败");
         }
         return jsonResult;
     }

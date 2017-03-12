@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.purchasePriceManageMapper">
+    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.purchasePriceManage">
+        <constructor>
+            <idArg column="ppm_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="goods_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="goods_price" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="ppm_time" jdbcType="TIMESTAMP" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ppm_id, goods_name, goods_price, ppm_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from purchase_price_manage
+        where ppm_id = #{ppmId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from purchase_price_manage
+        where ppm_id = #{ppmId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="scau.com.lprapm.entity.purchasePriceManage">
+        insert into purchase_price_manage (ppm_id, goods_name, goods_price,
+        ppm_time)
+        values (#{ppmId,jdbcType=INTEGER}, #{goodsName,jdbcType=VARCHAR}, #{goodsPrice,jdbcType=DOUBLE},
+        #{ppmTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.purchasePriceManage">
+        insert into purchase_price_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ppmId != null">
+                ppm_id,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsPrice != null">
+                goods_price,
+            </if>
+            <if test="ppmTime != null">
+                ppm_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ppmId != null">
+                #{ppmId,jdbcType=INTEGER},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null">
+                #{goodsPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="ppmTime != null">
+                #{ppmTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.purchasePriceManage">
+        update purchase_price_manage
+        <set>
+            <if test="goodsName != null">
+                goods_name = #{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsPrice != null">
+                goods_price = #{goodsPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="ppmTime != null">
+                ppm_time = #{ppmTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where ppm_id = #{ppmId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.purchasePriceManage">
+        update purchase_price_manage
+        set goods_name = #{goodsName,jdbcType=VARCHAR},
+        goods_price = #{goodsPrice,jdbcType=DOUBLE},
+        ppm_time = #{ppmTime,jdbcType=TIMESTAMP}
+        where ppm_id = #{ppmId,jdbcType=INTEGER}
+    </update>
+</mapper>

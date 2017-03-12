@@ -22,4 +22,12 @@ public interface OrdersService {
     void revokePOP(Map<String, Object> params);
 
     void revokeLOP(Map<String, Object> params);
+
+    void askSP(Map<String, Object> params);
+
+    void revokeSP(Map<String, Object> params);
+
+    void askLOP(Map<String, Object> params);
+
+    void revokeSC(Map<String, Object> params);
 }
