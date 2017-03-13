@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.CarMapper" >
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Car" >
+    <constructor >
+      <idArg column="car_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="car_license" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="car_type" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="car_volume" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="car_weight" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="pre_km_price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="is_free" jdbcType="VARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    car_id, user_id, car_license, car_type, car_volume, car_weight, pre_km_price, is_free
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from car
+    where car_id = #{carId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from car
+    where car_id = #{carId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.Car" >
+    insert into car (car_id, user_id, car_license, 
+      car_type, car_volume, car_weight, 
+      pre_km_price, is_free)
+    values (#{carId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{carLicense,jdbcType=VARCHAR}, 
+      #{carType,jdbcType=VARCHAR}, #{carVolume,jdbcType=DOUBLE}, #{carWeight,jdbcType=DOUBLE}, 
+      #{preKmPrice,jdbcType=DOUBLE}, #{isFree,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Car" >
+    insert into car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="carLicense != null" >
+        car_license,
+      </if>
+      <if test="carType != null" >
+        car_type,
+      </if>
+      <if test="carVolume != null" >
+        car_volume,
+      </if>
+      <if test="carWeight != null" >
+        car_weight,
+      </if>
+      <if test="preKmPrice != null" >
+        pre_km_price,
+      </if>
+      <if test="isFree != null" >
+        is_free,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="carId != null" >
+        #{carId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="carLicense != null" >
+        #{carLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carVolume != null" >
+        #{carVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="carWeight != null" >
+        #{carWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="preKmPrice != null" >
+        #{preKmPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="isFree != null" >
+        #{isFree,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Car" >
+    update car
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="carLicense != null" >
+        car_license = #{carLicense,jdbcType=VARCHAR},
+      </if>
+      <if test="carType != null" >
+        car_type = #{carType,jdbcType=VARCHAR},
+      </if>
+      <if test="carVolume != null" >
+        car_volume = #{carVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="carWeight != null" >
+        car_weight = #{carWeight,jdbcType=DOUBLE},
+      </if>
+      <if test="preKmPrice != null" >
+        pre_km_price = #{preKmPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="isFree != null" >
+        is_free = #{isFree,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Car" >
+    update car
+    set user_id = #{userId,jdbcType=INTEGER},
+      car_license = #{carLicense,jdbcType=VARCHAR},
+      car_type = #{carType,jdbcType=VARCHAR},
+      car_volume = #{carVolume,jdbcType=DOUBLE},
+      car_weight = #{carWeight,jdbcType=DOUBLE},
+      pre_km_price = #{preKmPrice,jdbcType=DOUBLE},
+      is_free = #{isFree,jdbcType=VARCHAR}
+    where car_id = #{carId,jdbcType=INTEGER}
+  </update>
+</mapper>

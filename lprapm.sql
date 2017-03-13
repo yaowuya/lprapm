@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50520
+Source Server Version : 50168
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50168
 File Encoding         : 65001
 
-Date: 2017-03-12 23:51:45
+Date: 2017-03-13 17:51:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -39,7 +39,7 @@ INSERT INTO `action` VALUES ('4', '订单审核', '市场部门领导具有该�
 -- ----------------------------
 DROP TABLE IF EXISTS `car`;
 CREATE TABLE `car` (
-  `car_id` int(11) NOT NULL,
+  `car_id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
   `car_license` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -59,7 +59,7 @@ CREATE TABLE `car` (
 -- ----------------------------
 DROP TABLE IF EXISTS `car_free_bill`;
 CREATE TABLE `car_free_bill` (
-  `carfree_id` int(11) NOT NULL,
+  `carfree_id` int(11) NOT NULL AUTO_INCREMENT,
   `car_id` int(11) DEFAULT NULL,
   `carn_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`carfree_id`)
@@ -74,7 +74,7 @@ CREATE TABLE `car_free_bill` (
 -- ----------------------------
 DROP TABLE IF EXISTS `car_need`;
 CREATE TABLE `car_need` (
-  `carn_id` int(11) NOT NULL,
+  `carn_id` int(11) NOT NULL AUTO_INCREMENT,
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
   `carn_exam_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -166,7 +166,7 @@ CREATE TABLE `menu` (
   `menu_i_class` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `menu_href` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
 
 -- ----------------------------
 -- Records of menu
@@ -183,6 +183,8 @@ INSERT INTO `menu` VALUES ('12', '采购价格展示', 'fa-tree', '/redirect/pag
 INSERT INTO `menu` VALUES ('13', '采购计划管理', 'fa-envira', '/redirect/page/purchasePlan');
 INSERT INTO `menu` VALUES ('15', '物流审核管理', 'fa-check', '/redirect/page/logExamine');
 INSERT INTO `menu` VALUES ('16', '物流计费管理', 'fa-cny', '/redirect/page/logCharge');
+INSERT INTO `menu` VALUES ('17', '车辆信息管理', 'fa-bus', '/redirect/page/vehicleInfo');
+INSERT INTO `menu` VALUES ('18', '车辆需求管理', 'fa-truck', '/redirect/page/vehicleDemand');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -407,7 +409,7 @@ CREATE TABLE `role_menu` (
   `role_id` int(11) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`rm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
 
 -- ----------------------------
 -- Records of role_menu
@@ -425,6 +427,8 @@ INSERT INTO `role_menu` VALUES ('16', '1', '12');
 INSERT INTO `role_menu` VALUES ('17', '1', '13');
 INSERT INTO `role_menu` VALUES ('19', '1', '15');
 INSERT INTO `role_menu` VALUES ('20', '1', '16');
+INSERT INTO `role_menu` VALUES ('21', '1', '17');
+INSERT INTO `role_menu` VALUES ('22', '1', '18');
 
 -- ----------------------------
 -- Table structure for `route_manage`
