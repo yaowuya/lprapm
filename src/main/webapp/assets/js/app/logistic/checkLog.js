@@ -19,7 +19,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.isSure == "是") {
+                if (row.isSure == "是" && row.logState != "已出发") {
                     $.confirm({
                         closeIcon: true,
                         closeIconClass: 'fa fa-close',

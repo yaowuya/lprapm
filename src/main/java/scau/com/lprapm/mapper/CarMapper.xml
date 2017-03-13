@@ -9,12 +9,12 @@
       <arg column="car_type" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="car_volume" jdbcType="DOUBLE" javaType="java.lang.Double" />
       <arg column="car_weight" jdbcType="DOUBLE" javaType="java.lang.Double" />
-      <arg column="pre_km_price" jdbcType="DOUBLE" javaType="java.lang.Double" />
+      <arg column="km_price" jdbcType="DOUBLE" javaType="java.lang.Double"/>
       <arg column="is_free" jdbcType="VARCHAR" javaType="java.lang.String" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    car_id, user_id, car_license, car_type, car_volume, car_weight, pre_km_price, is_free
+    car_id, user_id, car_license, car_type, car_volume, car_weight, km_price, is_free
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -28,11 +28,11 @@
   </delete>
   <insert id="insert" parameterType="scau.com.lprapm.entity.Car" >
     insert into car (car_id, user_id, car_license, 
-      car_type, car_volume, car_weight, 
-      pre_km_price, is_free)
+      car_type, car_volume, car_weight,
+    km_price, is_free)
     values (#{carId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{carLicense,jdbcType=VARCHAR}, 
-      #{carType,jdbcType=VARCHAR}, #{carVolume,jdbcType=DOUBLE}, #{carWeight,jdbcType=DOUBLE}, 
-      #{preKmPrice,jdbcType=DOUBLE}, #{isFree,jdbcType=VARCHAR})
+      #{carType,jdbcType=VARCHAR}, #{carVolume,jdbcType=DOUBLE}, #{carWeight,jdbcType=DOUBLE},
+    #{kmPrice,jdbcType=DOUBLE}, #{isFree,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Car" >
     insert into car
@@ -55,8 +55,8 @@
       <if test="carWeight != null" >
         car_weight,
       </if>
-      <if test="preKmPrice != null" >
-        pre_km_price,
+      <if test="kmPrice != null">
+        km_price,
       </if>
       <if test="isFree != null" >
         is_free,
@@ -81,8 +81,8 @@
       <if test="carWeight != null" >
         #{carWeight,jdbcType=DOUBLE},
       </if>
-      <if test="preKmPrice != null" >
-        #{preKmPrice,jdbcType=DOUBLE},
+      <if test="kmPrice != null">
+        #{kmPrice,jdbcType=DOUBLE},
       </if>
       <if test="isFree != null" >
         #{isFree,jdbcType=VARCHAR},
@@ -107,8 +107,8 @@
       <if test="carWeight != null" >
         car_weight = #{carWeight,jdbcType=DOUBLE},
       </if>
-      <if test="preKmPrice != null" >
-        pre_km_price = #{preKmPrice,jdbcType=DOUBLE},
+      <if test="kmPrice != null">
+        km_price = #{kmPrice,jdbcType=DOUBLE},
       </if>
       <if test="isFree != null" >
         is_free = #{isFree,jdbcType=VARCHAR},
@@ -123,7 +123,7 @@
       car_type = #{carType,jdbcType=VARCHAR},
       car_volume = #{carVolume,jdbcType=DOUBLE},
       car_weight = #{carWeight,jdbcType=DOUBLE},
-      pre_km_price = #{preKmPrice,jdbcType=DOUBLE},
+    km_price = #{kmPrice,jdbcType=DOUBLE},
       is_free = #{isFree,jdbcType=VARCHAR}
     where car_id = #{carId,jdbcType=INTEGER}
   </update>

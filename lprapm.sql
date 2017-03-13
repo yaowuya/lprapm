@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50168
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50168
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-03-13 17:51:57
+Date: 2017-03-14 00:11:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -45,14 +45,15 @@ CREATE TABLE `car` (
   `car_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_volume` double DEFAULT NULL,
   `car_weight` double DEFAULT NULL,
-  `pre_km_price` double DEFAULT NULL,
-  `is_free` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `km_price` double DEFAULT NULL,
+  `is_free` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`car_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆信息';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆信息';
 
 -- ----------------------------
 -- Records of car
 -- ----------------------------
+INSERT INTO `car` VALUES ('2', '3', '34567', '轿车', '45', '210', '344', '是');
 
 -- ----------------------------
 -- Table structure for `car_free_bill`
@@ -77,7 +78,7 @@ CREATE TABLE `car_need` (
   `carn_id` int(11) NOT NULL AUTO_INCREMENT,
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
-  `carn_exam_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carn_exam_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_exam_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`carn_id`)

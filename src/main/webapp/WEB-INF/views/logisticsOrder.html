@@ -73,7 +73,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-date">期望送达日期:</label>
                         <div class="col-sm-3 date">
-                            <input class="form-control Time" type="text" value="" id="addLOTime" name="endTime" placeholder="请选择时间">
+                            <input class="form-control Time" type="text" value="" id="addLOTime" name="endTime"
+                                   placeholder="请选择时间">
                         </div>
                     </div>
                     <div class="form-group">
@@ -90,6 +91,7 @@
                         </div>
                     </div>
                     <input type="text" class="hide" name="isPur" value="否"/>
+                    <input type="text" class="hide" name="isSure" value="否"/>
                     <input type="text" class="hide" name="oeState" value="否"/>
                     <input type="text" class="hide" name="purState" value="否"/>
                     <input type="text" class="hide" name="logState" value="否"/>
@@ -111,21 +113,21 @@
                 <form class="form-inline" role="form" id="searchMLOForm">
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-date">创建时间:</label>
-                        <div class="col-sm-3 input-group date" >
-                            <input class="form-control Time" id="createMLOTime" type="text" value=""
-                                   name="createTime" placeholder="请选择时间">
+                        <div class="col-sm-3 input-group date">
+                            <input class="form-control Time" id="createMLOTime" type="text" value="" name="createTime"
+                                   placeholder="请选择时间">
                         </div>
                         <div class="col-sm-1 input-group date">
                             <span class="pull-right sapn-date">到</span>
                         </div>
-                        <div class="col-sm-3 input-group date" >
-                            <input class="form-control Time" id="endMLOTime" type="text" value="" name="endTime" placeholder="请选择时间">
+                        <div class="col-sm-3 input-group date">
+                            <input class="form-control Time" id="endMLOTime" type="text" value="" name="endTime"
+                                   placeholder="请选择时间">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="goodsName">货物名称</label>
-                        <input type="text" class="form-control" id="goodsName" name="goodsName"
-                               placeholder="请输入货物名称">
+                        <input type="text" class="form-control" id="goodsName" name="goodsName" placeholder="请输入货物名称">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="receiptName">接收人名称</label>
@@ -163,22 +165,19 @@
                                 <label class="col-sm-2 control-label">货物数量:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsNumber" placeholder="请输入货物数量"
-                                           min="0"
-                                           required>
+                                           min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">货物体积:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsVolume" placeholder="请输入货物体积"
-                                           min="0"
-                                           required>
+                                           min="0" required>
                                 </div>
                                 <label class="col-sm-2  control-label">单位重量:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsPerweight"
-                                           placeholder="请输入货物单位重量"
-                                           min="0" required>
+                                           placeholder="请输入货物单位重量" min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -198,8 +197,8 @@
                             <div class="form-group">
                                 <label class="col-sm-3 control-label label-date">期望送达日期:</label>
                                 <div class="col-sm-8 date">
-                                    <input class="form-control Time" type="text" id="editMLOTime" value="" name="endTime"
-                                           placeholder="请选择时间">
+                                    <input class="form-control Time" type="text" id="editMLOTime" value=""
+                                           name="endTime" placeholder="请选择时间">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -255,48 +254,38 @@
             <div class="row content-main-btn">
                 <form class="form-horizontal" role="form" id="searchLOPForm" style="padding-left: 11px;">
                     <div class="form-group">
-                        <div class="col-sm-3">
+                        <div class="col-sm-4">
                             <select name="isAskLog" class="selectpicker form-control selectAskPur" title="请选择物流询价状态">
-                                <option value="">请选择</option>
-                                <option value="是">已经物流询价</option>
-                                <option value="否">未物流询价</option>
+                                <option value=''>请选择</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
-                        <div class="col-sm-3">
-                            <select name="oeState" class="selectpicker form-control selectAskPur" title="请选择物流审核状态">
-                                <option value="">请选择</option>
-                                <option value="是">已审核</option>
-                                <option value="否">未审核</option>
-                            </select>
-                        </div>
-                        <label class="col-sm-1 control-label">收货人</label>
+                        <label class="col-sm-1 control-label">货物名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="receiptName"
-                               placeholder="请输入收货人名称">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
+                        </div>
+                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入接收人名称">
                         </div>
                     </div>
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
-                        <div class="col-sm-3">
-                            <input class="form-control Time" type="text"
-                                   name="createTime" id="createLOPTime" placeholder="请选择开始创建时间" style="width:88%;">
+                        <div class="col-sm-4">
+                            <input class="form-control Time" type="text" name="createTime" id="createLOPTime"
+                                   placeholder="请选择创建时间" style="width:92%;">
                         </div>
-                        <!-- <div class="col-sm-1 text-center" style="padding-top: 9px;">
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>
-                        </div> -->
+                        </div>
                         <div class="col-sm-2">
                             <input class="form-control Time" type="text" name="endTime" id="endLOPTime"
-                                   placeholder="请选择截止创建时间" style="width:143%">
+                                   placeholder="请选择创建时间">
                         </div>
-                        
-                        <label class="col-sm-2 control-label">货物名称</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="goodsName"
-                               placeholder="请输入货物名称">
-                        </div>
-                        <div class="col-sm-2 input-group">
+                        <div class="col-sm-4 input-group">
                             <button type="button" class="btn btn-success pull-right" id="searchLOPBtn"
-                                    style="padding:6px 30px;">
+                                    style="padding: 6px 48px;">
                                 <span class="fa fa-fw fa-search"></span> 查询
                             </button>
                         </div>
@@ -312,38 +301,52 @@
             <div class="row content-main-btn">
                 <form class="form-horizontal" role="form" id="searchSCForm" style="padding-left: 11px;">
                     <div class="form-group">
-                        <div class="col-sm-4">
-                            <select name="isSure" class="selectpicker form-control selectAskPur" title="请选择采购询价状态">
-                                <option value="">请选择</option>
+                        <div class="col-sm-3">
+                            <select name="isSure" class="selectpicker form-control selectAskPur" title="请选择合同状态">
+                                <option value="">请选择合同状态</option>
                                 <option value="是">已经签订合同</option>
                                 <option value="否">未签订合同</option>
                             </select>
                         </div>
-                        <label class="col-sm-1 control-label">货物名称</label>
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" name="goodsName"
-                               placeholder="请输入货物名称">
+                        <div class="col-sm-3">
+                            <select name="oeState" class="selectpicker form-control selectAskPur" title="请选择物流审核状态">
+                                <option value="">请选择物流审核状态</option>
+                                <option value="审核中">审核中</option>
+                                <option value="通过">通过</option>
+                                <option value="不通过">不通过</option>
+                            </select>
                         </div>
-                        <label class="col-sm-2 control-label">接收人名称</label>
+                        <div class="col-sm-3">
+                            <select name="logState" class="selectpicker form-control selectAskPur" title="请选择物流询价回复状态">
+                                <option value="">请选择物流询价回复状态</option>
+                                <option value="否">否</option>
+                                <option value="已回复">已回复</option>
+                                <option value="已出发">已出发</option>
+                            </select>
+                        </div>
+                        <label class="col-sm-1 control-label">收货人</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="receiptName"
-                               placeholder="请输入接收人名称">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入收货人名称"
+                                   style="width: 75%;">
                         </div>
                     </div>
                     <div class="form-group">
-                        <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
-                        <div class="col-sm-4">
-                            <input class="form-control Time" type="text" 
-                                   name="createTime" id="createSCTime" placeholder="请选择创建时间"  style="width:92%;">
-                        </div>
-                        <div class="col-sm-1 text-center" style="padding-top: 9px;">
-                            <b>到</b>
+                        <div class="col-sm-3">
+                            <input class="form-control Time" type="text" name="createTime" id="createSCTime"
+                                   placeholder="请选择开始创建时间" style="width:88%;">
                         </div>
                         <div class="col-sm-2">
-                            <input class="form-control Time" type="text" name="endTime" id="endSCTime" placeholder="请选择创建时间">
+                            <input class="form-control Time" type="text" name="endTime" id="endSCTime"
+                                   placeholder="请选择截止创建时间" style="width:143%">
                         </div>
-                        <div class="col-sm-4 input-group">
-                            <button type="button" class="btn btn-success pull-right" id="searchSCBtn">
+                        <label class="col-sm-2 control-label">货物名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称"
+                                   style="width: 83%;">
+                        </div>
+                        <div class="col-sm-2 input-group">
+                            <button type="button" class="btn btn-success pull-right" id="searchSCBtn"
+                                    style="padding:6px 30px;margin-left:111px;">
                                 <span class="fa fa-fw fa-search"></span> 查询
                             </button>
                         </div>
@@ -351,7 +354,7 @@
                 </form>
             </div>
             <div class="row content-main-table">
-                <table class="SCrice-table"></table>
+                <table class="SC-table"></table>
             </div>
         </div>
         <!-- 订单跟踪 -->

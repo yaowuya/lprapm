@@ -13,18 +13,18 @@ public class Car {
 
     private Double carWeight;
 
-    private Double preKmPrice;
+    private Double kmPrice;
 
     private String isFree;
 
-    public Car(Integer carId, Integer userId, String carLicense, String carType, Double carVolume, Double carWeight, Double preKmPrice, String isFree) {
+    public Car(Integer carId, Integer userId, String carLicense, String carType, Double carVolume, Double carWeight, Double kmPrice, String isFree) {
         this.carId = carId;
         this.userId = userId;
         this.carLicense = carLicense;
         this.carType = carType;
         this.carVolume = carVolume;
         this.carWeight = carWeight;
-        this.preKmPrice = preKmPrice;
+        this.kmPrice = kmPrice;
         this.isFree = isFree;
     }
 
@@ -80,12 +80,12 @@ public class Car {
         this.carWeight = carWeight;
     }
 
-    public Double getPreKmPrice() {
-        return preKmPrice;
+    public Double getKmPrice() {
+        return kmPrice;
     }
 
-    public void setPreKmPrice(Double preKmPrice) {
-        this.preKmPrice = preKmPrice;
+    public void setKmPrice(Double kmPrice) {
+        this.kmPrice = kmPrice;
     }
 
     public String getIsFree() {

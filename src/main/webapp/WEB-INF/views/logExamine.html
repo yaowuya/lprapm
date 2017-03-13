@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>物流审核管理</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-select.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/purchaseOrder.css"/>
+</head>
+
+<body>
+<div class="content-theme">
+    <h3>物流审核管理</h3>
+</div>
+<div class="content-nav">
+</div>
+<div class="content-main">
+    <div class="tab-content">
+        <!-- 物流审核管理 -->
+        <div class="row content-main-btn">
+            <form class="form-horizontal" role="form" id="searchELForm" style="padding-left: 11px;">
+                <div class="form-group">
+                    <label class="col-sm-1 control-label label-date">创建时间:</label>
+                    <div class="col-sm-2">
+                        <input class="form-control Time" type="text" name="createTime" id="createELTime"
+                               placeholder="请选择创建时间" style="width:92%;">
+                    </div>
+                    <div class="col-sm-1 text-center" style="padding-top: 9px; width: 10px;">
+                        <b>到</b>
+                    </div>
+                    <div class="col-sm-2">
+                        <input class="form-control Time" type="text" name="endTime" id="endELTime"
+                               placeholder="请选择创建时间">
+                    </div>
+                    <div class="col-sm-2">
+                        <select name="oeState" class="selectpicker form-control selectAskPur" title="请选择审核状态">
+                            <option value="">请选择审核状态</option>
+                            <option value="审核中">审核中</option>
+                            <option value="通过">通过</option>
+                            <option value="不通过">不通过</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-2">
+                        <label class="sr-only" for="goodsName">货物名称</label>
+                        <input type="text" class="form-control" id="goodsName" name="goodsName" placeholder="请输入货物名称">
+                    </div>
+                    <div class="col-sm-2 input-group">
+                        <button type="button" class="btn btn-success pull-right" id="searchELBtn"
+                                style="padding: 6px 48px;">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="row content-main-table">
+            <table class="EL-table"></table>
+        </div>
+        <!-- 模态框（Modal） -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true" scrolling="no">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                            &times;
+                        </button>
+                        <h4 class="modal-title" id="myModalLabel">
+
+                        </h4>
+                    </div>
+                    <form class="modal-body form-horizontal" role="form" id="addELForm">
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">货物名称:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称" readonly>
+                            </div>
+                            <label class="col-sm-2 control-label">货物数量:</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" name="goodsNumber" placeholder="请输入货物数量"
+                                       min="0" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">货物体积:</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" name="goodsVolume" placeholder="请输入货物体积"
+                                       min="0" readonly>
+                            </div>
+                            <label class="col-sm-2  control-label">单位重量:</label>
+                            <div class="col-sm-3">
+                                <input type="number" class="form-control" name="goodsPerweight" placeholder="请输入货物单位重量"
+                                       min="0" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">审核部门:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="oeDept" placeholder="请输入审核部门"
+                                       value="市场审核部" readonly>
+                            </div>
+                            <label class="col-sm-2  control-label">审核人:</label>
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" name="oePerson" placeholder="请输入审核人" min="0"
+                                       readonly>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">审核原因:</label>
+                            <div class="col-sm-9">
+                                <textarea name="oeReason" class="form-control" placeholder="请输入审核原因"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-3  control-label">回复状态:</label>
+                            <div class="col-sm-9">
+                                <select name="oeState" class="selectpicker form-control selectAskPur" title="请选择审核状态">
+                                    <option value="">请选择审核状态</option>
+                                    <option value="通过">通过</option>
+                                    <option value="不通过">不通过</option>
+                                </select>
+                            </div>
+                        </div>
+                        <input type="text" class="hide" name="orderId" value="">
+                        <input type="text" class="hide" name="goodsId" value="">
+                        <input type="text" class="hide" name="oeId" value="">
+                        <button type="reset" class="btn hide" id="resetELBtn">
+                            重置
+                        </button>
+                    </form>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                        </button>
+                        <button type="button" class="btn btn-success" id="submitELBtn">
+                            提交
+                        </button>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal -->
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['../../assets/js/common.js'], function () {
+        require(['app/logistic/logExamine']);
+    });
+</script>
+</body>
+
+</html>

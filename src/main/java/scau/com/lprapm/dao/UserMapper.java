@@ -2,6 +2,7 @@ package scau.com.lprapm.dao;
 
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 import scau.com.lprapm.entity.User;
 
@@ -43,4 +44,7 @@ public interface UserMapper {
     int insertUsers(User user);
 
     List<Map<String,Object>> searchUserByName(Map<String, Object> params);
+
+    @Select("select user_id userId, user_true_name userTrueName from user")
+    List<Map<String, Object>> searchAllUser();
 }

@@ -91,8 +91,9 @@
                         </div>
                     </div>
                     <input type="text" class="hide" name="isPur" value="是"/>
+                    <input type="text" class="hide" name="isSure" value="否"/>
                     <input type="text" class="hide" name="oeState" value="否"/>
-                    <input type="text" class="hide" name="purState" value="否"/>
+                    <input type="text" class="hide" name="purState" value="审核中"/>
                     <input type="text" class="hide" name="logState" value="否"/>
                     <input type="text" class="hide" name="receiptState" value="否"/>
                     <div class="form-group">
@@ -308,9 +309,9 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <select name="isAskLog" class="selectpicker form-control selectAskPur" title="请选择物流询价状态">
-                                <option value="">请选择</option>
-                                <option value="是">已经物流询价</option>
-                                <option value="否">未物流询价</option>
+                                <option value=''>请选择</option>
+                                <option value="是">是</option>
+                                <option value="否">否</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label">货物名称</label>
@@ -357,9 +358,10 @@
                     <div class="form-group">
                         <div class="col-sm-4">
                             <select name="purState" class="selectpicker form-control purState" title="请选择发起采购状态">
-                                <option value="">请选择</option>
-                                <option value="是">已经发起采购</option>
-                                <option value="否">未发起采购</option>
+                                <option value='"已回复","发起采购中","采购中"'>请选择</option>
+                                <option value='"已回复"'>已回复</option>
+                                <option value='"发起采购中"'>发起采购中</option>
+                                <option value='"采购中"'>采购中</option>
                             </select>
                         </div>
                         <label class="col-sm-1 control-label">货物名称</label>
@@ -387,7 +389,8 @@
                                    placeholder="请选择创建时间">
                         </div>
                         <div class="col-sm-4 input-group">
-                            <button type="button" class="btn btn-success pull-right" id="searchSPBtn">
+                            <button type="button" class="btn btn-success pull-right" id="searchSPBtn"
+                                    style="padding: 6px 48px;">
                                 <span class="fa fa-fw fa-search"></span> 查询
                             </button>
                         </div>
