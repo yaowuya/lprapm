@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50520
+Source Server Version : 50168
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50168
 File Encoding         : 65001
 
-Date: 2017-03-14 00:11:52
+Date: 2017-03-14 17:47:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -79,8 +79,10 @@ CREATE TABLE `car_need` (
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
   `carn_exam_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `car_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carn_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_exam_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carn_time` date DEFAULT NULL,
+  `carn_exam_time` date DEFAULT NULL,
   PRIMARY KEY (`carn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
 

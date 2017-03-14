@@ -1,5 +1,7 @@
 package scau.com.lprapm.entity;
 
+import java.util.Date;
+
 public class CarNeed {
     private Integer carnId;
 
@@ -9,17 +11,23 @@ public class CarNeed {
 
     private String carnExamState;
 
-    private String carExamPerson;
+    private String carnExamPerson;
 
     private String carnExamDept;
 
-    public CarNeed(Integer carnId, String carnType, Integer carnNum, String carnExamState, String carExamPerson, String carnExamDept) {
+    private Date carnTime;
+
+    private Date carnExamTime;
+
+    public CarNeed(Integer carnId, String carnType, Integer carnNum, String carnExamState, String carnExamPerson, String carnExamDept, Date carnTime, Date carnExamTime) {
         this.carnId = carnId;
         this.carnType = carnType;
         this.carnNum = carnNum;
         this.carnExamState = carnExamState;
-        this.carExamPerson = carExamPerson;
+        this.carnExamPerson = carnExamPerson;
         this.carnExamDept = carnExamDept;
+        this.carnTime = carnTime;
+        this.carnExamTime = carnExamTime;
     }
 
     public CarNeed() {
@@ -58,12 +66,12 @@ public class CarNeed {
         this.carnExamState = carnExamState == null ? null : carnExamState.trim();
     }
 
-    public String getCarExamPerson() {
-        return carExamPerson;
+    public String getCarnExamPerson() {
+        return carnExamPerson;
     }
 
-    public void setCarExamPerson(String carExamPerson) {
-        this.carExamPerson = carExamPerson == null ? null : carExamPerson.trim();
+    public void setCarnExamPerson(String carnExamPerson) {
+        this.carnExamPerson = carnExamPerson == null ? null : carnExamPerson.trim();
     }
 
     public String getCarnExamDept() {
@@ -72,5 +80,21 @@ public class CarNeed {
 
     public void setCarnExamDept(String carnExamDept) {
         this.carnExamDept = carnExamDept == null ? null : carnExamDept.trim();
+    }
+
+    public Date getCarnTime() {
+        return carnTime;
+    }
+
+    public void setCarnTime(Date carnTime) {
+        this.carnTime = carnTime;
+    }
+
+    public Date getCarnExamTime() {
+        return carnExamTime;
+    }
+
+    public void setCarnExamTime(Date carnExamTime) {
+        this.carnExamTime = carnExamTime;
     }
 }
