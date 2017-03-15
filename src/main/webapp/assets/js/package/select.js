@@ -16,7 +16,7 @@ define(['ajaxPackage', 'bootstrapSelect'],
         };
 
         var setSelectList = {
-                option: function($select, selectOption, Url, name, code, selected) {
+            option: function ($select, selectOption, Url, name, code, selected, ajaxData) {
                     // selected是一个数组
                     var namekey = "",
                         codekey = "",
@@ -29,6 +29,7 @@ define(['ajaxPackage', 'bootstrapSelect'],
                         ajaxPakage.Ajax.request({
                             url: Url,
                             async: false,
+                            data: ajaxData,
                             success: function(response) {
                                 var successData = response.data;
                                 $.each(successData, function(index, item) { //后台返回值
