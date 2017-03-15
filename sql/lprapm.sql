@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50168
 File Encoding         : 65001
 
-Date: 2017-03-14 17:47:57
+Date: 2017-03-15 17:46:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -56,38 +56,61 @@ CREATE TABLE `car` (
 INSERT INTO `car` VALUES ('2', '3', '34567', '轿车', '45', '210', '344', '是');
 
 -- ----------------------------
--- Table structure for `car_free_bill`
--- ----------------------------
-DROP TABLE IF EXISTS `car_free_bill`;
-CREATE TABLE `car_free_bill` (
-  `carfree_id` int(11) NOT NULL AUTO_INCREMENT,
-  `car_id` int(11) DEFAULT NULL,
-  `carn_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`carfree_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='审核后的符合要求的车辆';
-
--- ----------------------------
--- Records of car_free_bill
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `car_need`
 -- ----------------------------
 DROP TABLE IF EXISTS `car_need`;
 CREATE TABLE `car_need` (
-  `carn_id` int(11) NOT NULL AUTO_INCREMENT,
+  `carn_id` int(11) NOT NULL,
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
-  `carn_exam_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `carn_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carn_exam_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `car_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_exam_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `carn_time` date DEFAULT NULL,
-  `carn_exam_time` date DEFAULT NULL,
+  `car_ids` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`carn_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
 
 -- ----------------------------
 -- Records of car_need
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `car_plan`
+-- ----------------------------
+DROP TABLE IF EXISTS `car_plan`;
+CREATE TABLE `car_plan` (
+  `carplan_id` int(11) NOT NULL,
+  `order_id` int(11) DEFAULT NULL,
+  `carn_id` int(11) DEFAULT NULL,
+  `all_weight` double DEFAULT NULL,
+  `all_number` double DEFAULT NULL,
+  `all_volume` double DEFAULT NULL,
+  `carplan_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carplan_person` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carplan_desrciption` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carplan_time` date DEFAULT NULL,
+  PRIMARY KEY (`carplan_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
+
+-- ----------------------------
+-- Records of car_plan
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `car_type`
+-- ----------------------------
+DROP TABLE IF EXISTS `car_type`;
+CREATE TABLE `car_type` (
+  `ct_id` int(11) NOT NULL,
+  `ct_type` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `ct_volume` double DEFAULT NULL,
+  `ct_weight` double DEFAULT NULL,
+  `km_price` double DEFAULT NULL,
+  PRIMARY KEY (`ct_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车类型管理';
+
+-- ----------------------------
+-- Records of car_type
 -- ----------------------------
 
 -- ----------------------------
@@ -265,7 +288,8 @@ DROP TABLE IF EXISTS `position_tracking`;
 CREATE TABLE `position_tracking` (
   `position_id` int(11) NOT NULL,
   `withcar_id` int(11) DEFAULT NULL,
-  `routep_id` int(11) DEFAULT NULL,
+  `repo_id` int(11) DEFAULT NULL,
+  `track_status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`position_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
 
@@ -367,6 +391,26 @@ INSERT INTO `receipt` VALUES ('15', '中岳', '18845698789', '中国香港', '�
 INSERT INTO `receipt` VALUES ('17', '霓裳', '15578986569', '撒点粉', '否', null);
 
 -- ----------------------------
+-- Table structure for `repertory`
+-- ----------------------------
+DROP TABLE IF EXISTS `repertory`;
+CREATE TABLE `repertory` (
+  `repo_id` int(11) NOT NULL,
+  `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `area` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cityid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `city` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `provinceid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `repo_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`repo_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='仓库';
+
+-- ----------------------------
+-- Records of repertory
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `role`
 -- ----------------------------
 DROP TABLE IF EXISTS `role`;
@@ -434,53 +478,6 @@ INSERT INTO `role_menu` VALUES ('21', '1', '17');
 INSERT INTO `role_menu` VALUES ('22', '1', '18');
 
 -- ----------------------------
--- Table structure for `route_manage`
--- ----------------------------
-DROP TABLE IF EXISTS `route_manage`;
-CREATE TABLE `route_manage` (
-  `routem_id` int(11) NOT NULL,
-  `routem_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `routem_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`routem_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='路线管理';
-
--- ----------------------------
--- Records of route_manage
--- ----------------------------
-
--- ----------------------------
--- Table structure for `route_mange_point`
--- ----------------------------
-DROP TABLE IF EXISTS `route_mange_point`;
-CREATE TABLE `route_mange_point` (
-  `routemp_id` int(11) NOT NULL,
-  `routem_id` int(11) DEFAULT NULL,
-  `routep_id` int(11) DEFAULT NULL,
-  `routemp_price` double DEFAULT NULL,
-  PRIMARY KEY (`routemp_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='路线-站点映射';
-
--- ----------------------------
--- Records of route_mange_point
--- ----------------------------
-
--- ----------------------------
--- Table structure for `route_point`
--- ----------------------------
-DROP TABLE IF EXISTS `route_point`;
-CREATE TABLE `route_point` (
-  `routep_id` int(11) NOT NULL,
-  `routep_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `routep_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `routep_address` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`routep_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='站点管理';
-
--- ----------------------------
--- Records of route_point
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -527,22 +524,3 @@ INSERT INTO `user_role` VALUES ('2', '2', '1');
 INSERT INTO `user_role` VALUES ('3', '3', '3');
 INSERT INTO `user_role` VALUES ('4', '4', '4');
 INSERT INTO `user_role` VALUES ('10', '11', '1');
-
--- ----------------------------
--- Table structure for `with_car_plan`
--- ----------------------------
-DROP TABLE IF EXISTS `with_car_plan`;
-CREATE TABLE `with_car_plan` (
-  `withcar_id` int(11) NOT NULL,
-  `routemp_id` int(11) DEFAULT NULL,
-  `carfree_id` int(11) DEFAULT NULL,
-  `log_id` int(11) DEFAULT NULL,
-  `withcar_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `withcar_code` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `withcar_coast` double DEFAULT NULL,
-  PRIMARY KEY (`withcar_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
-
--- ----------------------------
--- Records of with_car_plan
--- ----------------------------
