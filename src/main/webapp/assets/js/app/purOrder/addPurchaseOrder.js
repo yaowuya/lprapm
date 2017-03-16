@@ -6,9 +6,12 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
          */
         var addPurchaseOrder = function () {
             var submitBtn = $("#addPurOrder .btn-submitPO"),
-                $province = $(".selectProvince"),
-                $city = $(".selectCity"),
-                $area = $(".selectArea"),
+                $province = $("#orderProvince"),
+                $city = $("#orderCity"),
+                $area = $("#orderArea"),
+                $receiptProvince = $("#receiptProvince"),
+                $receiptCity = $("#receiptCity"),
+                $receiptArea = $("#receiptArea"),
                 selectOption = {
                     isSearch: true, //是否显示搜索框
                     multiple: false, //是否多选
@@ -21,11 +24,24 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             $city.selectpicker('show');
             $area.selectpicker('show');
 
+            Select.selectList.option($receiptProvince, selectOption, '/address/province', "province", "provinceid", []);
+            $receiptCity.selectpicker('show');
+            $receiptArea.selectpicker('show');
+
             $province.on('change', function (event) {
                 event.preventDefault();
                 /* Act on the event */
                 var provinceVal = $(this).val();
                 Select.selectList.option($city, selectOption, "/address/city", "city", "cityid", [], {
+                    "provinceid": provinceVal
+                });
+            });
+
+            $receiptProvince.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                var provinceVal = $(this).val();
+                Select.selectList.option($receiptCity, selectOption, "/address/city", "city", "cityid", [], {
                     "provinceid": provinceVal
                 });
             });
@@ -43,6 +59,19 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 }
             });
 
+            $receiptCity.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($receiptProvince.val() == null || $receiptProvince.val() == "") {
+                    $receiptCity.selectpicker('destroy');
+                } else {
+                    var cityVal = $(this).val();
+                    Select.selectList.option($receiptArea, selectOption, "/address/area", "area", "areaid", [], {
+                        "cityid": cityVal
+                    });
+                }
+            });
+
             $area.on('change', function (event) {
                 event.preventDefault();
                 /* Act on the event */
@@ -50,12 +79,23 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     $area.selectpicker('destroy');
                 }
             });
+
+            $receiptArea.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($receiptCity.val() == null || $receiptCity.val() == "") {
+                    $receiptArea.selectpicker('destroy');
+                }
+            });
+
+
             timePicker.picker("#addPOTime", null);
 
             submitBtn.click(function (event) {
                 event.stopPropagation;
                 /* Act on the event */
                 var form = $(this).closest('form');
+                getAddress(form);
                 var formData = form.serializeArray();
                 // console.log(formData);
                 Lprapm.Ajax.request({
@@ -71,6 +111,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     }
                 });
             });
+
+            function getAddress(form) {
+            }
         }
 
         return {

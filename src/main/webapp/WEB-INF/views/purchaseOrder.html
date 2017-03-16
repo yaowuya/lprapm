@@ -78,34 +78,53 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">订单地址:</label>
+                        <label class="col-sm-2 control-label">订单所在地区:</label>
                         <div class="col-sm-2">
-                            <select class="selectpicker form-control selectProvince" id="orderProvince" title="省份"
+                            <select name="orderProvince" class="selectpicker form-control selectProvince"
+                                    id="orderProvince" title="省份"
                                     required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="selectpicker form-control selectCity" id="orderCity" title="地级市"
+                            <select name="orderCity" class="selectpicker form-control selectCity" id="orderCity"
+                                    title="地级市"
                                     required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="selectpicker form-control selectArea" id="orderArea" title="市、县级市"
+                            <select name="orderArea" class="selectpicker form-control selectArea" id="orderArea"
+                                    title="市、县级市"
                                     required></select>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <label class="col-sm-2 control-label">收货地址:</label>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">订单街道地址:</label>
+                        <div class="col-sm-8">
+                            <textarea name="orderDetailArea" cols="30" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收货人所在地区:</label>
                         <input type="text" class="form-control hide" name="receiptAddress">
                         <div class="col-sm-2">
-                            <select class="selectpicker form-control selectProvince" id="receiptProvince" title="省份" required></select>
+                            <select name="receiptProvince" class="selectpicker form-control selectProvince"
+                                    id="receiptProvince" title="省份" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="selectpicker form-control selectCity" id="receiptCity" title="地级市" required></select>
+                            <select name="receiptCity" class="selectpicker form-control selectCity" id="receiptCity"
+                                    title="地级市" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="selectpicker form-control selectArea" id="receiptArea" title="市、县级市" required></select>
+                            <select class="receiptArea" class="selectpicker form-control selectArea" id="receiptArea"
+                                    title="市、县级市" required></select>
                         </div>
-                    </div> -->
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">收货人街道地址:</label>
+                        <div class="col-sm-8">
+                            <textarea name="receiptDetailArea" cols="30" rows="3" class="form-control"></textarea>
+                        </div>
+                    </div>
                     <input type="text" class="form-control hide" name="orderAddress">
+                    <input type="text" class="form-control hide" name="receiptAddress">
                     <input type="text" class="hide" name="isPur" value="是"/>
                     <input type="text" class="hide" name="isSure" value="否"/>
                     <input type="text" class="hide" name="oeState" value="否"/>
