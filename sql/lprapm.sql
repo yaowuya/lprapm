@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-03-15 23:37:22
+Date: 2017-03-17 00:05:38
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3662,7 +3662,7 @@ CREATE TABLE `goods` (
   `goods_volume` double DEFAULT NULL,
   `goods_perweight` double DEFAULT NULL,
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
 
 -- ----------------------------
 -- Records of goods
@@ -3676,6 +3676,14 @@ INSERT INTO `goods` VALUES ('10', '飞熊', '33', '556', '1000');
 INSERT INTO `goods` VALUES ('17', '大厦', '33', '33', null);
 INSERT INTO `goods` VALUES ('18', '蟠桃', '55', '44', '666');
 INSERT INTO `goods` VALUES ('20', '昆吾', '7', '44', '88');
+INSERT INTO `goods` VALUES ('22', 'as', null, null, null);
+INSERT INTO `goods` VALUES ('23', 'df', null, null, null);
+INSERT INTO `goods` VALUES ('24', 'df', '12', '21', '12');
+INSERT INTO `goods` VALUES ('25', 'sd', null, null, null);
+INSERT INTO `goods` VALUES ('28', '蒋小鱼', null, null, null);
+INSERT INTO `goods` VALUES ('29', '蒋小鱼', null, null, null);
+INSERT INTO `goods` VALUES ('38', '士大夫', null, null, null);
+INSERT INTO `goods` VALUES ('40', '', null, null, null);
 
 -- ----------------------------
 -- Table structure for `log_price`
@@ -3688,7 +3696,7 @@ CREATE TABLE `log_price` (
   `log_price` double DEFAULT NULL,
   `log_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
 
 -- ----------------------------
 -- Records of log_price
@@ -3702,6 +3710,11 @@ INSERT INTO `log_price` VALUES ('7', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('14', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('15', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('17', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('19', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('22', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('23', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('32', null, null, null, '');
+INSERT INTO `log_price` VALUES ('34', null, null, null, '');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -3752,22 +3765,29 @@ CREATE TABLE `orders` (
   `is_sure` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `create_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
+  `provinceid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cityid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `order_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('3', '5', '2', '2', '11', '2', '2', '换换', '是', '是', '否', '否', '2017-02-08', '2017-02-27', '阿萨德开房间辣圣诞节快拉');
-INSERT INTO `orders` VALUES ('4', '6', '3', '3', '11', '3', '3', '换换', '是', '是', '否', '否', '2017-02-08', '2017-03-10', '类似的看法拉萨的李开复');
-INSERT INTO `orders` VALUES ('5', '7', '4', '4', '11', '4', '4', '换换', '是', '是', '是', '否', '2017-02-08', '2017-03-03', '大声点开了房间卡拉斯的减肥路上打卡机福利卡电视机房里看见俺说的可浪费了斯柯达解放啦圣诞节疯狂了大数据法拉盛打发');
-INSERT INTO `orders` VALUES ('6', '8', null, '5', '11', '5', '5', '换换', '否', '否', '否', '', '2017-03-01', '2017-03-31', '撒的发生发发试试事实上');
-INSERT INTO `orders` VALUES ('7', '9', '6', '6', '11', '6', '6', '换换', '否', '否', '是', '是', '2017-03-01', '2017-04-09', '撒旦法师法师打发的说法是的发生');
-INSERT INTO `orders` VALUES ('8', '10', '7', '7', '11', '7', '7', '换换', '否', '否', '否', '否', '2017-03-01', '2017-04-09', '撒旦法师法师打发的说法是的发生');
-INSERT INTO `orders` VALUES ('15', '17', null, '14', '11', '14', '14', '换换', '否', '否', '否', '', '2017-03-01', null, '');
-INSERT INTO `orders` VALUES ('16', '18', null, '15', '11', '15', '15', '换换', '是', '否', '否', '', '2017-03-07', '2017-04-09', '广东省广州市同和握山石决南街三巷八号');
-INSERT INTO `orders` VALUES ('18', '20', null, '17', '11', '17', '17', '换换', '是', '否', '否', '', '2017-03-07', '2017-03-29', '啊是的浪费空间');
+INSERT INTO `orders` VALUES ('3', '5', '2', '2', '11', '2', '2', '换换', '是', '是', '否', '否', '2017-02-08', '2017-02-27', null, null, null, '阿萨德开房间辣圣诞节快拉');
+INSERT INTO `orders` VALUES ('4', '6', '3', '3', '11', '3', '3', '换换', '是', '是', '否', '否', '2017-02-08', '2017-03-10', null, null, null, '类似的看法拉萨的李开复');
+INSERT INTO `orders` VALUES ('5', '7', '4', '4', '11', '4', '4', '换换', '是', '是', '是', '否', '2017-02-08', '2017-03-03', null, null, null, '大声点开了房间卡拉斯的减肥路上打卡机福利卡电视机房里看见俺说的可浪费了斯柯达解放啦圣诞节疯狂了大数据法拉盛打发');
+INSERT INTO `orders` VALUES ('6', '8', null, '5', '11', '5', '5', '换换', '否', '否', '否', '', '2017-03-01', '2017-03-31', null, null, null, '撒的发生发发试试事实上');
+INSERT INTO `orders` VALUES ('7', '9', '6', '6', '11', '6', '6', '换换', '否', '否', '是', '是', '2017-03-01', '2017-04-09', null, null, null, '撒旦法师法师打发的说法是的发生');
+INSERT INTO `orders` VALUES ('8', '10', '7', '7', '11', '7', '7', '换换', '否', '否', '否', '否', '2017-03-01', '2017-04-09', null, null, null, '撒旦法师法师打发的说法是的发生');
+INSERT INTO `orders` VALUES ('15', '17', null, '14', '11', '14', '14', '换换', '否', '否', '否', '', '2017-03-01', null, null, null, null, '');
+INSERT INTO `orders` VALUES ('16', '18', null, '15', '11', '15', '15', '换换', '是', '否', '否', '', '2017-03-07', '2017-04-09', null, null, null, '广东省广州市同和握山石决南街三巷八号');
+INSERT INTO `orders` VALUES ('18', '20', null, '17', '11', '17', '17', '换换', '是', '否', '否', '', '2017-03-07', '2017-03-29', null, null, null, '啊是的浪费空间');
+INSERT INTO `orders` VALUES ('22', '28', '31', '22', '11', '22', '22', '换换', '是', '否', '否', '否', '2017-03-16', '2017-04-01', '210000', '210300', '210303', '士大夫');
+INSERT INTO `orders` VALUES ('23', '29', '32', '23', '11', '23', '23', '换换', '是', '否', '否', '否', '2017-03-16', '2017-04-01', null, null, null, '士大夫');
+INSERT INTO `orders` VALUES ('32', '38', '41', '32', '11', '32', '32', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '的');
+INSERT INTO `orders` VALUES ('34', '40', '43', '34', '11', '34', '34', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `order_exam`
@@ -3780,7 +3800,7 @@ CREATE TABLE `order_exam` (
   `oe_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oe_reason` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`oe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
 
 -- ----------------------------
 -- Records of order_exam
@@ -3801,6 +3821,11 @@ INSERT INTO `order_exam` VALUES ('23', '否', null, null, null);
 INSERT INTO `order_exam` VALUES ('24', '否', null, null, null);
 INSERT INTO `order_exam` VALUES ('25', '否', null, null, null);
 INSERT INTO `order_exam` VALUES ('26', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('28', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('31', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('32', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('41', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('43', '', null, null, null);
 
 -- ----------------------------
 -- Table structure for `position_tracking`
@@ -3918,7 +3943,7 @@ CREATE TABLE `pur_price` (
   `pur_price` double DEFAULT NULL,
   `pur_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
 
 -- ----------------------------
 -- Records of pur_price
@@ -3932,6 +3957,11 @@ INSERT INTO `pur_price` VALUES ('7', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('14', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('15', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('17', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('19', null, null, null, '审核中');
+INSERT INTO `pur_price` VALUES ('22', null, null, null, '审核中');
+INSERT INTO `pur_price` VALUES ('23', null, null, null, '审核中');
+INSERT INTO `pur_price` VALUES ('32', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('34', null, null, null, '');
 
 -- ----------------------------
 -- Table structure for `receipt`
@@ -3941,24 +3971,32 @@ CREATE TABLE `receipt` (
   `receipt_id` int(11) NOT NULL AUTO_INCREMENT,
   `receipt_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `receipt_provinceid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `receipt_cityid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `receipt_areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_time` date DEFAULT NULL,
   PRIMARY KEY (`receipt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
 
 -- ----------------------------
 -- Records of receipt
 -- ----------------------------
-INSERT INTO `receipt` VALUES ('2', '佳节123', '18814569878', '法律框架爱上邓丽君按时打卡了房间', '否', null);
-INSERT INTO `receipt` VALUES ('3', '小小', '18845236598', '阿斯顿发送到发送到发送到发送到发送到发多少', '否', null);
-INSERT INTO `receipt` VALUES ('4', '小啊', '15541234587', '盛大发售的疯狂拉升的风景', '否', null);
-INSERT INTO `receipt` VALUES ('5', '白小春', '15541023123', '阿斯顿发反反复复凤飞飞', '否', null);
-INSERT INTO `receipt` VALUES ('6', '李青候', '18845698789', '阿斯顿发的说法都是发发', '否', null);
-INSERT INTO `receipt` VALUES ('7', '李青候', '18845698789', '阿斯顿发的说法都是发发', '否', null);
-INSERT INTO `receipt` VALUES ('14', '', '', '', '否', null);
-INSERT INTO `receipt` VALUES ('15', '中岳', '18845698789', '中国香港', '否', null);
-INSERT INTO `receipt` VALUES ('17', '霓裳', '15578986569', '撒点粉', '否', null);
+INSERT INTO `receipt` VALUES ('2', '佳节123', '18814569878', null, null, null, '法律框架爱上邓丽君按时打卡了房间', '否', null);
+INSERT INTO `receipt` VALUES ('3', '小小', '18845236598', null, null, null, '阿斯顿发送到发送到发送到发送到发送到发多少', '否', null);
+INSERT INTO `receipt` VALUES ('4', '小啊', '15541234587', null, null, null, '盛大发售的疯狂拉升的风景', '否', null);
+INSERT INTO `receipt` VALUES ('5', '白小春', '15541023123', null, null, null, '阿斯顿发反反复复凤飞飞', '否', null);
+INSERT INTO `receipt` VALUES ('6', '李青候', '18845698789', null, null, null, '阿斯顿发的说法都是发发', '否', null);
+INSERT INTO `receipt` VALUES ('7', '李青候', '18845698789', null, null, null, '阿斯顿发的说法都是发发', '否', null);
+INSERT INTO `receipt` VALUES ('14', '', '', null, null, null, '', '否', null);
+INSERT INTO `receipt` VALUES ('15', '中岳', '18845698789', null, null, null, '中国香港', '否', null);
+INSERT INTO `receipt` VALUES ('17', '霓裳', '15578986569', null, null, null, '撒点粉', '否', null);
+INSERT INTO `receipt` VALUES ('19', '', '', '210000', '211100', null, 'dasf', '否', null);
+INSERT INTO `receipt` VALUES ('22', '', '', '210000', '211200', '211223', '范德萨', '否', null);
+INSERT INTO `receipt` VALUES ('23', '', '', null, null, null, '范德萨', '否', null);
+INSERT INTO `receipt` VALUES ('32', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('34', '', '', '', '', '', '', '', null);
 
 -- ----------------------------
 -- Table structure for `repertory`
