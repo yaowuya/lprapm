@@ -49,10 +49,10 @@ define(['ajaxPackage',
         var bodyHeight = window.screen.height;
         // var bodyHeight= window.screen.availHeight; 
         // console.log(bodyHeight);
-        $(".container-fluid").css('min-height', bodyHeight + 'px');
+        // $(".container-fluid").css('min-height', bodyHeight + 'px');
         // $(".content").css('height', bodyHeight+"px");
-        $("#Mainindex").css('min-height', bodyHeight + 'px');
-
+        $("#Mainindex").css('min-height', bodyHeight * 1.2 + 'px');
+        // scrolling="no"
         $(".side-menu").slimScroll({
             height: bodyHeight - 200 + 'px',
             disableFadeOut: true,

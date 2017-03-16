@@ -1,7 +1,5 @@
 package scau.com.lprapm.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Receipt {
@@ -11,11 +9,33 @@ public class Receipt {
 
     private String receiptPhone;
 
+    private String receiptProvinceid;
+
+    private String receiptCityid;
+
+    private String receiptAreaid;
+
     private String receiptAddress;
 
     private String receiptState;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+
     private Date receiptTime;
+
+    public Receipt(Integer receiptId, String receiptName, String receiptPhone, String receiptProvinceid, String receiptCityid, String receiptAreaid, String receiptAddress, String receiptState, Date receiptTime) {
+        this.receiptId = receiptId;
+        this.receiptName = receiptName;
+        this.receiptPhone = receiptPhone;
+        this.receiptProvinceid = receiptProvinceid;
+        this.receiptCityid = receiptCityid;
+        this.receiptAreaid = receiptAreaid;
+        this.receiptAddress = receiptAddress;
+        this.receiptState = receiptState;
+        this.receiptTime = receiptTime;
+    }
+
+    public Receipt() {
+        super();
+    }
 
     public Integer getReceiptId() {
         return receiptId;
@@ -39,6 +59,30 @@ public class Receipt {
 
     public void setReceiptPhone(String receiptPhone) {
         this.receiptPhone = receiptPhone == null ? null : receiptPhone.trim();
+    }
+
+    public String getReceiptProvinceid() {
+        return receiptProvinceid;
+    }
+
+    public void setReceiptProvinceid(String receiptProvinceid) {
+        this.receiptProvinceid = receiptProvinceid == null ? null : receiptProvinceid.trim();
+    }
+
+    public String getReceiptCityid() {
+        return receiptCityid;
+    }
+
+    public void setReceiptCityid(String receiptCityid) {
+        this.receiptCityid = receiptCityid == null ? null : receiptCityid.trim();
+    }
+
+    public String getReceiptAreaid() {
+        return receiptAreaid;
+    }
+
+    public void setReceiptAreaid(String receiptAreaid) {
+        this.receiptAreaid = receiptAreaid == null ? null : receiptAreaid.trim();
     }
 
     public String getReceiptAddress() {

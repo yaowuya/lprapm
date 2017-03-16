@@ -61,7 +61,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                     showModal();
                     $.each(row, function(index, value) {
                         /* iterate through array or object */
-                        $addForm.find("input[name=" + index + "]").val(value);
+                        $addForm.find(":input[name=" + index + "]").val(value);
                     });
                 }
             }

@@ -2,15 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="scau.com.lprapm.dao.ReceiptMapper" >
   <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Receipt" >
-    <id column="receipt_id" property="receiptId" jdbcType="INTEGER" />
-    <result column="receipt_name" property="receiptName" jdbcType="VARCHAR" />
-    <result column="receipt_phone" property="receiptPhone" jdbcType="VARCHAR" />
-    <result column="receipt_address" property="receiptAddress" jdbcType="VARCHAR" />
-    <result column="receipt_state" property="receiptState" jdbcType="VARCHAR" />
-    <result column="receipt_time" property="receiptTime" jdbcType="DATE" />
+    <constructor>
+      <idArg column="receipt_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="receipt_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_phone" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_provinceid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_cityid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_areaid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_address" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_state" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="receipt_time" jdbcType="DATE" javaType="java.util.Date"/>
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    receipt_id, receipt_name, receipt_phone, receipt_address, receipt_state, receipt_time
+    receipt_id, receipt_name, receipt_phone, receipt_provinceid, receipt_cityid, receipt_areaid,
+    receipt_address, receipt_state, receipt_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -23,18 +29,23 @@
     where receipt_id = #{receiptId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="scau.com.lprapm.entity.Receipt" >
-    insert into receipt (receipt_id, receipt_name, receipt_phone, 
+    insert into receipt (receipt_id, receipt_name, receipt_phone,
+    receipt_provinceid, receipt_cityid, receipt_areaid,
       receipt_address, receipt_state, receipt_time
       )
-    values (#{receiptId,jdbcType=INTEGER}, #{receiptName,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR}, 
+    values (#{receiptId,jdbcType=INTEGER}, #{receiptName,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR},
+    #{receiptProvinceid,jdbcType=VARCHAR}, #{receiptCityid,jdbcType=VARCHAR}, #{receiptAreaid,jdbcType=VARCHAR},
       #{receiptAddress,jdbcType=VARCHAR}, #{receiptState,jdbcType=VARCHAR}, #{receiptTime,jdbcType=DATE}
       )
   </insert>
-  <insert id="insertReceipt" parameterType="scau.com.lprapm.entity.Receipt" useGeneratedKeys="true" keyProperty="receiptId">
+  <insert id="insertReceipt" keyProperty="receiptId" parameterType="scau.com.lprapm.entity.Receipt"
+          useGeneratedKeys="true">
     insert into receipt (receipt_id, receipt_name, receipt_phone,
+    receipt_provinceid, receipt_cityid, receipt_areaid,
     receipt_address, receipt_state, receipt_time
     )
     values (#{receiptId,jdbcType=INTEGER}, #{receiptName,jdbcType=VARCHAR}, #{receiptPhone,jdbcType=VARCHAR},
+    #{receiptProvinceid,jdbcType=VARCHAR}, #{receiptCityid,jdbcType=VARCHAR}, #{receiptAreaid,jdbcType=VARCHAR},
     #{receiptAddress,jdbcType=VARCHAR}, #{receiptState,jdbcType=VARCHAR}, #{receiptTime,jdbcType=DATE}
     )
   </insert>
@@ -49,6 +60,15 @@
       </if>
       <if test="receiptPhone != null" >
         receipt_phone,
+      </if>
+      <if test="receiptProvinceid != null">
+        receipt_provinceid,
+      </if>
+      <if test="receiptCityid != null">
+        receipt_cityid,
+      </if>
+      <if test="receiptAreaid != null">
+        receipt_areaid,
       </if>
       <if test="receiptAddress != null" >
         receipt_address,
@@ -70,6 +90,15 @@
       <if test="receiptPhone != null" >
         #{receiptPhone,jdbcType=VARCHAR},
       </if>
+      <if test="receiptProvinceid != null">
+        #{receiptProvinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptCityid != null">
+        #{receiptCityid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptAreaid != null">
+        #{receiptAreaid,jdbcType=VARCHAR},
+      </if>
       <if test="receiptAddress != null" >
         #{receiptAddress,jdbcType=VARCHAR},
       </if>
@@ -90,6 +119,15 @@
       <if test="receiptPhone != null" >
         receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
       </if>
+      <if test="receiptProvinceid != null">
+        receipt_provinceid = #{receiptProvinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptCityid != null">
+        receipt_cityid = #{receiptCityid,jdbcType=VARCHAR},
+      </if>
+      <if test="receiptAreaid != null">
+        receipt_areaid = #{receiptAreaid,jdbcType=VARCHAR},
+      </if>
       <if test="receiptAddress != null" >
         receipt_address = #{receiptAddress,jdbcType=VARCHAR},
       </if>
@@ -106,6 +144,9 @@
     update receipt
     set receipt_name = #{receiptName,jdbcType=VARCHAR},
       receipt_phone = #{receiptPhone,jdbcType=VARCHAR},
+    receipt_provinceid = #{receiptProvinceid,jdbcType=VARCHAR},
+    receipt_cityid = #{receiptCityid,jdbcType=VARCHAR},
+    receipt_areaid = #{receiptAreaid,jdbcType=VARCHAR},
       receipt_address = #{receiptAddress,jdbcType=VARCHAR},
       receipt_state = #{receiptState,jdbcType=VARCHAR},
       receipt_time = #{receiptTime,jdbcType=DATE}

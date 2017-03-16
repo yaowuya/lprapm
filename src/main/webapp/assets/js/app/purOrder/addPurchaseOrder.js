@@ -92,10 +92,10 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             timePicker.picker("#addPOTime", null);
 
             submitBtn.click(function (event) {
-                event.stopPropagation;
+                // event.stopPropagation;
+                event.preventDefault();
                 /* Act on the event */
                 var form = $(this).closest('form');
-                getAddress(form);
                 var formData = form.serializeArray();
                 // console.log(formData);
                 Lprapm.Ajax.request({
@@ -103,7 +103,6 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     data: formData,
                     success: function (response) {
                         if (response.success) {
-                            console.log("插入成功");
                             $('button.btn-resetPO').click();
                         } else {
                             $.dialog(response.messages);
@@ -112,8 +111,17 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 });
             });
 
-            function getAddress(form) {
-            }
+            $('button.btn-resetPO').on('click', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                Select.selectList.select($province, []);
+                Select.selectList.select($city, []);
+                Select.selectList.select($area, []);
+                Select.selectList.select($receiptProvince, []);
+                Select.selectList.select($receiptCity, []);
+                Select.selectList.select($receiptArea, []);
+                $("#addPurOrder form").find(':input').val("");
+            });
         }
 
         return {

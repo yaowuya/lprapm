@@ -1,5 +1,5 @@
-define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
-    function (Lprapm, timePicker) {
+define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
+    function (Lprapm, timePicker, Select) {
         /**
          * 采购订单管理
          * @return {[type]} [description]
@@ -9,6 +9,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 $modal = $("#myModal"),
                 $addForm = $("#addMPOForm"),
                 tableColumn = [];
+
             timePicker.picker("#createMPOTime", "#endMPOTime");
             var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
                 'click .edit': function (event, value, row, index) {
@@ -64,8 +65,9 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                     showModal();
                     $.each(row, function (index, value) {
                         /* iterate through array or object */
-                        $addForm.find("input[name=" + index + "]").val(value);
+                        $addForm.find(":input[name=" + index + "]").val(value); 
                     });
+
                 }
             }
 
@@ -120,7 +122,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             }, {
                 field: 'orderAddress',
                 visible: true,
-                title: '订单地址'
+                title: '订单街道地址'
             }, {
                 field: 'receiptName',
                 visible: true,
@@ -132,7 +134,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             }, {
                 field: 'receiptAddress',
                 visible: true,
-                title: '收货地址'
+                title: '收货人街道地址'
             }, {
                 field: 'receiptState',
                 visible: true,
@@ -277,6 +279,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             $modal.on('hide.bs.modal', function () {
                 $("#resetBtn").click();
             });
+
             $("#submitBtn").click(function (event) {
                 /* 点击提交按钮 */
                 submitData();

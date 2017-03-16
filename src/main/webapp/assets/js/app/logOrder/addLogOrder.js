@@ -1,12 +1,96 @@
-define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
-    function(Lprapm, timePicker) {
+define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
+    function (Lprapm, timePicker, Select) {
         /**
          * 录入物流信息
          * [addLogOrder description]
          */
         var addLogOrder = function() {
+            var submitBtn = $("#addLogOrder .btn-submitLO"),
+                $province = $("#orderProvince"),
+                $city = $("#orderCity"),
+                $area = $("#orderArea"),
+                $receiptProvince = $("#receiptProvince"),
+                $receiptCity = $("#receiptCity"),
+                $receiptArea = $("#receiptArea"),
+                selectOption = {
+                    isSearch: true, //是否显示搜索框
+                    multiple: false, //是否多选
+                    width: '100%', //长度
+                    actionBox: false, //是否展示全选、取消按钮
+                    // title: '请选择你的...', //默认提示
+                    dataSize: 7, //最多显示个数，数据多时会有滚动条
+                };
+
+            Select.selectList.option($province, selectOption, '/address/province', "province", "provinceid", []);
+            $city.selectpicker('show');
+            $area.selectpicker('show');
+
+            Select.selectList.option($receiptProvince, selectOption, '/address/province', "province", "provinceid", []);
+            $receiptCity.selectpicker('show');
+            $receiptArea.selectpicker('show');
+
+            $province.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                var provinceVal = $(this).val();
+                Select.selectList.option($city, selectOption, "/address/city", "city", "cityid", [], {
+                    "provinceid": provinceVal
+                });
+            });
+
+            $receiptProvince.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                var provinceVal = $(this).val();
+                Select.selectList.option($receiptCity, selectOption, "/address/city", "city", "cityid", [], {
+                    "provinceid": provinceVal
+                });
+            });
+
+            $city.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($province.val() == null || $province.val() == "") {
+                    $city.selectpicker('destroy');
+                } else {
+                    var cityVal = $(this).val();
+                    Select.selectList.option($area, selectOption, "/address/area", "area", "areaid", [], {
+                        "cityid": cityVal
+                    });
+                }
+            });
+
+            $receiptCity.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($receiptProvince.val() == null || $receiptProvince.val() == "") {
+                    $receiptCity.selectpicker('destroy');
+                } else {
+                    var cityVal = $(this).val();
+                    Select.selectList.option($receiptArea, selectOption, "/address/area", "area", "areaid", [], {
+                        "cityid": cityVal
+                    });
+                }
+            });
+
+            $area.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($city.val() == null || $city.val() == "") {
+                    $area.selectpicker('destroy');
+                }
+            });
+
+            $receiptArea.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($receiptCity.val() == null || $receiptCity.val() == "") {
+                    $receiptArea.selectpicker('destroy');
+                }
+            });
+
             timePicker.picker("#addLOTime", null);
-            var submitBtn = $("#addLogOrder .btn-submitLO");
+
             submitBtn.click(function(event) {
                 event.preventDefault();
                 /* Act on the event */
@@ -18,7 +102,6 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                     data: formData,
                     success: function(response) {
                         if (response.success) {
-                            console.log("插入成功");
                             $('button.btn-resetLO').click();
                         } else {
                             $.dialog(response.messages);
@@ -26,8 +109,20 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                     }
                 });
             });
+
+            $('button.btn-resetLO').on('click', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                Select.selectList.select($province, []);
+                Select.selectList.select($city, []);
+                Select.selectList.select($area, []);
+                Select.selectList.select($receiptProvince, []);
+                Select.selectList.select($receiptCity, []);
+                Select.selectList.select($receiptArea, []);
+                $("#addLogOrder form").find(':input').val("");
+            });
         }
         return {
-            "addLogOrder":addLogOrder
+            "addLogOrder": addLogOrder
         }
     })

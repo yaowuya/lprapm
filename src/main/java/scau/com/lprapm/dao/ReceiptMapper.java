@@ -15,5 +15,5 @@ public interface ReceiptMapper {
 
     int updateByPrimaryKey(Receipt record);
 
-    int insertReceipt(Receipt receipt);
+    void insertReceipt(Receipt receipt);
 }

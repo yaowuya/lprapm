@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 import scau.com.lprapm.dao.*;
 import scau.com.lprapm.entity.*;
 import scau.com.lprapm.service.inter.OrdersService;
-import sun.rmi.runtime.Log;
 
 import java.util.List;
 import java.util.Map;

@@ -2,25 +2,31 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="scau.com.lprapm.dao.OrdersMapper" >
   <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Orders" >
-    <id column="order_id" property="orderId" jdbcType="INTEGER" />
-    <result column="goods_id" property="goodsId" jdbcType="INTEGER" />
-    <result column="oe_id" property="oeId" jdbcType="INTEGER" />
-    <result column="receipt_id" property="receiptId" jdbcType="INTEGER" />
-    <result column="user_id" property="userId" jdbcType="INTEGER" />
-    <result column="pur_id" property="purId" jdbcType="INTEGER" />
-    <result column="log_id" property="logId" jdbcType="INTEGER" />
-    <result column="user_name" property="userName" jdbcType="VARCHAR" />
-    <result column="is_pur" property="isPur" jdbcType="VARCHAR" />
-    <result column="is_ask_pur" property="isAskPur" jdbcType="VARCHAR" />
-    <result column="is_ask_log" property="isAskLog" jdbcType="VARCHAR" />
-    <result column="is_sure" property="isSure" jdbcType="VARCHAR" />
-    <result column="create_time" property="createTime" jdbcType="DATE" />
-    <result column="end_time" property="endTime" jdbcType="DATE" />
-    <result column="order_address" property="orderAddress" jdbcType="VARCHAR" />
+    <constructor>
+      <idArg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="goods_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="oe_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="receipt_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="user_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="pur_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="log_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="user_name" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="is_pur" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="is_ask_pur" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="is_ask_log" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="is_sure" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="create_time" jdbcType="DATE" javaType="java.util.Date"/>
+      <arg column="end_time" jdbcType="DATE" javaType="java.util.Date"/>
+      <arg column="provinceid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="cityid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="areaid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="order_address" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    order_id, goods_id, oe_id, receipt_id, user_id, pur_id, log_id, user_name, is_pur, 
-    is_ask_pur, is_ask_log, is_sure, create_time, end_time, order_address
+    order_id, goods_id, oe_id, receipt_id, user_id, pur_id, log_id, user_name, is_pur,
+    is_ask_pur, is_ask_log, is_sure, create_time, end_time, provinceid, cityid, areaid,
+    order_address
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -36,14 +42,16 @@
     insert into orders (order_id, goods_id, oe_id, 
       receipt_id, user_id, pur_id, 
       log_id, user_name, is_pur, 
-      is_ask_pur, is_ask_log, is_sure, 
-      create_time, end_time, order_address
+      is_ask_pur, is_ask_log, is_sure,
+    create_time, end_time, provinceid,
+    cityid, areaid, order_address
       )
     values (#{orderId,jdbcType=INTEGER}, #{goodsId,jdbcType=INTEGER}, #{oeId,jdbcType=INTEGER}, 
       #{receiptId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{purId,jdbcType=INTEGER}, 
       #{logId,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{isPur,jdbcType=VARCHAR}, 
-      #{isAskPur,jdbcType=VARCHAR}, #{isAskLog,jdbcType=VARCHAR}, #{isSure,jdbcType=VARCHAR}, 
-      NOW(), #{endTime,jdbcType=DATE}, #{orderAddress,jdbcType=VARCHAR}
+      #{isAskPur,jdbcType=VARCHAR}, #{isAskLog,jdbcType=VARCHAR}, #{isSure,jdbcType=VARCHAR},
+    now(), #{endTime,jdbcType=DATE}, #{provinceid,jdbcType=VARCHAR},
+    #{cityid,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR}, #{orderAddress,jdbcType=VARCHAR}
       )
   </insert>
   <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Orders" >
@@ -90,6 +98,15 @@
       </if>
       <if test="endTime != null" >
         end_time,
+      </if>
+      <if test="provinceid != null">
+        provinceid,
+      </if>
+      <if test="cityid != null">
+        cityid,
+      </if>
+      <if test="areaid != null">
+        areaid,
       </if>
       <if test="orderAddress != null" >
         order_address,
@@ -138,6 +155,15 @@
       <if test="endTime != null" >
         #{endTime,jdbcType=DATE},
       </if>
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null">
+        #{areaid,jdbcType=VARCHAR},
+      </if>
       <if test="orderAddress != null" >
         #{orderAddress,jdbcType=VARCHAR},
       </if>
@@ -185,6 +211,15 @@
       <if test="endTime != null" >
         end_time = #{endTime,jdbcType=DATE},
       </if>
+      <if test="provinceid != null">
+        provinceid = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null">
+        cityid = #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null">
+        areaid = #{areaid,jdbcType=VARCHAR},
+      </if>
       <if test="orderAddress != null" >
         order_address = #{orderAddress,jdbcType=VARCHAR},
       </if>
@@ -206,6 +241,9 @@
       is_sure = #{isSure,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=DATE},
       end_time = #{endTime,jdbcType=DATE},
+    provinceid = #{provinceid,jdbcType=VARCHAR},
+    cityid = #{cityid,jdbcType=VARCHAR},
+    areaid = #{areaid,jdbcType=VARCHAR},
       order_address = #{orderAddress,jdbcType=VARCHAR}
     where order_id = #{orderId,jdbcType=INTEGER}
   </update>

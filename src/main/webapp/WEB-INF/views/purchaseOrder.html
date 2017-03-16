@@ -80,51 +80,45 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label">订单所在地区:</label>
                         <div class="col-sm-2">
-                            <select name="orderProvince" class="selectpicker form-control selectProvince"
-                                    id="orderProvince" title="省份"
-                                    required></select>
+                            <select name="provinceid" class="selectpicker form-control selectProvince"
+                                    id="orderProvince" title="省份" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="orderCity" class="selectpicker form-control selectCity" id="orderCity"
-                                    title="地级市"
-                                    required></select>
+                            <select name="cityid" class="selectpicker form-control selectCity" id="orderCity"
+                                    title="地级市" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="orderArea" class="selectpicker form-control selectArea" id="orderArea"
-                                    title="市、县级市"
-                                    required></select>
+                            <select name="areaid" class="selectpicker form-control selectArea" id="orderArea"
+                                    title="市、县级市" required></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">订单街道地址:</label>
                         <div class="col-sm-8">
-                            <textarea name="orderDetailArea" cols="30" rows="3" class="form-control"></textarea>
+                            <textarea name="orderAddress" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">收货人所在地区:</label>
-                        <input type="text" class="form-control hide" name="receiptAddress">
                         <div class="col-sm-2">
-                            <select name="receiptProvince" class="selectpicker form-control selectProvince"
+                            <select name="receiptProvinceid" class="selectpicker form-control selectProvince"
                                     id="receiptProvince" title="省份" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select name="receiptCity" class="selectpicker form-control selectCity" id="receiptCity"
+                            <select name="receiptCityid" class="selectpicker form-control selectCity" id="receiptCity"
                                     title="地级市" required></select>
                         </div>
                         <div class="col-sm-3">
-                            <select class="receiptArea" class="selectpicker form-control selectArea" id="receiptArea"
+                            <select name="receiptAreaid" class="selectpicker form-control selectArea" id="receiptArea"
                                     title="市、县级市" required></select>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">收货人街道地址:</label>
                         <div class="col-sm-8">
-                            <textarea name="receiptDetailArea" cols="30" rows="3" class="form-control"></textarea>
+                            <textarea name="receiptAddress" cols="30" rows="3" class="form-control"></textarea>
                         </div>
                     </div>
-                    <input type="text" class="form-control hide" name="orderAddress">
-                    <input type="text" class="form-control hide" name="receiptAddress">
                     <input type="text" class="hide" name="isPur" value="是"/>
                     <input type="text" class="hide" name="isSure" value="否"/>
                     <input type="text" class="hide" name="oeState" value="否"/>
@@ -149,8 +143,8 @@
                     <div class="form-group">
                         <label class="col-sm-2 control-label label-date">创建时间:</label>
                         <div class="col-sm-3 input-group date">
-                            <input class="form-control Time" id="createMPOTime" type="text" value=""
-                                   name="createTime" placeholder="请选择时间">
+                            <input class="form-control Time" id="createMPOTime" type="text" value="" name="createTime"
+                                   placeholder="请选择时间">
                         </div>
                         <div class="col-sm-1 input-group date">
                             <span class="pull-right sapn-date">到</span>
@@ -162,8 +156,7 @@
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="goodsName">货物名称</label>
-                        <input type="text" class="form-control" id="goodsName" name="goodsName"
-                               placeholder="请输入货物名称">
+                        <input type="text" class="form-control" id="goodsName" name="goodsName" placeholder="请输入货物名称">
                     </div>
                     <div class="form-group">
                         <label class="sr-only" for="receiptName">接收人名称</label>
@@ -201,22 +194,19 @@
                                 <label class="col-sm-2 control-label">货物数量:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsNumber" placeholder="请输入货物数量"
-                                           min="0"
-                                           required>
+                                           min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-3 control-label">货物体积:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsVolume" placeholder="请输入货物体积"
-                                           min="0"
-                                           required>
+                                           min="0" required>
                                 </div>
                                 <label class="col-sm-2  control-label">单位重量:</label>
                                 <div class="col-sm-3">
                                     <input type="number" class="form-control" name="goodsPerweight"
-                                           placeholder="请输入货物单位重量"
-                                           min="0" required>
+                                           placeholder="请输入货物单位重量" min="0" required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -237,22 +227,21 @@
                                 <label class="col-sm-3 control-label label-date">期望送达日期:</label>
                                 <div class="col-sm-8 date">
                                     <input class="form-control Time" type="text" id="editMPOTime" value=""
-                                           name="endTime"
-                                           placeholder="请选择时间">
+                                           name="endTime" placeholder="请选择时间">
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">订单地址:</label>
+                                <label class="col-sm-3 control-label">订单街道地址:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="orderAddress" placeholder="请输入订单地址"
-                                           required>
+                                    <textarea name="orderAddress" cols="30" rows="3" class="form-control"
+                                              readonly></textarea>
                                 </div>
                             </div>
                             <div class="form-group">
-                                <label class="col-sm-3 control-label">收货地址:</label>
+                                <label class="col-sm-3 control-label">收货人街道地址:</label>
                                 <div class="col-sm-8">
-                                    <input type="text" class="form-control" name="receiptAddress" placeholder="请输入收货地址"
-                                           required>
+                                    <textarea name="receiptAddress" cols="30" rows="3" class="form-control"
+                                              readonly></textarea>
                                 </div>
                             </div>
                             <input type="text" class="hide" name="createTime" value=""/>
@@ -303,20 +292,18 @@
                         </div>
                         <label class="col-sm-1 control-label">货物名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="goodsName"
-                                   placeholder="请输入货物名称">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
                         </div>
                         <label class="col-sm-2 control-label">接收人名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="receiptName"
-                                   placeholder="请输入接收人名称">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入接收人名称">
                         </div>
                     </div>
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
                         <div class="col-sm-4">
-                            <input class="form-control Time" type="text"
-                                   name="createTime" id="createPOPTime" placeholder="请选择创建时间" style="width:92%;">
+                            <input class="form-control Time" type="text" name="createTime" id="createPOPTime"
+                                   placeholder="请选择创建时间" style="width:92%;">
                         </div>
                         <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>
@@ -351,20 +338,18 @@
                         </div>
                         <label class="col-sm-1 control-label">货物名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="goodsName"
-                                   placeholder="请输入货物名称">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
                         </div>
                         <label class="col-sm-2 control-label">接收人名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="receiptName"
-                                   placeholder="请输入接收人名称">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入接收人名称">
                         </div>
                     </div>
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
                         <div class="col-sm-4">
-                            <input class="form-control Time" type="text"
-                                   name="createTime" id="createLOPTime" placeholder="请选择创建时间" style="width:92%;">
+                            <input class="form-control Time" type="text" name="createTime" id="createLOPTime"
+                                   placeholder="请选择创建时间" style="width:92%;">
                         </div>
                         <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>
@@ -401,20 +386,18 @@
                         </div>
                         <label class="col-sm-1 control-label">货物名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="goodsName"
-                                   placeholder="请输入货物名称">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
                         </div>
                         <label class="col-sm-2 control-label">接收人名称</label>
                         <div class="col-sm-2">
-                            <input type="text" class="form-control" name="receiptName"
-                                   placeholder="请输入接收人名称">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入接收人名称">
                         </div>
                     </div>
                     <div class="form-group">
                         <!-- <label class="col-sm-1 control-label label-date">创建时间:</label> -->
                         <div class="col-sm-4">
-                            <input class="form-control Time" type="text"
-                                   name="createTime" id="createSPTime" placeholder="请选择创建时间" style="width:92%;">
+                            <input class="form-control Time" type="text" name="createTime" id="createSPTime"
+                                   placeholder="请选择创建时间" style="width:92%;">
                         </div>
                         <div class="col-sm-1 text-center" style="padding-top: 9px;">
                             <b>到</b>

@@ -30,11 +30,13 @@ public interface OrdersMapper {
             " o.receipt_id receiptId, user_id userId, o.pur_id purId, o.log_id logId,o.oe_id oeId," +
             " user_name userName, is_pur isPur,is_sure isSure,is_ask_pur isAskPur, " +
             " is_ask_log isAskLog,create_time createTime, end_time endTime, " +
-            " order_address orderAddress, goods_name goodsName, " +
+            " provinceid, cityid, areaid,order_address orderAddress, goods_name goodsName, " +
             " goods_number goodsNumber, goods_volume goodsVolume, " +
             " goods_perweight goodsPerweight ," +
             " receipt_name receiptName, receipt_phone receiptPhone, " +
             " receipt_address receiptAddress, receipt_state receiptState, " +
+            " receipt_provinceid receiptProvinceid, receipt_cityid receiptCityid," +
+            " receipt_areaid receiptAreaid, " +
             " receipt_time receiptTime, pur_dept purDept, pur_person purPerson," +
             " pur_price purPrice, pur_state purState," +
             " oe_dept oeDept,oe_person oePerson,oe_reason Reason,oe_state oeState," +

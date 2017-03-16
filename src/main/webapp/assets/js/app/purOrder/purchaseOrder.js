@@ -11,7 +11,6 @@ define(['ajaxPackage',
     function (Lprapm, AddPurchaseOrder, ManagePurchaseOrder, PurOrderPrice, LogOrderPrice, StartPur) {
         var contentLi = $(".content-nav .nav li"),
             tableColumn = [];
-
         AddPurchaseOrder.addPurchaseOrder();
         contentLi.on('click', 'a', function (event) {
             event.preventDefault();

@@ -1,7 +1,5 @@
 package scau.com.lprapm.entity;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
 public class Orders {
@@ -33,7 +31,38 @@ public class Orders {
 
     private Date endTime;
 
+    private String provinceid;
+
+    private String cityid;
+
+    private String areaid;
+
     private String orderAddress;
+
+    public Orders(Integer orderId, Integer goodsId, Integer oeId, Integer receiptId, Integer userId, Integer purId, Integer logId, String userName, String isPur, String isAskPur, String isAskLog, String isSure, Date createTime, Date endTime, String provinceid, String cityid, String areaid, String orderAddress) {
+        this.orderId = orderId;
+        this.goodsId = goodsId;
+        this.oeId = oeId;
+        this.receiptId = receiptId;
+        this.userId = userId;
+        this.purId = purId;
+        this.logId = logId;
+        this.userName = userName;
+        this.isPur = isPur;
+        this.isAskPur = isAskPur;
+        this.isAskLog = isAskLog;
+        this.isSure = isSure;
+        this.createTime = createTime;
+        this.endTime = endTime;
+        this.provinceid = provinceid;
+        this.cityid = cityid;
+        this.areaid = areaid;
+        this.orderAddress = orderAddress;
+    }
+
+    public Orders() {
+        super();
+    }
 
     public Integer getOrderId() {
         return orderId;
@@ -145,6 +174,30 @@ public class Orders {
 
     public void setEndTime(Date endTime) {
         this.endTime = endTime;
+    }
+
+    public String getProvinceid() {
+        return provinceid;
+    }
+
+    public void setProvinceid(String provinceid) {
+        this.provinceid = provinceid == null ? null : provinceid.trim();
+    }
+
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid == null ? null : cityid.trim();
+    }
+
+    public String getAreaid() {
+        return areaid;
+    }
+
+    public void setAreaid(String areaid) {
+        this.areaid = areaid == null ? null : areaid.trim();
     }
 
     public String getOrderAddress() {
