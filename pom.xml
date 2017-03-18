@@ -228,6 +228,16 @@
             <version>RELEASE</version>
         </dependency>
         <!-- log end -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.10.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tsohr</groupId>
+            <artifactId>json</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>scaulogistics</finalName>

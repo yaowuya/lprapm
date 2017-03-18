@@ -1,25 +1,92 @@
-define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
-    function (Lprapm, Select) {
+define(['ajaxPackage', 'select',
+        'package/address/selectProvince',
+        'package/address/selectCity',
+        'package/address/selectArea',
+        'table', 'jqueryConfirm'
+    ],
+    function (Lprapm, Select, SelectPro, SelectCity, SelectArea) {
 
         var $table = $(".table"),
             $modal = $("#myModal"),
             $addForm = $("#addForm"),
+            $province = $("#rptProvince"),
+            $city = $("#rptCity"),
+            $area = $("#rptArea"),
+            $formPro = $("#formProvince"),
+            $formCity = $("#formCity"),
+            $formArea = $("#formArea"),
             isEdit = true,
             tableColumn = [],
-            $select = $(".selectUser"),
             selectOption = {
                 isSearch: true, //是否显示搜索框
                 multiple: false, //是否多选
                 width: '95%', //长度
                 actionBox: true, //是否展示全选、取消按钮
-                title: '请选择你的...', //默认提示
+                title: '请选择...', //默认提示
                 dataSize: 5, //最多显示个数，数据多时会有滚动条
             };
+        Select.selectList.option($province, selectOption, '/address/province', "province", "provinceid", []);
+        $city.selectpicker('show');
+        $area.selectpicker('show');
 
-        Select.selectList.option($select, selectOption, '/vehicle/searchUser', "userTrueName", "userId", []);
-        $('.selectAskPur').selectpicker('show');
-        $(".isFree").selectpicker("show");
-        $(".carType").selectpicker("show");
+        SelectPro.selectList.option($formPro, selectOption, []);
+        SelectCity.selectList.option($formCity, selectOption, []);
+        SelectArea.selectList.option($formArea, selectOption, []);
+
+        $province.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            var provinceVal = $(this).val();
+            Select.selectList.option($city, selectOption, "/address/city", "city", "cityid", [], {
+                "provinceid": provinceVal
+            });
+        });
+        $formPro.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            var provinceVal = $(this).val();
+            SelectCity.selectList.option($formCity, selectOption, [], {
+                "provinceid": provinceVal
+            });
+        });
+        $city.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            if ($province.val() == null || $province.val() == "") {
+                $city.selectpicker('destroy');
+            } else {
+                var cityVal = $(this).val();
+                Select.selectList.option($area, selectOption, "/address/area", "area", "areaid", [], {
+                    "cityid": cityVal
+                });
+            }
+        });
+        $formCity.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            if ($formPro.val() == null || $formPro.val() == "") {
+                SelectCity.selectList.select($formCity, []);
+            } else {
+                var cityVal = $(this).val();
+                SelectArea.selectList.option($formArea, selectOption, [], {
+                    "cityid": cityVal
+                });
+            }
+        });
+        $area.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            if ($city.val() == null || $city.val() == "") {
+                $area.selectpicker('destroy');
+            }
+        });
+        $formArea.on('change', function (event) {
+            event.preventDefault();
+            /* Act on the event */
+            if ($formCity.val() == null || $formCity.val() == "") {
+                SelectArea.selectList.select($formArea, []);
+            }
+        });
         var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
             'click .edit': function (event, value, row, index) {
                 // console.log("edit:", row);
@@ -41,9 +108,9 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
                             btnClass: 'btn-success',
                             action: function () {
                                 Lprapm.Ajax.request({
-                                    url: '/vehicle/deleteVehicle',
+                                    url: '/repertory/deleteReper',
                                     data: {
-                                        "carId": row.carId,
+                                        "repoId": row.repoId,
                                     },
                                     success: function (response) {
                                         if (response.success) {
@@ -66,14 +133,18 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             showModal();
             $.each(row, function (index, value) {
                 /* iterate through array or object */
-                if (index == "userId") {
+                if (index == "provinceid") {
                     var selectVaue = [];
                     selectVaue.push(value);
-                    Select.selectList.select($select, selectVaue);
-                } else if (index == "carType") {
-                    $(".carType").selectpicker('val', value);
-                } else if (index == "isFree") {
-                    $(".isFree").selectpicker('val', value);
+                    SelectPro.selectList.select($formPro, selectVaue);
+                } else if (index == "cityid") {
+                    var selectVaue = [];
+                    selectVaue.push(value);
+                    SelectCity.selectList.select($formCity, selectVaue);
+                } else if (index == "areaid") {
+                    var selectVaue = [];
+                    selectVaue.push(value);
+                    SelectArea.selectList.select($formArea, selectVaue);
                 } else {
                     $addForm.find(":input[name=" + index + "]").val(value);
                 }
@@ -101,41 +172,37 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
         }
 
         tableColumn = [{
-            field: 'carId',
+            field: 'repoId',
             visible: true,
-            title: 'carId'
+            title: 'repoId'
         }, {
-            field: 'userId',
+            field: 'provinceid',
             visible: false,
-            title: 'userId'
+            title: 'provinceid'
         }, {
-            field: 'userTrueName',
+            field: 'province',
             visible: true,
-            title: '司机'
+            title: '省份'
         }, {
-            field: 'carLicense',
-            visible: true,
-            title: '车牌号'
-        }, {
-            field: 'carType',
-            visible: true,
-            title: '车类型'
-        }, {
-            field: 'carVolume',
+            field: 'cityid',
             visible: false,
-            title: '车体积'
+            title: 'cityid'
         }, {
-            field: 'carWeight',
+            field: 'city',
             visible: true,
-            title: '车载重'
+            title: '地级市'
         }, {
-            field: 'kmPrice',
-            visible: true,
-            title: '车费(元/km)'
+            field: 'areaid',
+            visible: false,
+            title: 'areaid'
         }, {
-            field: 'isFree',
+            field: 'area',
             visible: true,
-            title: '是否空闲'
+            title: '市,地级市'
+        }, {
+            field: 'repoAddress',
+            visible: true,
+            title: '街道地址'
         }];
         /*表格加载*/
         $table.bootstrapTable({
@@ -144,8 +211,8 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             clickToSelect: true, //设置true 将在点击行时，自动选择rediobox 和 checkbox
             sortable: true, //是否启用排序
             sortOrder: 'asc', //定义排序方式 'asc' 或者 'desc'
-            sortName: 'carId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
-            url: '/vehicle/searchVehicle', //请求接口
+            sortName: 'repoId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
+            url: '/repertory/searchReper', //请求接口
             columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
             detailView: true, //详细查看按钮
             detailFormatter: detailFormatter, //显示详细查看数据
@@ -203,18 +270,18 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             e.preventDefault();
             // console.log(searchParams());
             $table.bootstrapTable('refresh', {
-                url: '/vehicle/searchVehicle',
+                url: '/repertory/searchReper',
                 query: searchParams()
             });
         });
 
         function searchParams() {
-            var sendParams = $("#searchForm").serializeArray();
-            $.each(sendParams, function (index, val) {
+            var sendParams = {},
+                selectData = $("#searchForm").find('select');
+            $.each(selectData, function (index, val) {
                 /* iterate through array or object */
-                sendParams[val["name"]] = $.trim(val["value"]);
+                sendParams[$(this).attr("name")] = $.trim($(this).val());
             });
-            // console.log(sendParams);
             return sendParams;
         }
 
@@ -227,15 +294,15 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
 
         function showModal() {
             $modal.modal("show");
+
         }
 
         /*关闭重置表单*/
         $modal.on('hide.bs.modal', function () {
             $("#resetBtn").click();
-            $(".isFree").selectpicker('val', []);
-            $(".carType").selectpicker('val', []);
-            Select.selectList.select($select, "[]");
-
+            SelectPro.selectList.select($formPro, []);
+            SelectCity.selectList.select($formCity, []);
+            SelectArea.selectList.select($formArea, []);
         });
         $("#submitBtn").click(function (event) {
             /* 点击提交按钮 */
@@ -246,7 +313,7 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             var formData = {};
             formData = $addForm.serializeArray();
             Lprapm.Ajax.request({
-                url: '/vehicle/' + (isEdit ? 'updateVehicle' : 'insertVehicle'),
+                url: '/repertory/' + (isEdit ? 'updateReper' : 'insertReper'),
                 data: formData,
                 success: function (response) {
                     if (response.success) {

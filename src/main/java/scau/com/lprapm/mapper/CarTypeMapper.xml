@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.CarTypeMapper">
+    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.CarType">
+        <constructor>
+            <idArg column="ct_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="ct_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="ct_volume" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="ct_weight" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="km_price" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ct_id, ct_type, ct_volume, ct_weight, km_price
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from car_type
+        where ct_id = #{ctId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from car_type
+        where ct_id = #{ctId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="scau.com.lprapm.entity.CarType">
+        insert into car_type (ct_id, ct_type, ct_volume,
+        ct_weight, km_price)
+        values (#{ctId,jdbcType=INTEGER}, #{ctType,jdbcType=VARCHAR}, #{ctVolume,jdbcType=DOUBLE},
+        #{ctWeight,jdbcType=DOUBLE}, #{kmPrice,jdbcType=DOUBLE})
+    </insert>
+    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.CarType">
+        insert into car_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="ctId != null">
+                ct_id,
+            </if>
+            <if test="ctType != null">
+                ct_type,
+            </if>
+            <if test="ctVolume != null">
+                ct_volume,
+            </if>
+            <if test="ctWeight != null">
+                ct_weight,
+            </if>
+            <if test="kmPrice != null">
+                km_price,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="ctId != null">
+                #{ctId,jdbcType=INTEGER},
+            </if>
+            <if test="ctType != null">
+                #{ctType,jdbcType=VARCHAR},
+            </if>
+            <if test="ctVolume != null">
+                #{ctVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="ctWeight != null">
+                #{ctWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="kmPrice != null">
+                #{kmPrice,jdbcType=DOUBLE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.CarType">
+        update car_type
+        <set>
+            <if test="ctType != null">
+                ct_type = #{ctType,jdbcType=VARCHAR},
+            </if>
+            <if test="ctVolume != null">
+                ct_volume = #{ctVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="ctWeight != null">
+                ct_weight = #{ctWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="kmPrice != null">
+                km_price = #{kmPrice,jdbcType=DOUBLE},
+            </if>
+        </set>
+        where ct_id = #{ctId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.CarType">
+        update car_type
+        set ct_type = #{ctType,jdbcType=VARCHAR},
+        ct_volume = #{ctVolume,jdbcType=DOUBLE},
+        ct_weight = #{ctWeight,jdbcType=DOUBLE},
+        km_price = #{kmPrice,jdbcType=DOUBLE}
+        where ct_id = #{ctId,jdbcType=INTEGER}
+    </update>
+</mapper>

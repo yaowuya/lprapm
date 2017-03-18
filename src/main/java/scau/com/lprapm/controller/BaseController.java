@@ -9,6 +9,8 @@ import scau.com.lprapm.common.Constant;
 import scau.com.lprapm.entity.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
@@ -22,11 +24,12 @@ public class BaseController {
     @Autowired
     private HttpServletRequest request;
 
-    public User getUserCurrent(){
-        Object obj= WebUtils.getSessionAttribute(this.request, Constant.CURRENR_USER);
-        return (User)obj;
+    public User getUserCurrent() {
+        Object obj = WebUtils.getSessionAttribute(this.request, Constant.CURRENR_USER);
+        return (User) obj;
     }
-//    只能获取1条数据
+
+    //    只能获取1条数据
     public Map<String, Object> getParamMap() {
         Map<String, Object> result = new LinkedHashMap<>();
         LinkedHashMap<String, String[]> map = new LinkedHashMap<>(request.getParameterMap());
@@ -37,19 +40,29 @@ public class BaseController {
         }
         return result;
     }
+
     /**
      * 当有日期传进来时，如果要用到entity，则需要进行日期转换，否则报错
-     * @param binder
-     * 另一种简单的方法是：
-     * 在entity中
+     *
+     * @param binder 另一种简单的方法是：
+     *               在entity中
      * @DateTimeFormat(pattern = "yyyy-MM-dd")
-     *private Date createTime;
+     * private Date createTime;
      */
     @InitBinder
-    public void InitBinder(WebDataBinder binder){
+    public void InitBinder(WebDataBinder binder) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         dateFormat.setLenient(false);
         binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, true));   //true:允许输入空值，false:不能为空值
     }
 
+    //获取ip地址
+    public String getIpAddr() throws UnknownHostException {
+        InetAddress addr = InetAddress.getLocalHost();
+        String ip = addr.getHostAddress();//获得本机IP
+//         String address=addr.getHostName();//获得本机名称
+//         System.out.println(ip);
+//        System.out.println(address);
+        return ip;
+    }
 }

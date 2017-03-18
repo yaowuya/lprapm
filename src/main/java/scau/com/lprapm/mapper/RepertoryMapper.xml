@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.RepertoryMapper">
+    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.Repertory">
+        <constructor>
+            <idArg column="repo_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="areaid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="area" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="cityid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="city" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="provinceid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="province" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="repo_address" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+    repo_id, areaid, area, cityid, city, provinceid, province, repo_address
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from repertory
+        where repo_id = #{repoId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from repertory
+    where repo_id = #{repoId,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="scau.com.lprapm.entity.Repertory">
+    insert into repertory (repo_id, areaid, area, 
+      cityid, city, provinceid, 
+      province, repo_address)
+    values (#{repoId,jdbcType=INTEGER}, #{areaid,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, 
+      #{cityid,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, 
+      #{province,jdbcType=VARCHAR}, #{repoAddress,jdbcType=VARCHAR})
+  </insert>
+    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.Repertory">
+        insert into repertory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="repoId != null">
+                repo_id,
+            </if>
+            <if test="areaid != null">
+                areaid,
+            </if>
+            <if test="area != null">
+                area,
+            </if>
+            <if test="cityid != null">
+                cityid,
+            </if>
+            <if test="city != null">
+                city,
+            </if>
+            <if test="provinceid != null">
+                provinceid,
+            </if>
+            <if test="province != null">
+                province,
+            </if>
+            <if test="repoAddress != null">
+                repo_address,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="repoId != null">
+                #{repoId,jdbcType=INTEGER},
+            </if>
+            <if test="areaid != null">
+                #{areaid,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="cityid != null">
+                #{cityid,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceid != null">
+                #{provinceid,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="repoAddress != null">
+                #{repoAddress,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.Repertory">
+        update repertory
+        <set>
+            <if test="areaid != null">
+                areaid = #{areaid,jdbcType=VARCHAR},
+            </if>
+            <if test="area != null">
+                area = #{area,jdbcType=VARCHAR},
+            </if>
+            <if test="cityid != null">
+                cityid = #{cityid,jdbcType=VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city,jdbcType=VARCHAR},
+            </if>
+            <if test="provinceid != null">
+                provinceid = #{provinceid,jdbcType=VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province,jdbcType=VARCHAR},
+            </if>
+            <if test="repoAddress != null">
+                repo_address = #{repoAddress,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where repo_id = #{repoId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.Repertory">
+    update repertory
+    set areaid = #{areaid,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      cityid = #{cityid,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      provinceid = #{provinceid,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      repo_address = #{repoAddress,jdbcType=VARCHAR}
+    where repo_id = #{repoId,jdbcType=INTEGER}
+  </update>
+</mapper>

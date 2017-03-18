@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.CarNeedMapper">
+    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.CarNeed">
+        <constructor>
+            <idArg column="carn_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="carn_type" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="carn_num" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="carn_exam_state" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="car_exam_person" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="carn_exam_dept" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="car_ids" jdbcType="VARCHAR" javaType="java.lang.String"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        carn_id, carn_type, carn_num, carn_exam_state, car_exam_person, carn_exam_dept, car_ids
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from car_need
+        where carn_id = #{carnId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from car_need
+        where carn_id = #{carnId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="scau.com.lprapm.entity.CarNeed">
+        insert into car_need (carn_id, carn_type, carn_num,
+        carn_exam_state, car_exam_person, carn_exam_dept,
+        car_ids)
+        values (#{carnId,jdbcType=INTEGER}, #{carnType,jdbcType=VARCHAR}, #{carnNum,jdbcType=INTEGER},
+        #{carnExamState,jdbcType=VARCHAR}, #{carExamPerson,jdbcType=VARCHAR}, #{carnExamDept,jdbcType=VARCHAR},
+        #{carIds,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.CarNeed">
+        insert into car_need
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carnId != null">
+                carn_id,
+            </if>
+            <if test="carnType != null">
+                carn_type,
+            </if>
+            <if test="carnNum != null">
+                carn_num,
+            </if>
+            <if test="carnExamState != null">
+                carn_exam_state,
+            </if>
+            <if test="carExamPerson != null">
+                car_exam_person,
+            </if>
+            <if test="carnExamDept != null">
+                carn_exam_dept,
+            </if>
+            <if test="carIds != null">
+                car_ids,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carnId != null">
+                #{carnId,jdbcType=INTEGER},
+            </if>
+            <if test="carnType != null">
+                #{carnType,jdbcType=VARCHAR},
+            </if>
+            <if test="carnNum != null">
+                #{carnNum,jdbcType=INTEGER},
+            </if>
+            <if test="carnExamState != null">
+                #{carnExamState,jdbcType=VARCHAR},
+            </if>
+            <if test="carExamPerson != null">
+                #{carExamPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="carnExamDept != null">
+                #{carnExamDept,jdbcType=VARCHAR},
+            </if>
+            <if test="carIds != null">
+                #{carIds,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.CarNeed">
+        update car_need
+        <set>
+            <if test="carnType != null">
+                carn_type = #{carnType,jdbcType=VARCHAR},
+            </if>
+            <if test="carnNum != null">
+                carn_num = #{carnNum,jdbcType=INTEGER},
+            </if>
+            <if test="carnExamState != null">
+                carn_exam_state = #{carnExamState,jdbcType=VARCHAR},
+            </if>
+            <if test="carExamPerson != null">
+                car_exam_person = #{carExamPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="carnExamDept != null">
+                carn_exam_dept = #{carnExamDept,jdbcType=VARCHAR},
+            </if>
+            <if test="carIds != null">
+                car_ids = #{carIds,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where carn_id = #{carnId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.CarNeed">
+        update car_need
+        set carn_type = #{carnType,jdbcType=VARCHAR},
+        carn_num = #{carnNum,jdbcType=INTEGER},
+        carn_exam_state = #{carnExamState,jdbcType=VARCHAR},
+        car_exam_person = #{carExamPerson,jdbcType=VARCHAR},
+        carn_exam_dept = #{carnExamDept,jdbcType=VARCHAR},
+        car_ids = #{carIds,jdbcType=VARCHAR}
+        where carn_id = #{carnId,jdbcType=INTEGER}
+    </update>
+</mapper>

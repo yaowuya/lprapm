@@ -10,6 +10,7 @@ public class Constant {
 
 //    session
     public static final String CURRENR_USER="current_user";
+    public static final String CURRENR_ADDR = "current_addr";
 
     /**
      * 当主键为varchar(32)时，可用该函数产生主键

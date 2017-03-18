@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="scau.com.lprapm.dao.CarPlanMapper">
+    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.CarPlan">
+        <constructor>
+            <idArg column="carplan_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="carn_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+            <arg column="all_weight" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="all_number" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="all_volume" jdbcType="DOUBLE" javaType="java.lang.Double"/>
+            <arg column="carplan_dept" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="carplan_person" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="carplan_desrciption" jdbcType="VARCHAR" javaType="java.lang.String"/>
+            <arg column="carplan_time" jdbcType="DATE" javaType="java.util.Date"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        carplan_id, order_id, carn_id, all_weight, all_number, all_volume, carplan_dept,
+        carplan_person, carplan_desrciption, carplan_time
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from car_plan
+        where carplan_id = #{carplanId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from car_plan
+        where carplan_id = #{carplanId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="scau.com.lprapm.entity.CarPlan">
+        insert into car_plan (carplan_id, order_id, carn_id,
+        all_weight, all_number, all_volume,
+        carplan_dept, carplan_person, carplan_desrciption,
+        carplan_time)
+        values (#{carplanId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{carnId,jdbcType=INTEGER},
+        #{allWeight,jdbcType=DOUBLE}, #{allNumber,jdbcType=DOUBLE}, #{allVolume,jdbcType=DOUBLE},
+        #{carplanDept,jdbcType=VARCHAR}, #{carplanPerson,jdbcType=VARCHAR}, #{carplanDesrciption,jdbcType=VARCHAR},
+        #{carplanTime,jdbcType=DATE})
+    </insert>
+    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.CarPlan">
+        insert into car_plan
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="carplanId != null">
+                carplan_id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="carnId != null">
+                carn_id,
+            </if>
+            <if test="allWeight != null">
+                all_weight,
+            </if>
+            <if test="allNumber != null">
+                all_number,
+            </if>
+            <if test="allVolume != null">
+                all_volume,
+            </if>
+            <if test="carplanDept != null">
+                carplan_dept,
+            </if>
+            <if test="carplanPerson != null">
+                carplan_person,
+            </if>
+            <if test="carplanDesrciption != null">
+                carplan_desrciption,
+            </if>
+            <if test="carplanTime != null">
+                carplan_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="carplanId != null">
+                #{carplanId,jdbcType=INTEGER},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="carnId != null">
+                #{carnId,jdbcType=INTEGER},
+            </if>
+            <if test="allWeight != null">
+                #{allWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="allNumber != null">
+                #{allNumber,jdbcType=DOUBLE},
+            </if>
+            <if test="allVolume != null">
+                #{allVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="carplanDept != null">
+                #{carplanDept,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanPerson != null">
+                #{carplanPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanDesrciption != null">
+                #{carplanDesrciption,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanTime != null">
+                #{carplanTime,jdbcType=DATE},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.CarPlan">
+        update car_plan
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=INTEGER},
+            </if>
+            <if test="carnId != null">
+                carn_id = #{carnId,jdbcType=INTEGER},
+            </if>
+            <if test="allWeight != null">
+                all_weight = #{allWeight,jdbcType=DOUBLE},
+            </if>
+            <if test="allNumber != null">
+                all_number = #{allNumber,jdbcType=DOUBLE},
+            </if>
+            <if test="allVolume != null">
+                all_volume = #{allVolume,jdbcType=DOUBLE},
+            </if>
+            <if test="carplanDept != null">
+                carplan_dept = #{carplanDept,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanPerson != null">
+                carplan_person = #{carplanPerson,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanDesrciption != null">
+                carplan_desrciption = #{carplanDesrciption,jdbcType=VARCHAR},
+            </if>
+            <if test="carplanTime != null">
+                carplan_time = #{carplanTime,jdbcType=DATE},
+            </if>
+        </set>
+        where carplan_id = #{carplanId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.CarPlan">
+        update car_plan
+        set order_id = #{orderId,jdbcType=INTEGER},
+        carn_id = #{carnId,jdbcType=INTEGER},
+        all_weight = #{allWeight,jdbcType=DOUBLE},
+        all_number = #{allNumber,jdbcType=DOUBLE},
+        all_volume = #{allVolume,jdbcType=DOUBLE},
+        carplan_dept = #{carplanDept,jdbcType=VARCHAR},
+        carplan_person = #{carplanPerson,jdbcType=VARCHAR},
+        carplan_desrciption = #{carplanDesrciption,jdbcType=VARCHAR},
+        carplan_time = #{carplanTime,jdbcType=DATE}
+        where carplan_id = #{carplanId,jdbcType=INTEGER}
+    </update>
+</mapper>

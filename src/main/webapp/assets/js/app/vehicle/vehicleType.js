@@ -6,7 +6,6 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             $addForm = $("#addForm"),
             isEdit = true,
             tableColumn = [],
-            $select = $(".selectUser"),
             selectOption = {
                 isSearch: true, //是否显示搜索框
                 multiple: false, //是否多选
@@ -16,10 +15,9 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
                 dataSize: 5, //最多显示个数，数据多时会有滚动条
             };
 
-        Select.selectList.option($select, selectOption, '/vehicle/searchUser', "userTrueName", "userId", []);
+
         $('.selectAskPur').selectpicker('show');
-        $(".isFree").selectpicker("show");
-        $(".carType").selectpicker("show");
+        $(".ctType").selectpicker("show");
         var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
             'click .edit': function (event, value, row, index) {
                 // console.log("edit:", row);
@@ -41,9 +39,9 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
                             btnClass: 'btn-success',
                             action: function () {
                                 Lprapm.Ajax.request({
-                                    url: '/vehicle/deleteVehicle',
+                                    url: '/vehicle/deleteCarType',
                                     data: {
-                                        "carId": row.carId,
+                                        "ctId": row.ctId,
                                     },
                                     success: function (response) {
                                         if (response.success) {
@@ -70,10 +68,8 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
                     var selectVaue = [];
                     selectVaue.push(value);
                     Select.selectList.select($select, selectVaue);
-                } else if (index == "carType") {
-                    $(".carType").selectpicker('val', value);
-                } else if (index == "isFree") {
-                    $(".isFree").selectpicker('val', value);
+                } else if (index == "ctType") {
+                    $(".ctType").selectpicker("val", value);
                 } else {
                     $addForm.find(":input[name=" + index + "]").val(value);
                 }
@@ -101,41 +97,25 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
         }
 
         tableColumn = [{
-            field: 'carId',
+            field: 'ctId',
             visible: true,
-            title: 'carId'
+            title: 'ctId'
         }, {
-            field: 'userId',
-            visible: false,
-            title: 'userId'
-        }, {
-            field: 'userTrueName',
-            visible: true,
-            title: '司机'
-        }, {
-            field: 'carLicense',
-            visible: true,
-            title: '车牌号'
-        }, {
-            field: 'carType',
+            field: 'ctType',
             visible: true,
             title: '车类型'
         }, {
-            field: 'carVolume',
-            visible: false,
+            field: 'ctVolume',
+            visible: true,
             title: '车体积'
         }, {
-            field: 'carWeight',
+            field: 'ctWeight',
             visible: true,
-            title: '车载重'
+            title: '车载重(吨)'
         }, {
             field: 'kmPrice',
             visible: true,
             title: '车费(元/km)'
-        }, {
-            field: 'isFree',
-            visible: true,
-            title: '是否空闲'
         }];
         /*表格加载*/
         $table.bootstrapTable({
@@ -144,8 +124,8 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             clickToSelect: true, //设置true 将在点击行时，自动选择rediobox 和 checkbox
             sortable: true, //是否启用排序
             sortOrder: 'asc', //定义排序方式 'asc' 或者 'desc'
-            sortName: 'carId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
-            url: '/vehicle/searchVehicle', //请求接口
+            sortName: 'ctId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
+            url: '/vehicle/searchCarType', //请求接口
             columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
             detailView: true, //详细查看按钮
             detailFormatter: detailFormatter, //显示详细查看数据
@@ -203,7 +183,7 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             e.preventDefault();
             // console.log(searchParams());
             $table.bootstrapTable('refresh', {
-                url: '/vehicle/searchVehicle',
+                url: '/vehicle/searchCarType',
                 query: searchParams()
             });
         });
@@ -227,15 +207,12 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
 
         function showModal() {
             $modal.modal("show");
+            $(".ctType").selectpicker('val', []);
         }
 
         /*关闭重置表单*/
         $modal.on('hide.bs.modal', function () {
             $("#resetBtn").click();
-            $(".isFree").selectpicker('val', []);
-            $(".carType").selectpicker('val', []);
-            Select.selectList.select($select, "[]");
-
         });
         $("#submitBtn").click(function (event) {
             /* 点击提交按钮 */
@@ -246,7 +223,7 @@ define(['ajaxPackage', 'select', 'table', 'jqueryConfirm'],
             var formData = {};
             formData = $addForm.serializeArray();
             Lprapm.Ajax.request({
-                url: '/vehicle/' + (isEdit ? 'updateVehicle' : 'insertVehicle'),
+                url: '/vehicle/' + (isEdit ? 'updateCarType' : 'insertCarType'),
                 data: formData,
                 success: function (response) {
                     if (response.success) {

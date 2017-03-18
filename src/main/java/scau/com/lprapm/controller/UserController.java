@@ -46,8 +46,10 @@ public class UserController extends BaseController{
 //        user.setUserPassword(request.getParameter("userPassword"));
         JsonResult jsonResult=null;
         try{
+            String ip = super.getIpAddr();
            User current=userService.login(user.getUserEmail(),user.getUserPassword());
            request.getSession(true).setAttribute(Constant.CURRENR_USER,current);
+            request.getSession(true).setAttribute(Constant.CURRENR_ADDR, ip);
             jsonResult=new JsonResult(true,"登录成功",current);
         }catch (UserException e){
 //            e.printStackTrace();
@@ -71,6 +73,7 @@ public class UserController extends BaseController{
         try {
             request.getSession().removeAttribute(Constant.CURRENR_USER);
             request.getSession().removeAttribute("menuList");
+            request.getSession().removeAttribute(Constant.CURRENR_ADDR);
             response.sendRedirect("/login.html");
             jsonResult=new JsonResult(true,"退出成功");
         }catch (Exception e){
