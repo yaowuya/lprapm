@@ -68,14 +68,14 @@ public interface CarPlanMapper {
             " <if test=\"area != null and area != '' \">" +
             "    and a.area = #{area} " +
             " </if>" +
-            " <if test=\"provinceid != null and provinceid != '' \">" +
-            "    and receipt_provinceid = #{provinceid} " +
+            " <if test=\"receiptProvinceid != null and receiptProvinceid != '' \">" +
+            "    and receipt_provinceid = #{receiptProvinceid} " +
             " </if>" +
-            " <if test=\"cityid != null and cityid != '' \">" +
-            "    and receipt_cityid = #{cityid} " +
+            " <if test=\"receiptCityid != null and receiptCityid != '' \">" +
+            "    and receipt_cityid = #{receiptCityid} " +
             " </if>" +
-            " <if test=\"areaid != null and areaid != '' \">" +
-            "    and receipt_areaid = #{areaid} " +
+            " <if test=\"receiptAreaid != null and receiptAreaid != '' \">" +
+            "    and receipt_areaid = #{receiptAreaid} " +
             " </if>" +
             "</script>")
     List<Map<String, Object>> searchCarS(Map<String, Object> params);
