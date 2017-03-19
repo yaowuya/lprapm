@@ -69,7 +69,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.oeState == "通过") {
+                if (row.oeState == "通过" && row.logState != "配车中" && row.logState != "已出发") {
                     $("#addRLForm").find('input[name="logPerson"]').val(username);
                     $("#myModalLabel").text("修改");
                     $.each(row, function (index, value) {
@@ -98,6 +98,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 $("#resetRLBtn").click();
             });
             $("#submitRLBtn").click(function (event) {
+                event.preventDefault;
                 /* 点击提交按钮 */
                 submitData();
             });
@@ -111,12 +112,6 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                     success: function (response) {
                         if (response.success) {
                             $table.bootstrapTable("refresh");
-                            $.confirm({
-                                animation: 'rotateYR',
-                                closeAnimation: 'rotate',
-                                backgroundDismiss: true,
-                                content: response.messages,
-                            });
                             $modal.modal('hide');
                         } else {
                             $.dialog(response.messages);

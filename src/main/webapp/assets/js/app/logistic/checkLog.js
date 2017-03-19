@@ -19,7 +19,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.isSure == "是" && row.logState != "已出发") {
+                if (row.isSure == "是" && row.logState != "配车中" && row.logState != "已出发") {
                     $.confirm({
                         closeIcon: true,
                         closeIconClass: 'fa fa-close',
@@ -37,7 +37,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                                         url: '/logistic/checkReplyLog',
                                         data: {
                                             "logId": row.logId,
-                                            "logState": "已出发",
+                                            "logState": "配车中",
                                             "logPerson": username
                                         },
                                         success: function (response) {

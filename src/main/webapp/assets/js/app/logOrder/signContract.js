@@ -81,7 +81,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                                     animation: 'rotateYR',
                                     closeAnimation: 'rotate',
                                     backgroundDismiss: true,
-                                    content: response.messages,
+                                    content: "签订合同成功",
                                 });
                             } else {
                                 $.dialog(response.messages);

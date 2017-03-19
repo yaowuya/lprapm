@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-03-19 00:11:31
+Date: 2017-03-20 01:05:12
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3220,7 +3220,7 @@ INSERT INTO `car` VALUES ('4', '3', '2345', '中卡', '123', '33', '23', '否');
 -- ----------------------------
 DROP TABLE IF EXISTS `car_need`;
 CREATE TABLE `car_need` (
-  `carn_id` int(11) NOT NULL,
+  `carn_id` int(11) NOT NULL AUTO_INCREMENT,
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
   `carn_exam_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -3239,8 +3239,9 @@ CREATE TABLE `car_need` (
 -- ----------------------------
 DROP TABLE IF EXISTS `car_plan`;
 CREATE TABLE `car_plan` (
-  `carplan_id` int(11) NOT NULL,
-  `order_id` int(11) DEFAULT NULL,
+  `carplan_id` int(11) NOT NULL AUTO_INCREMENT,
+  `order_ids` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `order_names` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_id` int(11) DEFAULT NULL,
   `all_weight` double DEFAULT NULL,
   `all_number` double DEFAULT NULL,
@@ -3248,6 +3249,9 @@ CREATE TABLE `car_plan` (
   `carplan_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carplan_person` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carplan_desrciption` varchar(300) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `provinceid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cityid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carplan_time` date DEFAULT NULL,
   PRIMARY KEY (`carplan_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
@@ -3666,7 +3670,7 @@ CREATE TABLE `goods` (
   `goods_volume` double DEFAULT NULL,
   `goods_perweight` double DEFAULT NULL,
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
 
 -- ----------------------------
 -- Records of goods
@@ -3689,6 +3693,8 @@ INSERT INTO `goods` VALUES ('29', '蒋小鱼', null, null, null);
 INSERT INTO `goods` VALUES ('38', '士大夫', null, null, null);
 INSERT INTO `goods` VALUES ('40', '', null, null, null);
 INSERT INTO `goods` VALUES ('41', '鸭肉卷', '45', '45', '345');
+INSERT INTO `goods` VALUES ('42', '冰冰', '12', '33', '444');
+INSERT INTO `goods` VALUES ('43', '僵尸肉', '55', '66', '123');
 
 -- ----------------------------
 -- Table structure for `log_price`
@@ -3701,7 +3707,7 @@ CREATE TABLE `log_price` (
   `log_price` double DEFAULT NULL,
   `log_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
 
 -- ----------------------------
 -- Records of log_price
@@ -3710,7 +3716,7 @@ INSERT INTO `log_price` VALUES ('2', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('3', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('4', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('5', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('6', '市场部', '换换', '12', '已出发');
+INSERT INTO `log_price` VALUES ('6', '市场部', '换换', '123', '配车中');
 INSERT INTO `log_price` VALUES ('7', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('14', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('15', null, null, null, '否');
@@ -3721,6 +3727,8 @@ INSERT INTO `log_price` VALUES ('23', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('32', null, null, null, '');
 INSERT INTO `log_price` VALUES ('34', null, null, null, '');
 INSERT INTO `log_price` VALUES ('35', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('36', '市场部', '换换', '33', '配车中');
+INSERT INTO `log_price` VALUES ('37', '市场部', '换换', '33', '配车中');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -3732,7 +3740,7 @@ CREATE TABLE `menu` (
   `menu_i_class` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `menu_href` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
 
 -- ----------------------------
 -- Records of menu
@@ -3753,6 +3761,7 @@ INSERT INTO `menu` VALUES ('17', '车辆信息管理', 'fa-bus', '/redirect/page
 INSERT INTO `menu` VALUES ('18', '车辆需求管理', 'fa-truck', '/redirect/page/vehicleDemand');
 INSERT INTO `menu` VALUES ('19', '车辆类型管理', 'fa-bicycle', '/redirect/page/vehicleType');
 INSERT INTO `menu` VALUES ('20', '仓储位置', 'fa-address-card', '/redirect/page/repertory');
+INSERT INTO `menu` VALUES ('21', '配车方案管理', 'fa-calculator', '/redirect/page/carscheme');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -3778,7 +3787,7 @@ CREATE TABLE `orders` (
   `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `order_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
 
 -- ----------------------------
 -- Records of orders
@@ -3797,6 +3806,8 @@ INSERT INTO `orders` VALUES ('23', '29', '32', '23', '11', '23', '23', '换换',
 INSERT INTO `orders` VALUES ('32', '38', '41', '32', '11', '32', '32', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '的');
 INSERT INTO `orders` VALUES ('34', '40', '43', '34', '11', '34', '34', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '');
 INSERT INTO `orders` VALUES ('35', '41', '44', '35', '11', '35', '35', '换换', '否', '否', '否', '否', '2017-03-17', '2017-03-31', '210000', '210600', '210624', 'test1');
+INSERT INTO `orders` VALUES ('36', '42', '45', '36', '11', '36', '36', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-01', '440000', '440100', '440104', '同和握山石决');
+INSERT INTO `orders` VALUES ('37', '43', '46', '37', '11', '37', '37', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-09', '440000', '440100', '440104', '白云山');
 
 -- ----------------------------
 -- Table structure for `order_exam`
@@ -3809,7 +3820,7 @@ CREATE TABLE `order_exam` (
   `oe_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oe_reason` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`oe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
 
 -- ----------------------------
 -- Records of order_exam
@@ -3836,16 +3847,21 @@ INSERT INTO `order_exam` VALUES ('32', '否', null, null, null);
 INSERT INTO `order_exam` VALUES ('41', '', null, null, null);
 INSERT INTO `order_exam` VALUES ('43', '', null, null, null);
 INSERT INTO `order_exam` VALUES ('44', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('45', '通过', '换换', '市场审核部', 'test通过');
+INSERT INTO `order_exam` VALUES ('46', '通过', '换换', '市场审核部', 'test2');
 
 -- ----------------------------
 -- Table structure for `position_tracking`
 -- ----------------------------
 DROP TABLE IF EXISTS `position_tracking`;
 CREATE TABLE `position_tracking` (
-  `position_id` int(11) NOT NULL,
+  `position_id` int(11) NOT NULL AUTO_INCREMENT,
   `withcar_id` int(11) DEFAULT NULL,
   `repo_id` int(11) DEFAULT NULL,
   `track_status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `provinceid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cityid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`position_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
 
@@ -3953,7 +3969,7 @@ CREATE TABLE `pur_price` (
   `pur_price` double DEFAULT NULL,
   `pur_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
 
 -- ----------------------------
 -- Records of pur_price
@@ -3973,6 +3989,8 @@ INSERT INTO `pur_price` VALUES ('23', null, null, null, '审核中');
 INSERT INTO `pur_price` VALUES ('32', null, null, null, '');
 INSERT INTO `pur_price` VALUES ('34', null, null, null, '');
 INSERT INTO `pur_price` VALUES ('35', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('36', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('37', null, null, null, '否');
 
 -- ----------------------------
 -- Table structure for `receipt`
@@ -3989,7 +4007,7 @@ CREATE TABLE `receipt` (
   `receipt_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_time` date DEFAULT NULL,
   PRIMARY KEY (`receipt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
 
 -- ----------------------------
 -- Records of receipt
@@ -4009,6 +4027,8 @@ INSERT INTO `receipt` VALUES ('23', '', '', null, null, null, '范德萨', '否'
 INSERT INTO `receipt` VALUES ('32', '', '', '', '', '', '', '', null);
 INSERT INTO `receipt` VALUES ('34', '', '', '', '', '', '', '', null);
 INSERT INTO `receipt` VALUES ('35', '烤肉王', '15584036598', '130000', '130800', '130823', 'test1', '否', null);
+INSERT INTO `receipt` VALUES ('36', '晓东', '18854123659', '440000', '440800', '440882', '西湖南路', '否', null);
+INSERT INTO `receipt` VALUES ('37', '小小', '18840316985', '440000', '440600', '440605', '大学', '否', null);
 
 -- ----------------------------
 -- Table structure for `repertory`
@@ -4078,7 +4098,7 @@ CREATE TABLE `role_menu` (
   `role_id` int(11) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`rm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
 
 -- ----------------------------
 -- Records of role_menu
@@ -4100,6 +4120,7 @@ INSERT INTO `role_menu` VALUES ('21', '1', '17');
 INSERT INTO `role_menu` VALUES ('22', '1', '18');
 INSERT INTO `role_menu` VALUES ('23', '1', '19');
 INSERT INTO `role_menu` VALUES ('24', '1', '20');
+INSERT INTO `role_menu` VALUES ('25', '1', '21');
 
 -- ----------------------------
 -- Table structure for `user`

@@ -5,7 +5,9 @@ import java.util.Date;
 public class CarPlan {
     private Integer carplanId;
 
-    private Integer orderId;
+    private String orderIds;
+
+    private String orderNames;
 
     private Integer carnId;
 
@@ -21,11 +23,18 @@ public class CarPlan {
 
     private String carplanDesrciption;
 
+    private String provinceid;
+
+    private String cityid;
+
+    private String areaid;
+
     private Date carplanTime;
 
-    public CarPlan(Integer carplanId, Integer orderId, Integer carnId, Double allWeight, Double allNumber, Double allVolume, String carplanDept, String carplanPerson, String carplanDesrciption, Date carplanTime) {
+    public CarPlan(Integer carplanId, String orderIds, String orderNames, Integer carnId, Double allWeight, Double allNumber, Double allVolume, String carplanDept, String carplanPerson, String carplanDesrciption, String provinceid, String cityid, String areaid, Date carplanTime) {
         this.carplanId = carplanId;
-        this.orderId = orderId;
+        this.orderIds = orderIds;
+        this.orderNames = orderNames;
         this.carnId = carnId;
         this.allWeight = allWeight;
         this.allNumber = allNumber;
@@ -33,6 +42,9 @@ public class CarPlan {
         this.carplanDept = carplanDept;
         this.carplanPerson = carplanPerson;
         this.carplanDesrciption = carplanDesrciption;
+        this.provinceid = provinceid;
+        this.cityid = cityid;
+        this.areaid = areaid;
         this.carplanTime = carplanTime;
     }
 
@@ -48,12 +60,20 @@ public class CarPlan {
         this.carplanId = carplanId;
     }
 
-    public Integer getOrderId() {
-        return orderId;
+    public String getOrderIds() {
+        return orderIds;
     }
 
-    public void setOrderId(Integer orderId) {
-        this.orderId = orderId;
+    public void setOrderIds(String orderIds) {
+        this.orderIds = orderIds == null ? null : orderIds.trim();
+    }
+
+    public String getOrderNames() {
+        return orderNames;
+    }
+
+    public void setOrderNames(String orderNames) {
+        this.orderNames = orderNames == null ? null : orderNames.trim();
     }
 
     public Integer getCarnId() {
@@ -110,6 +130,30 @@ public class CarPlan {
 
     public void setCarplanDesrciption(String carplanDesrciption) {
         this.carplanDesrciption = carplanDesrciption == null ? null : carplanDesrciption.trim();
+    }
+
+    public String getProvinceid() {
+        return provinceid;
+    }
+
+    public void setProvinceid(String provinceid) {
+        this.provinceid = provinceid == null ? null : provinceid.trim();
+    }
+
+    public String getCityid() {
+        return cityid;
+    }
+
+    public void setCityid(String cityid) {
+        this.cityid = cityid == null ? null : cityid.trim();
+    }
+
+    public String getAreaid() {
+        return areaid;
+    }
+
+    public void setAreaid(String areaid) {
+        this.areaid = areaid == null ? null : areaid.trim();
     }
 
     public Date getCarplanTime() {

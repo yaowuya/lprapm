@@ -130,11 +130,15 @@ public class IpAddress {
         JSONObject jsStr = new JSONObject(returnStr);
         JSONObject result = jsStr.getJSONObject("result");
         JSONObject addressComponent = result.getJSONObject("addressComponent");
-        System.out.println(addressComponent);
+        map.put("province", addressComponent.getString("province"));
+        map.put("city", addressComponent.getString("city"));
+        map.put("area", addressComponent.getString("district"));
+        map.put("street", addressComponent.getString("street"));
         return map;
     }
 
-    public static void main(String[] args) throws IOException {
-        Map<String, Object> map = getAddress();
-    }
+//    public static void main(String[] args) throws IOException {
+//        Map<String, Object> map = getAddress();
+//        System.out.println(map);
+//    }
 }

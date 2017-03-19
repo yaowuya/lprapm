@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>配车方案管理</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-select.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/purchaseOrder.css"/>
+</head>
+
+<body>
+<div class="content-theme">
+    <h3>配车方案管理</h3>
+    <div class="pull-right" style="padding: 33px;">
+        <strong>本站所在地:</strong>
+        <p class="pull-right text-danger"></p>
+    </div>
+</div>
+<div class="content-nav">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#carPlan">配车管理</a></li>
+        <li><a data-toggle="tab" href="#outCar">出车管理</a></li>
+    </ul>
+</div>
+<div class="content-main">
+    <div class="tab-content">
+        <!-- 物流订单管理 -->
+        <div id="carPlan" class="tab-pane fade in active">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchCPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">创建时间:</label>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="createTime" id="createCPTime"
+                                   placeholder="请选择创建时间" style="width:100%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;padding-right: 0px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endCPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-offset-1 col-sm-2">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="receiptName" placeholder="请输入接收人名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">接收地址:</label>
+                        <div class="col-sm-2">
+                            <select name="provinceid" class="selectpicker form-control" id="CPProvince"
+                                    title="省份"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="cityid" class="selectpicker form-control" id="CPCity" title="地级市"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="areaid" class="selectpicker form-control" id="CPArea" title="市、县级市"></select>
+                        </div>
+                        <button type="button" class="btn btn-success col-sm-offset-2" id="insertCPBtn">
+                            <span class="fa fa-fw fa-automobile"></span>配车
+                        </button>
+                        <button type="button" class="btn btn-success" id="searchCPBtn" style="margin-left: 44px;">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="CP-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" scrolling="no">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addCPForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">货物名称:</label>
+                                <div class="col-sm-8">
+                                    <textarea name="orderNames" cols="30" rows="3" class="form-control"
+                                              readonly></textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">货物总数量:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="allNumber" placeholder="请输入货物总数量"
+                                           min="0" readonly>
+                                </div>
+                                <label class="col-sm-2 control-label">收货人:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="receiptName" placeholder="请输入收货人名称"
+                                           readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">货物总体积:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="allVolume" placeholder="请输入货物总体积"
+                                           min="0" readonly>
+                                </div>
+                                <label class="col-sm-2  control-label">货总重量:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="allWeight" placeholder="请输入货物总重量"
+                                           min="0" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">选择车类型:</label>
+                                <div class="col-sm-3">
+                                    <select name="carnType" class="selectpicker form-control selectAskPur"
+                                            id="selectCarT" title="请选择车辆类型">
+                                        <option value='1800'>微卡</option>
+                                        <option value='6000'>轻卡</option>
+                                        <option value='14000'>中卡</option>
+                                        <option value='20000'>重卡</option>
+                                    </select>
+                                </div>
+                                <label class="col-sm-2  control-label">所需车数:</label>
+                                <div class="col-sm-3">
+                                    <input type="number" class="form-control" name="carnNum" placeholder="请输入所需车数"
+                                           min="0" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">部门:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="carplanDept" value="运输部" readonly>
+                                </div>
+                                <label class="col-sm-2  control-label">操作员:</label>
+                                <div class="col-sm-3">
+                                    <input type="text" class="form-control" name="carplanPerson" readonly>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">配车描述:</label>
+                                <div class="col-sm-8">
+                                    <textarea name="carplanDesrciption" cols="30" rows="3"
+                                              class="form-control"></textarea>
+                                </div>
+                            </div>
+                            <input type="text" class="hide" name="carplanId" value=""/>
+                            <input type="text" class="hide" name="carnId" value=""/>
+                            <input type="text" class="hide" name="provinceid" value=""/>
+                            <input type="text" class="hide" name="cityid" value=""/>
+                            <input type="text" class="hide" name="areaid" value=""/>
+                            <button type="reset" class="btn hide" id="resetBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="calculateBtn">
+                                计算配车
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+        <!-- 物流询价管理     -->
+        <div id="outCar" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchOCForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label label-date">创建时间:</label>
+                        <div class="col-sm-2 input-group date">
+                            <input class="form-control Time" id="createOCTime" type="text" value="" name="createTime"
+                                   placeholder="请选择时间">
+                        </div>
+                        <div class="col-sm-1 input-group date">
+                            <span class="pull-right sapn-date">到</span>
+                        </div>
+                        <div class="col-sm-2 input-group date">
+                            <input class="form-control Time" id="endOCTime" type="text" value="" name="endTime"
+                                   placeholder="请选择时间">
+                        </div>
+                        <div class="col-sm-4">
+                            <select name="carnExamState" class="selectpicker form-control selectAskPur"
+                                    title="请选择车辆审核状态">
+                                <option value=''>请选择车辆审核状态</option>
+                                <option value="审核中">审核中</option>
+                                <option value="通过">通过</option>
+                                <option value="不通过">不通过</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">接收地址:</label>
+                        <div class="col-sm-2">
+                            <select name="provinceid" class="selectpicker form-control" id="OCProvince"
+                                    title="省份"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="cityid" class="selectpicker form-control" id="OCCity" title="地级市"></select>
+                        </div>
+                        <div class="col-sm-2">
+                            <select name="areaid" class="selectpicker form-control" id="OCArea" title="市、县级市"></select>
+                        </div>
+                        <button type="button" class="btn btn-success col-sm-offset-2" id="searchOCBtn">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="OC-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['../../assets/js/common.js'], function () {
+        require(['app/transport/carscheme']);
+    });
+</script>
+</body>
+
+</html>

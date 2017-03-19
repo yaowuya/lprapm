@@ -1,84 +1,119 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="scau.com.lprapm.dao.PositionTrackingMapper">
-    <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.PositionTracking">
-        <constructor>
-            <idArg column="position_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="withcar_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="repo_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-            <arg column="track_status" jdbcType="VARCHAR" javaType="java.lang.String"/>
-        </constructor>
-    </resultMap>
-    <sql id="Base_Column_List">
-        position_id, withcar_id, repo_id, track_status
-    </sql>
-    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
-        select
-        <include refid="Base_Column_List"/>
-        from position_tracking
-        where position_id = #{positionId,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from position_tracking
-        where position_id = #{positionId,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="scau.com.lprapm.entity.PositionTracking">
-        insert into position_tracking (position_id, withcar_id, repo_id,
-        track_status)
-        values (#{positionId,jdbcType=INTEGER}, #{withcarId,jdbcType=INTEGER}, #{repoId,jdbcType=INTEGER},
-        #{trackStatus,jdbcType=VARCHAR})
-    </insert>
-    <insert id="insertSelective" parameterType="scau.com.lprapm.entity.PositionTracking">
-        insert into position_tracking
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="positionId != null">
-                position_id,
-            </if>
-            <if test="withcarId != null">
-                withcar_id,
-            </if>
-            <if test="repoId != null">
-                repo_id,
-            </if>
-            <if test="trackStatus != null">
-                track_status,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="positionId != null">
-                #{positionId,jdbcType=INTEGER},
-            </if>
-            <if test="withcarId != null">
-                #{withcarId,jdbcType=INTEGER},
-            </if>
-            <if test="repoId != null">
-                #{repoId,jdbcType=INTEGER},
-            </if>
-            <if test="trackStatus != null">
-                #{trackStatus,jdbcType=VARCHAR},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.PositionTracking">
-        update position_tracking
-        <set>
-            <if test="withcarId != null">
-                withcar_id = #{withcarId,jdbcType=INTEGER},
-            </if>
-            <if test="repoId != null">
-                repo_id = #{repoId,jdbcType=INTEGER},
-            </if>
-            <if test="trackStatus != null">
-                track_status = #{trackStatus,jdbcType=VARCHAR},
-            </if>
-        </set>
-        where position_id = #{positionId,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.PositionTracking">
-        update position_tracking
-        set withcar_id = #{withcarId,jdbcType=INTEGER},
+  <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.PositionTracking">
+    <constructor>
+      <idArg column="position_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="withcar_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="repo_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="track_status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="provinceid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="cityid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="areaid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    position_id, withcar_id, repo_id, track_status, provinceid, cityid, areaid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"/>
+    from position_tracking
+    where position_id = #{positionId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from position_tracking
+    where position_id = #{positionId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="scau.com.lprapm.entity.PositionTracking">
+    insert into position_tracking (position_id, withcar_id, repo_id, 
+      track_status, provinceid, cityid, 
+      areaid)
+    values (#{positionId,jdbcType=INTEGER}, #{withcarId,jdbcType=INTEGER}, #{repoId,jdbcType=INTEGER}, 
+      #{trackStatus,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, 
+      #{areaid,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="scau.com.lprapm.entity.PositionTracking">
+    insert into position_tracking
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="withcarId != null">
+        withcar_id,
+      </if>
+      <if test="repoId != null">
+        repo_id,
+      </if>
+      <if test="trackStatus != null">
+        track_status,
+      </if>
+      <if test="provinceid != null">
+        provinceid,
+      </if>
+      <if test="cityid != null">
+        cityid,
+      </if>
+      <if test="areaid != null">
+        areaid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="positionId != null">
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="withcarId != null">
+        #{withcarId,jdbcType=INTEGER},
+      </if>
+      <if test="repoId != null">
+        #{repoId,jdbcType=INTEGER},
+      </if>
+      <if test="trackStatus != null">
+        #{trackStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null">
+        #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null">
+        #{areaid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.PositionTracking">
+    update position_tracking
+    <set>
+      <if test="withcarId != null">
+        withcar_id = #{withcarId,jdbcType=INTEGER},
+      </if>
+      <if test="repoId != null">
         repo_id = #{repoId,jdbcType=INTEGER},
-        track_status = #{trackStatus,jdbcType=VARCHAR}
-        where position_id = #{positionId,jdbcType=INTEGER}
-    </update>
+      </if>
+      <if test="trackStatus != null">
+        track_status = #{trackStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceid != null">
+        provinceid = #{provinceid,jdbcType=VARCHAR},
+      </if>
+      <if test="cityid != null">
+        cityid = #{cityid,jdbcType=VARCHAR},
+      </if>
+      <if test="areaid != null">
+        areaid = #{areaid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where position_id = #{positionId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.PositionTracking">
+    update position_tracking
+    set withcar_id = #{withcarId,jdbcType=INTEGER},
+      repo_id = #{repoId,jdbcType=INTEGER},
+      track_status = #{trackStatus,jdbcType=VARCHAR},
+      provinceid = #{provinceid,jdbcType=VARCHAR},
+      cityid = #{cityid,jdbcType=VARCHAR},
+      areaid = #{areaid,jdbcType=VARCHAR}
+    where position_id = #{positionId,jdbcType=INTEGER}
+  </update>
 </mapper>
