@@ -4,16 +4,17 @@
   <resultMap id="BaseResultMap" type="scau.com.lprapm.entity.PositionTracking">
     <constructor>
       <idArg column="position_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-      <arg column="withcar_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-      <arg column="repo_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
-      <arg column="track_status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="carplan_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
+      <arg column="order_id" jdbcType="INTEGER" javaType="java.lang.Integer"/>
       <arg column="provinceid" jdbcType="VARCHAR" javaType="java.lang.String"/>
       <arg column="cityid" jdbcType="VARCHAR" javaType="java.lang.String"/>
       <arg column="areaid" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="track_status" jdbcType="VARCHAR" javaType="java.lang.String"/>
+      <arg column="track_time" jdbcType="DATE" javaType="java.util.Date"/>
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
-    position_id, withcar_id, repo_id, track_status, provinceid, cityid, areaid
+    position_id, carplan_id, order_id, provinceid, cityid, areaid, track_status, track_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
@@ -26,12 +27,12 @@
     where position_id = #{positionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="scau.com.lprapm.entity.PositionTracking">
-    insert into position_tracking (position_id, withcar_id, repo_id, 
-      track_status, provinceid, cityid, 
-      areaid)
-    values (#{positionId,jdbcType=INTEGER}, #{withcarId,jdbcType=INTEGER}, #{repoId,jdbcType=INTEGER}, 
-      #{trackStatus,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, 
-      #{areaid,jdbcType=VARCHAR})
+    insert into position_tracking (position_id, carplan_id, order_id,
+    provinceid, cityid, areaid,
+    track_status, track_time)
+    values (#{positionId,jdbcType=INTEGER}, #{carplanId,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER},
+    #{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR}, #{areaid,jdbcType=VARCHAR},
+    #{trackStatus,jdbcType=VARCHAR}, #{trackTime,jdbcType=DATE})
   </insert>
   <insert id="insertSelective" parameterType="scau.com.lprapm.entity.PositionTracking">
     insert into position_tracking
@@ -39,14 +40,11 @@
       <if test="positionId != null">
         position_id,
       </if>
-      <if test="withcarId != null">
-        withcar_id,
+      <if test="carplanId != null">
+        carplan_id,
       </if>
-      <if test="repoId != null">
-        repo_id,
-      </if>
-      <if test="trackStatus != null">
-        track_status,
+      <if test="orderId != null">
+        order_id,
       </if>
       <if test="provinceid != null">
         provinceid,
@@ -57,19 +55,22 @@
       <if test="areaid != null">
         areaid,
       </if>
+      <if test="trackStatus != null">
+        track_status,
+      </if>
+      <if test="trackTime != null">
+        track_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="positionId != null">
         #{positionId,jdbcType=INTEGER},
       </if>
-      <if test="withcarId != null">
-        #{withcarId,jdbcType=INTEGER},
+      <if test="carplanId != null">
+        #{carplanId,jdbcType=INTEGER},
       </if>
-      <if test="repoId != null">
-        #{repoId,jdbcType=INTEGER},
-      </if>
-      <if test="trackStatus != null">
-        #{trackStatus,jdbcType=VARCHAR},
+      <if test="orderId != null">
+        #{orderId,jdbcType=INTEGER},
       </if>
       <if test="provinceid != null">
         #{provinceid,jdbcType=VARCHAR},
@@ -80,19 +81,22 @@
       <if test="areaid != null">
         #{areaid,jdbcType=VARCHAR},
       </if>
+      <if test="trackStatus != null">
+        #{trackStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="trackTime != null">
+        #{trackTime,jdbcType=DATE},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="scau.com.lprapm.entity.PositionTracking">
     update position_tracking
     <set>
-      <if test="withcarId != null">
-        withcar_id = #{withcarId,jdbcType=INTEGER},
+      <if test="carplanId != null">
+        carplan_id = #{carplanId,jdbcType=INTEGER},
       </if>
-      <if test="repoId != null">
-        repo_id = #{repoId,jdbcType=INTEGER},
-      </if>
-      <if test="trackStatus != null">
-        track_status = #{trackStatus,jdbcType=VARCHAR},
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=INTEGER},
       </if>
       <if test="provinceid != null">
         provinceid = #{provinceid,jdbcType=VARCHAR},
@@ -103,17 +107,24 @@
       <if test="areaid != null">
         areaid = #{areaid,jdbcType=VARCHAR},
       </if>
+      <if test="trackStatus != null">
+        track_status = #{trackStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="trackTime != null">
+        track_time = #{trackTime,jdbcType=DATE},
+      </if>
     </set>
     where position_id = #{positionId,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="scau.com.lprapm.entity.PositionTracking">
     update position_tracking
-    set withcar_id = #{withcarId,jdbcType=INTEGER},
-      repo_id = #{repoId,jdbcType=INTEGER},
-      track_status = #{trackStatus,jdbcType=VARCHAR},
+    set carplan_id = #{carplanId,jdbcType=INTEGER},
+    order_id = #{orderId,jdbcType=INTEGER},
       provinceid = #{provinceid,jdbcType=VARCHAR},
       cityid = #{cityid,jdbcType=VARCHAR},
-      areaid = #{areaid,jdbcType=VARCHAR}
+    areaid = #{areaid,jdbcType=VARCHAR},
+    track_status = #{trackStatus,jdbcType=VARCHAR},
+    track_time = #{trackTime,jdbcType=DATE}
     where position_id = #{positionId,jdbcType=INTEGER}
   </update>
 </mapper>

@@ -33,6 +33,15 @@
         #{carnExamState,jdbcType=VARCHAR}, #{carExamPerson,jdbcType=VARCHAR}, #{carnExamDept,jdbcType=VARCHAR},
         #{carIds,jdbcType=VARCHAR})
     </insert>
+    <insert id="insertCarNeed" parameterType="scau.com.lprapm.entity.CarNeed" useGeneratedKeys="true"
+            keyProperty="carnId">
+        insert into car_need (carn_id, carn_type, carn_num,
+        carn_exam_state, car_exam_person, carn_exam_dept,
+        car_ids)
+        values (#{carnId,jdbcType=INTEGER}, #{carnType,jdbcType=VARCHAR}, #{carnNum,jdbcType=INTEGER},
+        #{carnExamState,jdbcType=VARCHAR}, #{carExamPerson,jdbcType=VARCHAR}, #{carnExamDept,jdbcType=VARCHAR},
+        #{carIds,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="scau.com.lprapm.entity.CarNeed">
         insert into car_need
         <trim prefix="(" suffix=")" suffixOverrides=",">

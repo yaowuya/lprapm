@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import scau.com.lprapm.common.Constant;
 import scau.com.lprapm.common.JsonResult;
+import scau.com.lprapm.entity.CarNeed;
+import scau.com.lprapm.entity.CarPlan;
 import scau.com.lprapm.entity.User;
 import scau.com.lprapm.service.inter.CarSService;
 import scau.com.lprapm.service.inter.OrdersService;
@@ -61,10 +63,24 @@ public class CarSController extends BaseController {
             params.put("city", map.get("city"));
             params.put("area", map.get("area"));
             List<Map<String, Object>> List = carSService.searchCarS(params);
-            jsonResult = new JsonResult(true, "查询物流成功", List);
+            jsonResult = new JsonResult(true, "查询物流订单成功", List);
         } catch (Exception e) {
             e.printStackTrace();
-            jsonResult = new JsonResult(false, "查询物流失败");
+            jsonResult = new JsonResult(false, "查询物流订单失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("updateCarS")
+    public JsonResult updateCarS(CarPlan carPlan, CarNeed carNeed) {
+        JsonResult jsonResult = null;
+        try {
+            carSService.updateCarS(carPlan, carNeed);
+            jsonResult = new JsonResult(true, "配车成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "配车失败");
         }
         return jsonResult;
     }

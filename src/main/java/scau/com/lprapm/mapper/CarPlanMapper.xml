@@ -45,6 +45,19 @@
       #{carplanDesrciption,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR},
       #{areaid,jdbcType=VARCHAR}, #{carplanTime,jdbcType=DATE})
   </insert>
+  <insert id="insertCarPlan" parameterType="scau.com.lprapm.entity.CarPlan" useGeneratedKeys="true"
+          keyProperty="carplanId">
+    insert into car_plan (carplan_id, order_ids, order_names,
+      carn_id, all_weight, all_number,
+      all_volume, carplan_dept, carplan_person,
+      carplan_desrciption, provinceid, cityid,
+      areaid, carplan_time)
+    values (#{carplanId,jdbcType=INTEGER}, #{orderIds,jdbcType=VARCHAR}, #{orderNames,jdbcType=VARCHAR},
+      #{carnId,jdbcType=INTEGER}, #{allWeight,jdbcType=DOUBLE}, #{allNumber,jdbcType=DOUBLE},
+      #{allVolume,jdbcType=DOUBLE}, #{carplanDept,jdbcType=VARCHAR}, #{carplanPerson,jdbcType=VARCHAR},
+      #{carplanDesrciption,jdbcType=VARCHAR}, #{provinceid,jdbcType=VARCHAR}, #{cityid,jdbcType=VARCHAR},
+      #{areaid,jdbcType=VARCHAR}, now())
+  </insert>
   <insert id="insertSelective" parameterType="scau.com.lprapm.entity.CarPlan">
     insert into car_plan
     <trim prefix="(" suffix=")" suffixOverrides=",">

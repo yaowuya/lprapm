@@ -1,13 +1,13 @@
 package scau.com.lprapm.entity;
 
+import java.util.Date;
+
 public class PositionTracking {
     private Integer positionId;
 
-    private Integer withcarId;
+    private Integer carplanId;
 
-    private Integer repoId;
-
-    private String trackStatus;
+    private Integer orderId;
 
     private String provinceid;
 
@@ -15,14 +15,19 @@ public class PositionTracking {
 
     private String areaid;
 
-    public PositionTracking(Integer positionId, Integer withcarId, Integer repoId, String trackStatus, String provinceid, String cityid, String areaid) {
+    private String trackStatus;
+
+    private Date trackTime;
+
+    public PositionTracking(Integer positionId, Integer carplanId, Integer orderId, String provinceid, String cityid, String areaid, String trackStatus, Date trackTime) {
         this.positionId = positionId;
-        this.withcarId = withcarId;
-        this.repoId = repoId;
-        this.trackStatus = trackStatus;
+        this.carplanId = carplanId;
+        this.orderId = orderId;
         this.provinceid = provinceid;
         this.cityid = cityid;
         this.areaid = areaid;
+        this.trackStatus = trackStatus;
+        this.trackTime = trackTime;
     }
 
     public PositionTracking() {
@@ -37,28 +42,20 @@ public class PositionTracking {
         this.positionId = positionId;
     }
 
-    public Integer getWithcarId() {
-        return withcarId;
+    public Integer getCarplanId() {
+        return carplanId;
     }
 
-    public void setWithcarId(Integer withcarId) {
-        this.withcarId = withcarId;
+    public void setCarplanId(Integer carplanId) {
+        this.carplanId = carplanId;
     }
 
-    public Integer getRepoId() {
-        return repoId;
+    public Integer getOrderId() {
+        return orderId;
     }
 
-    public void setRepoId(Integer repoId) {
-        this.repoId = repoId;
-    }
-
-    public String getTrackStatus() {
-        return trackStatus;
-    }
-
-    public void setTrackStatus(String trackStatus) {
-        this.trackStatus = trackStatus == null ? null : trackStatus.trim();
+    public void setOrderId(Integer orderId) {
+        this.orderId = orderId;
     }
 
     public String getProvinceid() {
@@ -83,5 +80,21 @@ public class PositionTracking {
 
     public void setAreaid(String areaid) {
         this.areaid = areaid == null ? null : areaid.trim();
+    }
+
+    public String getTrackStatus() {
+        return trackStatus;
+    }
+
+    public void setTrackStatus(String trackStatus) {
+        this.trackStatus = trackStatus == null ? null : trackStatus.trim();
+    }
+
+    public Date getTrackTime() {
+        return trackTime;
+    }
+
+    public void setTrackTime(Date trackTime) {
+        this.trackTime = trackTime;
     }
 }

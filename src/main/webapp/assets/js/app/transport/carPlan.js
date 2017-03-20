@@ -119,17 +119,41 @@ define(['ajaxPackage', 'timePicker', 'select',
                 visible: false,
                 title: '收货人电话'
             }, {
+                field: 'provinceid',
+                visible: false,
+                title: '订单所在省份id'
+            }, {
+                field: 'cityid',
+                visible: false,
+                title: '订单所在地级市id'
+            }, {
+                field: 'areaid',
+                visible: false,
+                title: '收货县级市id'
+            }, {
                 field: 'receiptProvinceid',
                 visible: false,
-                title: '收货地址'
+                title: '收货省份id'
             }, {
                 field: 'receiptCityid',
                 visible: false,
-                title: '收货地址'
+                title: '收货地级市id'
             }, {
                 field: 'receiptAreaid',
                 visible: false,
-                title: '收货地址'
+                title: '收货县级市id'
+            }, {
+                field: 'receiptProvince',
+                visible: false,
+                title: '收货省份'
+            }, {
+                field: 'receiptCity',
+                visible: false,
+                title: '收货地级市'
+            }, {
+                field: 'receiptArea',
+                visible: false,
+                title: '收货县级市'
             }, {
                 field: 'receiptAddress',
                 visible: false,
@@ -289,7 +313,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                 $addForm.find(':input').val("");
                 $('.selectAskPur').selectpicker('val', []);
             });
-
+            // 点击配车按钮
             $("#insertCPBtn").on('click', function (event) {
                 event.preventDefault();
                 /* Act on the event */
@@ -301,20 +325,63 @@ define(['ajaxPackage', 'timePicker', 'select',
                     allVolume = 0,
                     allNum = 0;
                 var selectTable = $table.bootstrapTable("getSelections");
+                var p = $province.val() == null ? false : true,
+                    c = $city.val() == null ? false : true,
+                    a = $area.val() == null ? false : true;
+
+                var myflag = false;
                 $.each(selectTable, function (index, val) {
                     /* iterate through array or object */
-                    selectIds += val.orderId + ",";
-                    selectNames += val.goodsName + ",";
-                    allWeight += val.goodsNumber * val.goodsPerweight;
-                    allVolume += val.goodsVolume;
-                    allNum += val.goodsNumber;
-                    selectUser += val.receiptName + ",";
+                    if (p && !c && !a) {
+                        if (val.receiptProvinceid != $province.val() || val.provinceid == $province.val()) {
+                            $.dialog("请先选择接收地址进行查询");
+                            myflag = true;
+                            resetData();
+                            return false;
+                        }
+                    } else if (p && c & !a) {
+                        if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val()) {
+                            $.dialog("请先选择接收地址进行查询");
+                            myflag = true;
+                            resetData();
+                            return false;
+                        }
+                    } else if (p && c && a) {
+                        if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val() || val.receiptAreaid != $area.val()) {
+                            $.dialog("请先选择接收地址进行查询");
+                            myflag = true;
+                            resetData();
+                            return false;
+                        }
+                    } else if (!p && !c && !a) {
+                        alert("message");
+                        $.dialog("请先选择接收地址进行查询");
+                        myflag = true;
+                        return false;
+                    }
+                    if (!myflag) {
+                        selectIds += val.orderId + ",";
+                        selectNames += val.goodsName + ",";
+                        allWeight += val.goodsNumber * val.goodsPerweight;
+                        allVolume += val.goodsVolume;
+                        allNum += val.goodsNumber;
+                        selectUser += val.receiptName + ",";
+                    }
                 });
+
+                function resetData() {
+                    selectIds = "",
+                        selectNames = "",
+                        selectUser = "",
+                        allWeight = 0,
+                        allVolume = 0,
+                        allNum = 0;
+                }
                 selectIds = selectIds.substring(0, selectIds.length - 1);
                 selectNames = selectNames.substring(0, selectNames.length - 1);
                 selectUser = selectUser.substring(0, selectUser.length - 1);
-                $addForm.find(':input[name="carplanId"]').val(selectIds);
                 $addForm.find(':input[name="orderNames"]').val(selectNames);
+                $addForm.find(':input[name="orderIds"]').val(selectIds);
                 $addForm.find(':input[name="allNumber"]').val(allNum);
                 $addForm.find(':input[name="allWeight"]').val(allWeight);
                 $addForm.find(':input[name="allVolume"]').val(allVolume);
@@ -324,27 +391,31 @@ define(['ajaxPackage', 'timePicker', 'select',
                 $addForm.find(':input[name="provinceid"]').val($province.val());
                 $addForm.find(':input[name="cityid"]').val($city.val());
                 $addForm.find(':input[name="areaid"]').val($area.val());
-                if ($province.val() || $city.val() || $area.val()) {
-                    $.dialog("请先选择接收地址");
-                } else {
+
+                if (!myflag) {
                     showModal();
-                    $("#calculateBtn").click(function (event) {
-                        event.preventDefault();
-                        /* Act on the event */
-                        var cartype = $("#selectCarT").val();
-                        if (cartype != null && cartype != "") {
-                            var carNum = allWeight / cartype;
-                            $addForm.find(':input[name="carnNum"]').val(carNum);
-                        } else {
-                            $.dialog("请选择车辆类型");
-                        }
-                    });
                 }
+                $("#calculateBtn").click(function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    /* Act on the event */
+                    var cartype = $("#selectCarT").val();
+                    if (cartype != null && cartype != "") {
+                        var carNum = Math.ceil(allWeight / cartype);
+                        $addForm.find(':input[name="carnNum"]').val(carNum);
+                    } else {
+                        $.dialog("请选择车辆类型");
+                    }
+                });
             });
 
             $("#submitBtn").click(function (event) {
                 /* 点击提交按钮 */
-                submitData();
+                if ($addForm.find(':input[name="carnNum"]').val() == "") {
+                    $.dialog("请先计算车辆数目");
+                } else {
+                    submitData();
+                }
             });
 
             function submitData() {
