@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>首页</title>
@@ -7,8 +8,59 @@
     <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
     <link rel="stylesheet" type="text/css" href="../../assets/css/app/home.css"/>
+    <style type="text/css">
+        body,
+        html,
+        #allmap {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            margin: 0;
+            font-family: "微软雅黑";
+        }
+    </style>
 </head>
+<div id="allmap"></div>
+<script type="text/JavaScript" src="http://api.map.baidu.com/api?v=2.0&ak=wN2fCvosijyRwmNMju5xn5fdGMlwKGxH
+"></script>
+<script type="text/javascript" src="../../assets/js/plugins/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+    var map = new BMap.Map("allmap"); //创建地图实例
+    //页面初始化
+    $(function () {
+        //初始化地图 默认加载北京天安门
+        var point = new BMap.Point(116.331398, 39.897445);
+        map.centerAndZoom(point, 16); //初始化地图，point为中心点，缩放级别为16
+        //判断手机浏览器是否支持定位
+        if (navigator.geolocation) {
+            var geolocation = new BMap.Geolocation(); //创建定位实例
+            geolocation.getCurrentPosition(showLocation, {
+                enableHighAccuracy: true
+            }); //enableHighAccuracy 要求浏览器获取最佳结果
+        } else {
+            map.addControl(new BMap.GeolocationControl()); //添加定位控件 支持定位
+        }
+    });
+    //处理定位后的信息
+    function showLocation(r) {
+        if (this.getStatus() == BMAP_STATUS_SUCCESS) { //定位成功
+            //新建中心点 并将地图中心移动过去
+            var centerPoint = new BMap.Point(r.longitude, r.latitude);
+            console.log(r);
+            map.panTo(centerPoint);
+            map.setCenter(centerPoint);
+            //新建标注
+            var mk = new BMap.Marker(centerPoint);
+            mk.disableDragging(); // 不可拖拽
+            map.addOverlay(mk);
+        } else {
+            alert('failed' + this.getStatus()); //定位失败
+        }
+    }
+</script>
+
 <body>
 <!-- <h1>欢迎来到物流管理系统</h1> -->
 </body>
+
 </html>
