@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50168
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50168
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-03-20 18:05:57
+Date: 2017-03-22 00:18:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3223,16 +3223,18 @@ CREATE TABLE `car_need` (
   `carn_id` int(11) NOT NULL AUTO_INCREMENT,
   `carn_type` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_num` int(11) DEFAULT NULL,
-  `carn_exam_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `carn_exam_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_exam_person` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carn_exam_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_ids` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`carn_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
 
 -- ----------------------------
 -- Records of car_need
 -- ----------------------------
+INSERT INTO `car_need` VALUES ('5', '6000', '1', '出发', null, null, null);
+INSERT INTO `car_need` VALUES ('6', '14000', '1', '通过', null, null, null);
 
 -- ----------------------------
 -- Table structure for `car_plan`
@@ -3254,11 +3256,13 @@ CREATE TABLE `car_plan` (
   `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carplan_time` date DEFAULT NULL,
   PRIMARY KEY (`carplan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
 
 -- ----------------------------
 -- Records of car_plan
 -- ----------------------------
+INSERT INTO `car_plan` VALUES ('4', '36', '冰冰', '5', '5328', '12', '33', '运输部', '换换', 'test', '440000', '440800', '440882', '2017-03-20');
+INSERT INTO `car_plan` VALUES ('5', '48', '熊肉', '6', '3630', '55', '44', '运输部', '巨鬼王', 'test', '440000', '440800', '440825', '2017-03-21');
 
 -- ----------------------------
 -- Table structure for `car_type`
@@ -3651,13 +3655,15 @@ CREATE TABLE `department` (
   `dept_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `dept_desc` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of department
 -- ----------------------------
 INSERT INTO `department` VALUES ('1', '市场部', '管理123订单');
 INSERT INTO `department` VALUES ('2', '运输部', '管理运输');
+INSERT INTO `department` VALUES ('3', '采购部', '负责采购的部门');
+INSERT INTO `department` VALUES ('4', '车辆管理处', '管理车辆信息');
 
 -- ----------------------------
 -- Table structure for `goods`
@@ -3670,7 +3676,7 @@ CREATE TABLE `goods` (
   `goods_volume` double DEFAULT NULL,
   `goods_perweight` double DEFAULT NULL,
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
+) ENGINE=InnoDB AUTO_INCREMENT=93 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
 
 -- ----------------------------
 -- Records of goods
@@ -3696,6 +3702,43 @@ INSERT INTO `goods` VALUES ('41', '鸭肉卷', '45', '45', '345');
 INSERT INTO `goods` VALUES ('42', '冰冰', '12', '33', '444');
 INSERT INTO `goods` VALUES ('43', '僵尸肉', '55', '66', '123');
 INSERT INTO `goods` VALUES ('44', '大米', '12', '333', '4444');
+INSERT INTO `goods` VALUES ('45', '猪肉', '22', '22', '111');
+INSERT INTO `goods` VALUES ('47', '牛肉', '66', '44', '120');
+INSERT INTO `goods` VALUES ('54', '熊肉', '55', '44', '66');
+INSERT INTO `goods` VALUES ('55', '', null, null, null);
+INSERT INTO `goods` VALUES ('56', '鞋子', '99', '55', '7');
+INSERT INTO `goods` VALUES ('57', '', null, null, null);
+INSERT INTO `goods` VALUES ('58', '', null, null, null);
+INSERT INTO `goods` VALUES ('59', '鸭肉', null, null, null);
+INSERT INTO `goods` VALUES ('60', '', null, null, null);
+INSERT INTO `goods` VALUES ('61', '', null, null, null);
+INSERT INTO `goods` VALUES ('62', '', null, null, null);
+INSERT INTO `goods` VALUES ('63', '', null, null, null);
+INSERT INTO `goods` VALUES ('66', '', null, null, null);
+INSERT INTO `goods` VALUES ('68', '', null, null, null);
+INSERT INTO `goods` VALUES ('69', '34', null, null, null);
+INSERT INTO `goods` VALUES ('70', '', null, null, null);
+INSERT INTO `goods` VALUES ('71', '', null, null, null);
+INSERT INTO `goods` VALUES ('72', '青蛙', '23', '32', '324');
+INSERT INTO `goods` VALUES ('73', '青蛙', '23', '32', '324');
+INSERT INTO `goods` VALUES ('74', '兔子', '44', '66', '888');
+INSERT INTO `goods` VALUES ('75', '巨龟', '666', '44', '567');
+INSERT INTO `goods` VALUES ('76', '', null, null, null);
+INSERT INTO `goods` VALUES ('77', '巨龟', '3', '4', '5');
+INSERT INTO `goods` VALUES ('78', '流沙', '45', '34', '66');
+INSERT INTO `goods` VALUES ('79', '烟头', '12', '123', '435');
+INSERT INTO `goods` VALUES ('80', '', null, null, null);
+INSERT INTO `goods` VALUES ('81', '213', null, null, null);
+INSERT INTO `goods` VALUES ('82', '', null, null, null);
+INSERT INTO `goods` VALUES ('83', '', null, null, null);
+INSERT INTO `goods` VALUES ('84', '23', null, null, null);
+INSERT INTO `goods` VALUES ('85', '34', null, null, null);
+INSERT INTO `goods` VALUES ('87', '腌菜', '555', '34', '67');
+INSERT INTO `goods` VALUES ('88', '货物1', '99', '445', '67');
+INSERT INTO `goods` VALUES ('89', '货物2', '45', '334', '77');
+INSERT INTO `goods` VALUES ('90', '鹿肉', '44', '65', '333');
+INSERT INTO `goods` VALUES ('91', '12', null, null, null);
+INSERT INTO `goods` VALUES ('92', '老鼠', '34', '44', '67');
 
 -- ----------------------------
 -- Table structure for `log_price`
@@ -3708,12 +3751,12 @@ CREATE TABLE `log_price` (
   `log_price` double DEFAULT NULL,
   `log_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
 
 -- ----------------------------
 -- Records of log_price
 -- ----------------------------
-INSERT INTO `log_price` VALUES ('2', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('2', null, null, null, '已出发');
 INSERT INTO `log_price` VALUES ('3', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('4', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('5', null, null, null, '否');
@@ -3728,9 +3771,45 @@ INSERT INTO `log_price` VALUES ('23', null, null, null, '否');
 INSERT INTO `log_price` VALUES ('32', null, null, null, '');
 INSERT INTO `log_price` VALUES ('34', null, null, null, '');
 INSERT INTO `log_price` VALUES ('35', '市场部', '换换', '444', '配车中');
-INSERT INTO `log_price` VALUES ('36', '市场部', '换换', '33', '配车中');
+INSERT INTO `log_price` VALUES ('36', '市场部', '换换', '33', '已出发');
 INSERT INTO `log_price` VALUES ('37', '市场部', '换换', '33', '配车中');
 INSERT INTO `log_price` VALUES ('38', '市场部', '换换', '444', '配车中');
+INSERT INTO `log_price` VALUES ('39', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('41', '市场部', '小赵', '234', '已回复');
+INSERT INTO `log_price` VALUES ('48', '市场部', '小赵', '34', '配车中');
+INSERT INTO `log_price` VALUES ('49', null, null, null, '');
+INSERT INTO `log_price` VALUES ('50', null, null, null, '');
+INSERT INTO `log_price` VALUES ('51', null, null, null, '');
+INSERT INTO `log_price` VALUES ('52', null, null, null, '');
+INSERT INTO `log_price` VALUES ('53', null, null, null, '');
+INSERT INTO `log_price` VALUES ('54', null, null, null, '');
+INSERT INTO `log_price` VALUES ('55', null, null, null, '');
+INSERT INTO `log_price` VALUES ('56', null, null, null, '');
+INSERT INTO `log_price` VALUES ('57', null, null, null, '');
+INSERT INTO `log_price` VALUES ('60', null, null, null, '');
+INSERT INTO `log_price` VALUES ('62', null, null, null, '');
+INSERT INTO `log_price` VALUES ('63', null, null, null, '');
+INSERT INTO `log_price` VALUES ('64', null, null, null, '');
+INSERT INTO `log_price` VALUES ('65', null, null, null, '');
+INSERT INTO `log_price` VALUES ('66', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('67', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('68', null, null, null, '');
+INSERT INTO `log_price` VALUES ('69', null, null, null, '');
+INSERT INTO `log_price` VALUES ('70', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('71', null, null, null, '');
+INSERT INTO `log_price` VALUES ('72', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('73', null, null, null, '');
+INSERT INTO `log_price` VALUES ('74', null, null, null, '');
+INSERT INTO `log_price` VALUES ('75', null, null, null, '');
+INSERT INTO `log_price` VALUES ('76', null, null, null, '');
+INSERT INTO `log_price` VALUES ('77', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('78', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('80', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('81', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('82', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('83', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('84', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('85', null, null, null, '否');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -3742,7 +3821,7 @@ CREATE TABLE `menu` (
   `menu_i_class` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `menu_href` varchar(100) CHARACTER SET utf8 COLLATE utf8_bin DEFAULT NULL,
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='菜单管理表';
 
 -- ----------------------------
 -- Records of menu
@@ -3764,6 +3843,8 @@ INSERT INTO `menu` VALUES ('18', '车辆需求管理', 'fa-truck', '/redirect/pa
 INSERT INTO `menu` VALUES ('19', '车辆类型管理', 'fa-bicycle', '/redirect/page/vehicleType');
 INSERT INTO `menu` VALUES ('20', '仓储位置', 'fa-address-card', '/redirect/page/repertory');
 INSERT INTO `menu` VALUES ('21', '配车方案管理', 'fa-calculator', '/redirect/page/carscheme');
+INSERT INTO `menu` VALUES ('22', '到站位置记录', 'fa-book', '/redirect/page/position');
+INSERT INTO `menu` VALUES ('23', '个人中心', 'fa-venus-double', '/redirect/page/usercenter');
 
 -- ----------------------------
 -- Table structure for `orders`
@@ -3789,7 +3870,7 @@ CREATE TABLE `orders` (
   `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `order_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
 
 -- ----------------------------
 -- Records of orders
@@ -3811,6 +3892,42 @@ INSERT INTO `orders` VALUES ('35', '41', '44', '35', '11', '35', '35', '换换',
 INSERT INTO `orders` VALUES ('36', '42', '45', '36', '11', '36', '36', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-01', '440000', '440100', '440104', '同和握山石决');
 INSERT INTO `orders` VALUES ('37', '43', '46', '37', '11', '37', '37', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-09', '440000', '440100', '440104', '白云山');
 INSERT INTO `orders` VALUES ('38', '44', '47', '38', '11', '38', '38', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-08', '440000', '440100', '440104', '城建大厦');
+INSERT INTO `orders` VALUES ('39', '45', '48', '39', '2', '39', '39', '小明', '是', '是', '否', '否', '2017-03-21', '2017-04-09', '440000', '440100', '440104', '同和地铁站');
+INSERT INTO `orders` VALUES ('41', '47', '50', '41', '2', '41', '41', '小明', '是', '是', '是', '是', '2017-03-21', '2017-03-23', '440000', '440100', '440104', '同和');
+INSERT INTO `orders` VALUES ('48', '54', '57', '48', '2', '48', '48', '小明', '否', '否', '是', '是', '2017-03-21', '2017-05-03', '440000', '440100', '440104', '同和');
+INSERT INTO `orders` VALUES ('49', '55', '58', '49', '2', '49', '49', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('50', '56', '59', '50', '2', '50', '50', '小明', '', '否', '否', '否', '2017-03-21', '2017-06-09', '440000', '440100', '440104', '同和庄');
+INSERT INTO `orders` VALUES ('51', '57', '60', '51', '2', '51', '51', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('52', '58', '61', '52', '2', '52', '52', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('53', '59', '62', '53', '2', '53', '53', '小明', '', '否', '否', '否', '2017-03-21', null, '440000', '440100', '440104', '同和抓');
+INSERT INTO `orders` VALUES ('54', '60', '63', '54', '2', '54', '54', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('55', '61', '64', '55', '2', '55', '55', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('56', '62', '65', '56', '2', '56', '56', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('57', '63', '66', '57', '2', '57', '57', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('60', '66', '69', '60', '2', '60', '60', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('62', '68', '71', '62', '2', '62', '62', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('63', '69', '72', '63', '2', '63', '63', '小明', '', '否', '否', '否', '2017-03-21', null, '210000', '210200', '210203', '');
+INSERT INTO `orders` VALUES ('64', '70', '73', '64', '2', '64', '64', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('65', '71', '74', '65', '2', '65', '65', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('66', '73', '75', '66', '2', '66', '66', '小明', '否', '否', '否', '否', '2017-03-21', '2017-03-24', '440000', '440100', '440106', 'test');
+INSERT INTO `orders` VALUES ('67', '74', '76', '67', '2', '67', '67', '小明', '是', '否', '否', '否', '2017-03-21', '2017-03-16', '440000', '440100', '440104', '同和等等撒');
+INSERT INTO `orders` VALUES ('68', '75', '77', '68', '2', '68', '68', '小明', '', '否', '否', '否', '2017-03-21', '2017-04-09', '440000', '440100', '440104', '托尔斯泰');
+INSERT INTO `orders` VALUES ('69', '76', '78', '69', '2', '69', '69', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('70', '77', '79', '70', '2', '70', '70', '小明', '是', '否', '否', '否', '2017-03-21', '2017-03-31', '440000', '440100', '440104', 'test');
+INSERT INTO `orders` VALUES ('71', '78', '80', '71', '2', '71', '71', '小明', '', '否', '否', '否', '2017-03-21', '2017-03-30', '440000', '440100', '440104', '天河');
+INSERT INTO `orders` VALUES ('72', '79', '81', '72', '2', '72', '72', '小明', '是', '否', '否', '否', '2017-03-21', '2017-04-07', '440000', '440100', '440104', '第一幼儿园');
+INSERT INTO `orders` VALUES ('73', '80', '82', '73', '2', '73', '73', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('74', '81', '83', '74', '2', '74', '74', '小明', '', '否', '否', '否', '2017-03-21', null, '440000', '440200', '440201', '123');
+INSERT INTO `orders` VALUES ('75', '82', '84', '75', '2', '75', '75', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('76', '83', '85', '76', '2', '76', '76', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
+INSERT INTO `orders` VALUES ('77', '84', '86', '77', '2', '77', '77', '小明', '是', '否', '否', '否', '2017-03-21', null, '130000', '130300', '130304', '');
+INSERT INTO `orders` VALUES ('78', '85', '87', '78', '2', '78', '78', '小明', '是', '否', '否', '否', '2017-03-21', null, '130000', '130300', '130303', '');
+INSERT INTO `orders` VALUES ('80', '87', '89', '80', '2', '80', '80', '小明', '是', '否', '否', '否', '2017-03-21', '2017-03-31', '440000', '440100', '440104', '越秀公寓');
+INSERT INTO `orders` VALUES ('81', '88', '90', '81', '2', '81', '81', '小明', '是', '否', '否', '否', '2017-03-21', '2017-03-23', '440000', '440100', '440104', 'test1');
+INSERT INTO `orders` VALUES ('82', '89', '91', '82', '2', '82', '82', '小明', '否', '否', '否', '否', '2017-03-21', '2017-04-08', '440000', '440100', '440104', 'test2');
+INSERT INTO `orders` VALUES ('83', '90', '92', '83', '2', '83', '83', '小明', '否', '否', '否', '否', '2017-03-21', '2017-04-27', '440000', '440100', '440104', '越秀公园');
+INSERT INTO `orders` VALUES ('84', '91', '93', '84', '2', '84', '84', '小明', '否', '否', '否', '否', '2017-03-21', null, '130000', '130400', '130431', '省份');
+INSERT INTO `orders` VALUES ('85', '92', '94', '85', '2', '85', '85', '小明', '否', '否', '否', '否', '2017-03-21', '2017-05-18', '440000', '440100', '440104', '握山石决');
 
 -- ----------------------------
 -- Table structure for `order_exam`
@@ -3823,7 +3940,7 @@ CREATE TABLE `order_exam` (
   `oe_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oe_reason` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`oe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
+) ENGINE=InnoDB AUTO_INCREMENT=95 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
 
 -- ----------------------------
 -- Records of order_exam
@@ -3853,6 +3970,42 @@ INSERT INTO `order_exam` VALUES ('44', '通过', '换换', '市场审核部', 't
 INSERT INTO `order_exam` VALUES ('45', '通过', '换换', '市场审核部', 'test通过');
 INSERT INTO `order_exam` VALUES ('46', '通过', '换换', '市场审核部', 'test2');
 INSERT INTO `order_exam` VALUES ('47', '通过', '换换', '市场审核部', 'test1');
+INSERT INTO `order_exam` VALUES ('48', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('50', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('57', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('58', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('59', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('60', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('61', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('62', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('63', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('64', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('65', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('66', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('69', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('71', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('72', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('73', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('74', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('75', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('76', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('77', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('78', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('79', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('80', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('81', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('82', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('83', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('84', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('85', '', null, null, null);
+INSERT INTO `order_exam` VALUES ('86', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('87', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('89', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('90', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('91', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('92', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('93', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('94', '否', null, null, null);
 
 -- ----------------------------
 -- Table structure for `position_tracking`
@@ -3868,11 +4021,14 @@ CREATE TABLE `position_tracking` (
   `track_status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `track_time` date DEFAULT NULL,
   PRIMARY KEY (`position_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
 
 -- ----------------------------
 -- Records of position_tracking
 -- ----------------------------
+INSERT INTO `position_tracking` VALUES ('5', '4', '36', '440000', '440800', '440882', '出发', '2017-03-20');
+INSERT INTO `position_tracking` VALUES ('6', '4', '36', '440000', '440200', '440204', '到站', '2017-03-21');
+INSERT INTO `position_tracking` VALUES ('7', '5', '48', '440000', '440800', '440825', '出发', '2017-03-21');
 
 -- ----------------------------
 -- Table structure for `provinces`
@@ -3974,7 +4130,7 @@ CREATE TABLE `pur_price` (
   `pur_price` double DEFAULT NULL,
   `pur_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
 
 -- ----------------------------
 -- Records of pur_price
@@ -3997,6 +4153,42 @@ INSERT INTO `pur_price` VALUES ('35', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('36', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('37', null, null, null, '否');
 INSERT INTO `pur_price` VALUES ('38', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('39', '采购部', '僵尸', '66', '已回复');
+INSERT INTO `pur_price` VALUES ('41', '采购部', '僵尸', '66', '采购完成');
+INSERT INTO `pur_price` VALUES ('48', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('49', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('50', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('51', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('52', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('53', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('54', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('55', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('56', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('57', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('60', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('62', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('63', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('64', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('65', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('66', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('67', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('68', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('69', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('70', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('71', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('72', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('73', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('74', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('75', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('76', null, null, null, '');
+INSERT INTO `pur_price` VALUES ('77', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('78', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('80', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('81', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('82', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('83', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('84', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('85', null, null, null, '否');
 
 -- ----------------------------
 -- Table structure for `receipt`
@@ -4013,7 +4205,7 @@ CREATE TABLE `receipt` (
   `receipt_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_time` date DEFAULT NULL,
   PRIMARY KEY (`receipt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
+) ENGINE=InnoDB AUTO_INCREMENT=86 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
 
 -- ----------------------------
 -- Records of receipt
@@ -4036,6 +4228,42 @@ INSERT INTO `receipt` VALUES ('35', '烤肉王', '15584036598', null, null, null
 INSERT INTO `receipt` VALUES ('36', '晓东', '18854123659', '440000', '440800', '440882', '西湖南路', '否', null);
 INSERT INTO `receipt` VALUES ('37', '小小', '18840316985', '440000', '440600', '440605', '大学', '否', null);
 INSERT INTO `receipt` VALUES ('38', '小东', '18854203265', '440000', '440800', '440883', '吴川一中', '否', null);
+INSERT INTO `receipt` VALUES ('39', '小明子', '15541032659', '440000', '440800', '440882', '雷湖南路', '否', null);
+INSERT INTO `receipt` VALUES ('41', '白浩', '18840325653', '440000', '440800', '440881', '连江一中', '否', null);
+INSERT INTO `receipt` VALUES ('48', '晓得', '18845632587', '440000', '440800', '440825', '许文中学', '否', null);
+INSERT INTO `receipt` VALUES ('49', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('50', '咚咚', '18852032659', '440000', '440800', '440882', '下江', '', null);
+INSERT INTO `receipt` VALUES ('51', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('52', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('53', '', '', '440000', '440800', '440882', '撒点粉', '', null);
+INSERT INTO `receipt` VALUES ('54', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('55', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('56', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('57', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('60', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('62', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('63', '', '', null, '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('64', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('65', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('66', '大哥', '1883250984', '440000', '440800', '440882', 'test', '否', null);
+INSERT INTO `receipt` VALUES ('67', '校庆', '19934950670', '440000', '440800', '440881', '廉江一中', '否', null);
+INSERT INTO `receipt` VALUES ('68', '咚咚', '18834095478', '440000', '440800', '440882', '下江34号', '', null);
+INSERT INTO `receipt` VALUES ('69', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('70', '清单', '', '440000', '440800', '440882', '撒点粉', '否', null);
+INSERT INTO `receipt` VALUES ('71', '晓东', '18834086458', '440000', '440600', '440601', '佛山科技', '', null);
+INSERT INTO `receipt` VALUES ('72', '明明', '18832098678', '440000', '440600', '440601', '佛山科技', '否', null);
+INSERT INTO `receipt` VALUES ('73', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('74', '', '', '440000', '440600', '440604', 'test', '', null);
+INSERT INTO `receipt` VALUES ('75', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('76', '', '', '', '', '', '', '', null);
+INSERT INTO `receipt` VALUES ('77', '', '', '210000', '211300', '211321', '', '否', null);
+INSERT INTO `receipt` VALUES ('78', '', '', '130000', '131000', '131028', '', '否', null);
+INSERT INTO `receipt` VALUES ('80', '小黄', '18845098678', '440000', '440800', '440881', '廉江', '否', null);
+INSERT INTO `receipt` VALUES ('81', '小强', '18864538980', '440000', '440800', '440882', '西湖公园', '否', null);
+INSERT INTO `receipt` VALUES ('82', '小小', '19947689098', '440000', '440600', '440601', 'test3', '否', null);
+INSERT INTO `receipt` VALUES ('83', '小刘', '18843098465', '440000', '440800', '440883', '吴川一中', '否', null);
+INSERT INTO `receipt` VALUES ('84', '', '', '150000', '152500', '152530', '', '否', null);
+INSERT INTO `receipt` VALUES ('85', '小李', '18832980678', '440000', '440800', '440882', '茂德公', '否', null);
 
 -- ----------------------------
 -- Table structure for `repertory`
@@ -4068,14 +4296,18 @@ CREATE TABLE `role` (
   `role_name` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `role_desc` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色信息';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色信息';
 
 -- ----------------------------
 -- Records of role
 -- ----------------------------
 INSERT INTO `role` VALUES ('1', '普通用户', '普通用户');
 INSERT INTO `role` VALUES ('2', '超级管理员', '拥有最高权限');
-INSERT INTO `role` VALUES ('4', '市场部门员工', '市场部门普通员工');
+INSERT INTO `role` VALUES ('4', '市场部计费员', '市场部门管理物流价格的人');
+INSERT INTO `role` VALUES ('5', '采购部员工', '采购部门的工作人员');
+INSERT INTO `role` VALUES ('6', '市场部审核员', '审核物流订单');
+INSERT INTO `role` VALUES ('7', '车辆管理员', '管理车辆信息');
+INSERT INTO `role` VALUES ('8', '运输部员工', '管理配车和站点信息');
 
 -- ----------------------------
 -- Table structure for `role_action`
@@ -4086,7 +4318,7 @@ CREATE TABLE `role_action` (
   `role_id` int(11) DEFAULT NULL,
   `action_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ra_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色权限映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色权限映射表';
 
 -- ----------------------------
 -- Records of role_action
@@ -4095,6 +4327,10 @@ INSERT INTO `role_action` VALUES ('1', '1', '1');
 INSERT INTO `role_action` VALUES ('2', '2', '2');
 INSERT INTO `role_action` VALUES ('3', '3', '4');
 INSERT INTO `role_action` VALUES ('5', '4', '3');
+INSERT INTO `role_action` VALUES ('6', '5', '1');
+INSERT INTO `role_action` VALUES ('7', '6', '1');
+INSERT INTO `role_action` VALUES ('8', '7', '1');
+INSERT INTO `role_action` VALUES ('9', '8', '1');
 
 -- ----------------------------
 -- Table structure for `role_menu`
@@ -4105,29 +4341,54 @@ CREATE TABLE `role_menu` (
   `role_id` int(11) DEFAULT NULL,
   `menu_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`rm_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='角色-菜单映射表';
 
 -- ----------------------------
 -- Records of role_menu
 -- ----------------------------
-INSERT INTO `role_menu` VALUES ('1', '1', '1');
+INSERT INTO `role_menu` VALUES ('1', '2', '1');
 INSERT INTO `role_menu` VALUES ('2', '2', '2');
 INSERT INTO `role_menu` VALUES ('3', '2', '3');
 INSERT INTO `role_menu` VALUES ('4', '2', '4');
 INSERT INTO `role_menu` VALUES ('5', '2', '5');
 INSERT INTO `role_menu` VALUES ('8', '4', '6');
 INSERT INTO `role_menu` VALUES ('13', '2', '9');
-INSERT INTO `role_menu` VALUES ('14', '1', '10');
-INSERT INTO `role_menu` VALUES ('15', '1', '11');
-INSERT INTO `role_menu` VALUES ('16', '1', '12');
-INSERT INTO `role_menu` VALUES ('17', '1', '13');
-INSERT INTO `role_menu` VALUES ('19', '1', '15');
-INSERT INTO `role_menu` VALUES ('20', '1', '16');
-INSERT INTO `role_menu` VALUES ('21', '1', '17');
-INSERT INTO `role_menu` VALUES ('22', '1', '18');
-INSERT INTO `role_menu` VALUES ('23', '1', '19');
-INSERT INTO `role_menu` VALUES ('24', '1', '20');
-INSERT INTO `role_menu` VALUES ('25', '1', '21');
+INSERT INTO `role_menu` VALUES ('14', '2', '10');
+INSERT INTO `role_menu` VALUES ('15', '2', '11');
+INSERT INTO `role_menu` VALUES ('16', '2', '12');
+INSERT INTO `role_menu` VALUES ('17', '2', '13');
+INSERT INTO `role_menu` VALUES ('19', '2', '15');
+INSERT INTO `role_menu` VALUES ('20', '2', '16');
+INSERT INTO `role_menu` VALUES ('21', '2', '17');
+INSERT INTO `role_menu` VALUES ('22', '2', '18');
+INSERT INTO `role_menu` VALUES ('23', '2', '19');
+INSERT INTO `role_menu` VALUES ('24', '2', '20');
+INSERT INTO `role_menu` VALUES ('25', '2', '21');
+INSERT INTO `role_menu` VALUES ('26', '2', '22');
+INSERT INTO `role_menu` VALUES ('27', '1', '1');
+INSERT INTO `role_menu` VALUES ('28', '1', '10');
+INSERT INTO `role_menu` VALUES ('29', '1', '11');
+INSERT INTO `role_menu` VALUES ('30', '4', '16');
+INSERT INTO `role_menu` VALUES ('31', '4', '1');
+INSERT INTO `role_menu` VALUES ('32', '5', '1');
+INSERT INTO `role_menu` VALUES ('33', '5', '12');
+INSERT INTO `role_menu` VALUES ('34', '5', '13');
+INSERT INTO `role_menu` VALUES ('35', '6', '1');
+INSERT INTO `role_menu` VALUES ('36', '6', '15');
+INSERT INTO `role_menu` VALUES ('37', '7', '1');
+INSERT INTO `role_menu` VALUES ('38', '7', '17');
+INSERT INTO `role_menu` VALUES ('39', '7', '19');
+INSERT INTO `role_menu` VALUES ('40', '8', '1');
+INSERT INTO `role_menu` VALUES ('41', '8', '20');
+INSERT INTO `role_menu` VALUES ('42', '8', '21');
+INSERT INTO `role_menu` VALUES ('43', '8', '22');
+INSERT INTO `role_menu` VALUES ('44', '2', '23');
+INSERT INTO `role_menu` VALUES ('45', '1', '23');
+INSERT INTO `role_menu` VALUES ('46', '4', '23');
+INSERT INTO `role_menu` VALUES ('47', '5', '23');
+INSERT INTO `role_menu` VALUES ('48', '6', '23');
+INSERT INTO `role_menu` VALUES ('49', '7', '23');
+INSERT INTO `role_menu` VALUES ('50', '8', '23');
 
 -- ----------------------------
 -- Table structure for `user`
@@ -4146,16 +4407,20 @@ CREATE TABLE `user` (
   `user_dept_phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_dept_desc` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息';
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1', 'amin', '12345', '00@00', '13640433893', '2016-12-25', 'man', null, null, null, null);
+INSERT INTO `user` VALUES ('1', 'amin', '12345', '00@00', '13640433893', '2016-12-25', 'man', '物流公司', '', '', '');
 INSERT INTO `user` VALUES ('2', '小明', '12345', '001@001', '18813838998', '2017-01-10', 'man', null, null, null, null);
 INSERT INTO `user` VALUES ('3', '小红红', '12345', '00033@qq.com', '18224848959', '2017-01-03', 'woman', '', '', '12132', '');
 INSERT INTO `user` VALUES ('4', '小赵', '12345', '004@003', '18828282837', '2017-01-10', 'man', null, null, null, null);
 INSERT INTO `user` VALUES ('11', '换换', '12345', '111@112', '18838383838', '2017-01-23', 'woman', '', '', '', '');
+INSERT INTO `user` VALUES ('12', '僵尸', '123456', '333@33', '18852315685', '2004-01-28', 'man', '', '', '', '');
+INSERT INTO `user` VALUES ('13', '小四', '12345', '444@qq.com', '18852136587', '1999-06-10', 'woman', '', '', '', '');
+INSERT INTO `user` VALUES ('14', '白浩', '12345', 'baihao@123.com', '12235468795', '1994-07-14', 'man', '', '', '', '');
+INSERT INTO `user` VALUES ('15', '巨鬼王', '12345', 'juguiwang@126.com', '18814052365', '1986-07-18', 'man', '', '', '', '');
 
 -- ----------------------------
 -- Table structure for `user_role`
@@ -4166,7 +4431,7 @@ CREATE TABLE `user_role` (
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户角色映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户角色映射表';
 
 -- ----------------------------
 -- Records of user_role
@@ -4176,3 +4441,7 @@ INSERT INTO `user_role` VALUES ('2', '2', '1');
 INSERT INTO `user_role` VALUES ('3', '3', '3');
 INSERT INTO `user_role` VALUES ('4', '4', '4');
 INSERT INTO `user_role` VALUES ('10', '11', '1');
+INSERT INTO `user_role` VALUES ('11', '12', '5');
+INSERT INTO `user_role` VALUES ('12', '13', '6');
+INSERT INTO `user_role` VALUES ('13', '14', '7');
+INSERT INTO `user_role` VALUES ('14', '15', '8');
