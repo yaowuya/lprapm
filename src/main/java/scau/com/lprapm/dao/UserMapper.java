@@ -47,4 +47,12 @@ public interface UserMapper {
 
     @Select("select user_id userId, user_true_name userTrueName from user")
     List<Map<String, Object>> searchAllUser();
+
+    @Select("select user_id userId, user_true_name userTrueName," +
+            " user_password userPassword,user_email userEmail, user_phone userPhone," +
+            " user_birthday userBirthday, user_sex userSex, user_company userCompany," +
+            " user_dept userDept,user_dept_phone userDeptPhone, user_dept_desc userDeptDesc " +
+            " from user " +
+            "where user_id=#{userId}")
+    List<Map<String, Object>> searchMyUser(Map<String, Object> params);
 }

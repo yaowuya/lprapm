@@ -108,7 +108,7 @@ public class MenuController extends BaseController {
         JsonResult jsonResult=null;
         try {
             RoleMenu roleMenu=new RoleMenu();
-            roleMenu.setRoleId(1);
+            roleMenu.setRoleId(2);
             int insert=menuService.menuInsert(menu,roleMenu);
             jsonResult=new JsonResult(true,"插入成功");
         }catch (Exception e){

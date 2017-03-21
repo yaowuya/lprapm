@@ -92,22 +92,34 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             timePicker.picker("#addLOTime", null);
 
             submitBtn.click(function(event) {
-                event.preventDefault();
-                /* Act on the event */
-                var form = $(this).closest('form');
-                var formData = form.serializeArray();
-                console.log(formData);
-                Lprapm.Ajax.request({
-                    url: '/orders/insertOrders',
-                    data: formData,
-                    success: function(response) {
-                        if (response.success) {
-                            $('button.btn-resetLO').click();
-                        } else {
-                            $.dialog(response.messages);
+                event.preventDefault;
+                event.stopPropagation;
+                var p = $province.val() == null ? false : true,
+                    c = $city.val() == null ? false : true,
+                    a = $area.val() == null ? false : true,
+                    rp = $receiptProvince.val() == null ? false : true,
+                    rc = $receiptCity.val() == null ? false : true,
+                    ra = $receiptArea.val() == null ? false : true;
+                if (p && c && a && rp && rc && ra) {
+                    /* Act on the event */
+                    var form = $(this).closest('form');
+                    var formData = form.serializeArray();
+                    console.log(formData);
+                    Lprapm.Ajax.request({
+                        url: '/orders/insertOrders',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success) {
+                                $('button.btn-resetLO').click();
+                            } else {
+                                $.dialog(response.messages);
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    $.dialog("请填好地址");
+                }
+
             });
 
             $('button.btn-resetLO').on('click', function (event) {
@@ -119,7 +131,8 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 Select.selectList.select($receiptProvince, []);
                 Select.selectList.select($receiptCity, []);
                 Select.selectList.select($receiptArea, []);
-                $("#addLogOrder form").find(':input').val("");
+                // $("#addLogOrder form").find(':input').val("");
+                window.location.reload();
             });
         }
         return {

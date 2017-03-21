@@ -146,4 +146,36 @@ public interface CarPlanMapper {
     List<Map<String, Object>> searchCarSs(Map<String, Object> params);
 
     void insertCarPlan(CarPlan carPlan);
+
+    @Select("<script>" +
+            "select carplan_id carplanId, order_ids orderIds, " +
+            "order_names orderNames, cp.carn_id carnId, " +
+            "all_weight allWeight, all_number allNumber, all_volume allVolume," +
+            "carplan_dept carplanDept, carplan_person carplanPerson, " +
+            "carplan_desrciption carplanDesrciption, cp.provinceid, " +
+            "cp.cityid, cp.areaid,p.province,c.city,a.area," +
+            "carplan_time carplanTime, carn_type carnType," +
+            "carn_num carnNum, carn_exam_state carnExamState, " +
+            "car_exam_person carExamPerson, carn_exam_dept carnExamDept," +
+            "car_ids carIds  " +
+            "from car_plan cp,car_need cn,provinces p,cities c,areas a " +
+            "where cp.carn_id=cn.carn_id and cp.provinceid=p.provinceid " +
+            "and cp.cityid=c.cityid and cp.areaid=a.areaid " +
+            " <if test=\"carnExamState != null and carnExamState != '' \">" +
+            "    and carn_exam_state in ( ${carnExamState} ) " +
+            " </if>" +
+            " <if test=\"createTime != null and createTime != '' \">" +
+            "    and <![CDATA[carplan_time >= #{createTime}]]>" +
+            " </if>" +
+            " <if test=\"endTime != null and endTime != '' \">" +
+            "    and <![CDATA[carplan_time <= #{endTime}]]>" +
+            " </if>" +
+            " <if test=\"goodsName != null and goodsName != '' \">" +
+            "    and order_names like concat('%',#{goodsName},'%')" +
+            " </if>" +
+            " <if test=\"carplanId != null and carplanId != '' \">" +
+            "    and carplan_id = #{carplanId}" +
+            " </if>" +
+            "</script>")
+    List<Map<String, Object>> searchPOS(Map<String, Object> params);
 }

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>到站位置记录</title>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-table.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/jquery-confirm.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-datetimepicker.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/bootstrap-select.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/animate.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/font-awesome-4.7.0/css/font-awesome.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/plugins/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/base.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/menu.css"/>
+    <link rel="stylesheet" type="text/css" href="../../assets/css/app/purchaseOrder.css"/>
+</head>
+
+<body>
+<div class="content-theme">
+    <h3>到站位置记录</h3>
+</div>
+<div class="content-nav">
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#recordPos">到站记录</a></li>
+        <li><a data-toggle="tab" href="#trackPos">物流订单位置追踪</a></li>
+    </ul>
+</div>
+<div class="content-main">
+    <div class="tab-content">
+        <!-- 到站记录 -->
+        <div id="recordPos" class="tab-pane fade in active">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchRPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <label class="col-sm-1 control-label">时间:</label>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="createTime" id="createRPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;padding-right: 0px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endRPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="carplanId" placeholder="请输入配送单编号">
+                        </div>
+                        <button type="button" class="btn btn-success" id="searchRPBtn" style="margin-left: 7%;">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="RP-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                 aria-hidden="true" scrolling="no">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+
+                            </h4>
+                        </div>
+                        <form class="modal-body form-horizontal" role="form" id="addRPForm">
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">省份:</label>
+                                <div class="col-sm-8">
+                                    <select name="provinceid" class="selectpicker form-control" id="formProvince"
+                                            title="省份"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">地级市:</label>
+                                <div class="col-sm-8">
+                                    <select name="cityid" class="selectpicker form-control" id="formCity"
+                                            title="地级市"></select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3 control-label">市、县级市:</label>
+                                <div class="col-sm-8">
+                                    <select name="areaid" class="selectpicker form-control" id="formArea"
+                                            title="市、县级市"></select>
+                                </div>
+                            </div>
+                            <!-- <input type="text" class="hide" name="positionId" value="" /> -->
+                            <input type="text" class="hide" name="carplanId" value=""/>
+                            <input type="text" class="hide" name="orderIds" value=""/>
+                            <input type="text" class="hide" name="trackStatus" value="到站"/>
+                            <button type="reset" class="btn hide" id="resetBtn">
+                                重置
+                            </button>
+                        </form>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-success" id="submitBtn">
+                                提交
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
+            </div>
+        </div>
+        <!-- 物流订单位置追踪     -->
+        <div id="trackPos" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchTPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label">时间:</label> -->
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="createTime" id="createTPTime"
+                                   placeholder="请选择创建时间" style="width:100%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;padding-right: 0px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endTPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="orderId" class="selectpicker form-control" id="orderId"
+                                    title="选择物流id"></select>
+                        </div>
+                        <button type="button" class="btn btn-success" id="searchTPBtn" style="margin-left: 7%;">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="TP-table"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
+<script type="text/javascript">
+    require(['../../assets/js/common.js'], function () {
+        require(['app/position/position']);
+    });
+</script>
+</body>
+
+</html>

@@ -215,4 +215,23 @@ public class UserController extends BaseController {
         }
         return jsonResult;
     }
+
+    @ResponseBody
+    @RequestMapping("searchMyUser")
+    public JsonResult searchMyUser() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            User current = (User) request.getSession().getAttribute(Constant.CURRENR_USER);
+            int userId = current.getUserId();
+            params.put("userId", userId);
+            List<Map<String, Object>> uList = userService.searchMyUser(params);
+            jsonResult = new JsonResult(true, "查询成功", uList);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, e.getMessage());
+        }
+        return jsonResult;
+    }
+
 }

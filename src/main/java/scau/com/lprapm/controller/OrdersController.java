@@ -9,6 +9,7 @@ import scau.com.lprapm.common.Constant;
 import scau.com.lprapm.common.JsonResult;
 import scau.com.lprapm.entity.*;
 import scau.com.lprapm.service.inter.OrdersService;
+import scau.com.lprapm.service.inter.PositionService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -24,6 +25,8 @@ public class OrdersController extends BaseController {
     OrdersService ordersService;
     @Autowired
     HttpServletRequest request;
+    @Autowired
+    PositionService positionService;
 
     /**
      * 添加采购订单
@@ -80,8 +83,11 @@ public class OrdersController extends BaseController {
         try {
             User current = (User) request.getSession().getAttribute(Constant.CURRENR_USER);
             int userId = current.getUserId();
+            String roleName = ordersService.searchRoleName(userId);
             Map<String, Object> params = super.getParamMap();
-            params.put("userId", userId);
+            if (roleName.equalsIgnoreCase("普通用户")) {
+                params.put("userId", userId);
+            }
             List<Map<String, Object>> poList = ordersService.searchOrders(params);
             jsonResult = new JsonResult(true, "查询成功", poList);
         } catch (Exception e) {
@@ -145,6 +151,7 @@ public class OrdersController extends BaseController {
         try {
             Map<String, Object> params = super.getParamMap();
             ordersService.askOrders(params);
+            ordersService.askSP(params);
             jsonResult = new JsonResult(true, "发起询价成功");
         } catch (Exception e) {
             e.printStackTrace();
@@ -153,6 +160,25 @@ public class OrdersController extends BaseController {
         return jsonResult;
     }
 
+    /**
+     * 发起询价
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("askContact")
+    public JsonResult askContact() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            ordersService.askOrders(params);
+            jsonResult = new JsonResult(true, "发起合同成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "发起合同失败");
+        }
+        return jsonResult;
+    }
     /**
      * 采购询价管理 撤销采购询价
      *
@@ -272,6 +298,36 @@ public class OrdersController extends BaseController {
         } catch (Exception e) {
             e.printStackTrace();
             jsonResult = new JsonResult(false, "撤销失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("queryOrders")
+    public JsonResult queryOrders() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            List<Map<String, Object>> list = ordersService.queryOrders(params);
+            jsonResult = new JsonResult(true, "查询成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "查询失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("queryTrack")
+    public JsonResult queryTrack() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            List<Map<String, Object>> list = positionService.queryTrack(params);
+            jsonResult = new JsonResult(true, "查询成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "查询失败");
         }
         return jsonResult;
     }

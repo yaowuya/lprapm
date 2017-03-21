@@ -26,6 +26,8 @@ public class OrdersServiceImpl implements OrdersService {
     PurPriceMapper purPriceMapper;
     @Autowired
     LogPriceMapper logPriceMapper;
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
     public void insertOrders(Orders orders, Goods goods, Receipt receipt, OrderExam orderExam, PurPrice purPrice, LogPrice logPrice) {
@@ -130,6 +132,16 @@ public class OrdersServiceImpl implements OrdersService {
     @Override
     public void revokeSC(Map<String, Object> params) {
         ordersMapper.revokeSC(params);
+    }
+
+    @Override
+    public List<Map<String, Object>> queryOrders(Map<String, Object> params) {
+        return ordersMapper.queryOrders(params);
+    }
+
+    @Override
+    public String searchRoleName(int userId) {
+        return userRoleMapper.searchRoleName(userId);
     }
 
 }

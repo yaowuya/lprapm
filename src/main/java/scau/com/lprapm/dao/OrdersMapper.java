@@ -45,7 +45,9 @@ public interface OrdersMapper {
             " where o.goods_id=g.goods_id and " +
             " o.receipt_id=r.receipt_id and o.pur_id=pp.pur_id and o.oe_id=oe.oe_id " +
             " and o.log_id=lp.log_id " +
-            " and user_id=#{userId}" +
+            " <if test=\"userId != null and userId != '' \">" +
+            "    and user_id = #{userId} " +
+            " </if>" +
             " <if test=\"createTime != null and createTime != '' \">" +
             "    and <![CDATA[create_time >= #{createTime}]]>" +
             " </if>" +
@@ -127,4 +129,21 @@ public interface OrdersMapper {
             "where order_id = #{orderId,jdbcType=INTEGER}" +
             "</script>")
     void revokeSC(Map<String, Object> params);
+
+    @Update("<script>" +
+            "update log_price " +
+            "set log_state = '已出发' " +
+            "where log_id in (select o.log_id from orders o where order_id = #{orderId})" +
+            "</script>")
+    void updateLogState(Map<String, Object> map);
+
+    @Select("<script>" +
+            "select order_id orderId,user_name userName " +
+            " from orders o " +
+            " where 1=1 " +
+            " <if test=\"userName != null and userName != '' \">" +
+            "   and user_name = #{userName,jdbcType=VARCHAR} " +
+            " </if>" +
+            "</script>")
+    List<Map<String, Object>> queryOrders(Map<String, Object> params);
 }

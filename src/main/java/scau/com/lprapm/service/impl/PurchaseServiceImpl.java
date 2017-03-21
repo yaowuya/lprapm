@@ -59,7 +59,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         purPrice.setPurDept(null);
         purPrice.setPurPerson(null);
         purPrice.setPurPrice(null);
-        purPrice.setPurState("否");
+        purPrice.setPurState("审核中");
         purPriceMapper.updateByPrimaryKey(purPrice);
     }
 

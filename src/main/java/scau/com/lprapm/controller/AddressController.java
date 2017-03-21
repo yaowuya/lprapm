@@ -14,7 +14,7 @@ import java.util.Map;
  * Created by Administrator on 2017/3/15.
  */
 @Controller
-@RequestMapping("address")
+@RequestMapping("/address")
 public class AddressController extends BaseController {
     @Autowired
     AddressService addressService;

@@ -84,4 +84,34 @@ public class CarSController extends BaseController {
         }
         return jsonResult;
     }
+
+    @ResponseBody
+    @RequestMapping("searchPOS")
+    public JsonResult searchPOS() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            List<Map<String, Object>> list = carSService.searchPOS(params);
+            jsonResult = new JsonResult(true, "查询成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "查询失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("surePOS")
+    public JsonResult surePOS() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            carSService.surePOS(params);
+            jsonResult = new JsonResult(true, "出车成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "出车失败");
+        }
+        return jsonResult;
+    }
 }

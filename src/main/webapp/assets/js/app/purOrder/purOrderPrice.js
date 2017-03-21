@@ -83,7 +83,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                         url: '/orders/askOrders',
                         data: {
                             "orderId": row.orderId,
-                            "isAskPur": "是"
+                            "isAskPur": "是",
+                            "purId": row.purId,
+                            "purState": "审核中"
                         },
                         success: function (response) {
                             if (response.success) {

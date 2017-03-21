@@ -102,4 +102,9 @@ public class UserServiceImpl implements UserService {
     public List<Map<String, Object>> searchUserByName(Map<String, Object> params) {
         return userMapper.searchUserByName(params);
     }
+
+    @Override
+    public List<Map<String, Object>> searchMyUser(Map<String, Object> params) {
+        return userMapper.searchMyUser(params);
+    }
 }

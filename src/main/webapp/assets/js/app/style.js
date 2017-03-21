@@ -8,7 +8,7 @@ define(['ajaxPackage',
         var menu = $("#menu"),
             leftMenus = [];
         Lprapm.Ajax.request({
-            url: '/menu/searchMenus',
+            url: '/menu/searchLeftMenu',
             data: '',
             async: false,
             success: function (response) {

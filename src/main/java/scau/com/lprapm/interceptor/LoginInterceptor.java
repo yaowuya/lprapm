@@ -44,6 +44,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 //            if(url.contains("index")) return true;
 //            if(url.contains("searchLeftMenu")) return true;
 //            if(url.contains("logOut")) return true;
+//            if(url.contains("address")) return true;
 //            List<Map<String,Object>> menuList=(List<Map<String,Object>>)request.getSession().getAttribute("menuList");
 ////            System.out.println("menuList:"+menuList);
 //            for(Map<String,Object> map:menuList){

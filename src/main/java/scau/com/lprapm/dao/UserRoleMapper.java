@@ -1,7 +1,10 @@
 package scau.com.lprapm.dao;
 
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 import scau.com.lprapm.entity.UserRole;
 
+@Repository
 public interface UserRoleMapper {
     int deleteByPrimaryKey(Integer urId);
 
@@ -16,4 +19,8 @@ public interface UserRoleMapper {
     int updateByPrimaryKey(UserRole record);
 
     int updateByRoleId(int roleId);
+
+    @Select("select role_name roleName from user_role natural join role " +
+            "where user_id=#{userId}")
+    String searchRoleName(int userId);
 }

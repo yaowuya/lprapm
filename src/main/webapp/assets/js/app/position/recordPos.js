@@ -1,15 +1,63 @@
 define(['ajaxPackage', 'timePicker', 'select',
+        'package/address/selectProvince',
+        'package/address/selectCity',
+        'package/address/selectArea',
         'table', 'jqueryConfirm'
     ],
-    function (Lprapm, timePicker, Select) {
-        var outCar = function () {
-            var $table = $(".OC-table"),
-                tableColumn = [];
-            timePicker.picker("#createOCTime", "#endOCTime");
+    function (Lprapm, timePicker, Select, SelectPro, SelectCity, SelectArea) {
+        var recordPos = function () {
+            var $table = $(".RP-table"),
+                $modal = $("#myModal"),
+                $addForm = $("#addRPForm"),
+                $formPro = $("#formProvince"),
+                $formCity = $("#formCity"),
+                $formArea = $("#formArea"),
+                tableColumn = [],
+                selectOption = {
+                    isSearch: true, //是否显示搜索框
+                    multiple: false, //是否多选
+                    width: '100%', //长度
+                    actionBox: true, //是否展示全选、取消按钮
+                    title: '请选择...', //默认提示
+                    dataSize: 5, //最多显示个数，数据多时会有滚动条
+                };
+            timePicker.picker("#createRPTime", "#endRPTime");
+            SelectPro.selectList.option($formPro, selectOption, []);
+            SelectCity.selectList.option($formCity, selectOption, []);
+            SelectArea.selectList.option($formArea, selectOption, []);
+
+            $formPro.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                var provinceVal = $(this).val();
+                SelectCity.selectList.option($formCity, selectOption, [], {
+                    "provinceid": provinceVal
+                });
+            });
+            $formCity.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($formPro.val() == null || $formPro.val() == "") {
+                    SelectCity.selectList.select($formCity, []);
+                } else {
+                    var cityVal = $(this).val();
+                    SelectArea.selectList.option($formArea, selectOption, [], {
+                        "cityid": cityVal
+                    });
+                }
+            });
+            $formArea.on('change', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                if ($formCity.val() == null || $formCity.val() == "") {
+                    SelectArea.selectList.select($formArea, []);
+                }
+            });
+
             var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
                 'click .edit': function (event, value, row, index) {
                     // console.log("remove:", row);
-                    if (row.carnExamState == "通过") {
+                    if (row.carnExamState == "出发") {
                         $.confirm({
                             closeIcon: true,
                             closeIconClass: 'fa fa-close',
@@ -23,27 +71,13 @@ define(['ajaxPackage', 'timePicker', 'select',
                                 确定: {
                                     btnClass: 'btn-success',
                                     action: function () {
-                                        Lprapm.Ajax.request({
-                                            url: '/carscheme/surePOS',
-                                            data: {
-                                                "carplanId": row.carplanId,
-                                                "orderIds": row.orderIds,
-                                                "carnId": row.carnId
-                                            },
-                                            success: function (response) {
-                                                if (response.success) {
-                                                    $table.bootstrapTable("refresh");
-                                                } else {
-                                                    $.dialog('出车失败');
-                                                }
-                                            }
-                                        });
+                                        showModal(row);
                                     }
                                 },
                             }
                         });
                     } else {
-                        $.dialog("已经出车，不能再次登记");
+                        $.dialog("已经登记，不能再次登记");
                     }
                 }
             }
@@ -64,8 +98,8 @@ define(['ajaxPackage', 'timePicker', 'select',
 
             function operateFormatter(value, row, index) {
                 return [
-                    '<a class="edit" href="javascript:void(0)" title="出车登记" style="color:red;">',
-                    '出车登记',
+                    '<a class="edit" href="javascript:void(0)" title="进站登记" style="color:red;">',
+                    '进站登记',
                     '</a> '
                 ].join("");
             }
@@ -166,7 +200,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                     }); //searchParams返回的是参数格式  return {N_id:abc}
                     return params;
                 },
-                url: '/carscheme/searchPOS', //请求接口
+                url: '/position/queryPOS', //请求接口
                 columns: getColumns(tableColumn), //列数据,也可以通过函数来获取
                 detailView: true, //详细查看按钮
                 detailFormatter: detailFormatter, //显示详细查看数据
@@ -217,18 +251,18 @@ define(['ajaxPackage', 'timePicker', 'select',
             }
 
             /*点击查询按钮*/
-            $("#searchOCBtn").click(function (e) {
+            $("#searchRPBtn").click(function (e) {
                 e.preventDefault();
                 // console.log(searchParams());
                 $table.bootstrapTable('refresh', {
-                    url: '/carscheme/searchPOS',
+                    url: '/position/queryPOS',
                     query: searchParams()
                 });
             });
 
             function searchParams() {
                 var sendParams = {},
-                    selectData = $("#searchOCForm").find(':input');
+                    selectData = $("#searchRPForm").find(':input');
                 $.each(selectData, function (index, val) {
                     /* iterate through array or object */
                     sendParams[$(this).attr("name")] = $.trim($(this).val());
@@ -236,9 +270,53 @@ define(['ajaxPackage', 'timePicker', 'select',
                 return sendParams;
             }
 
+            function showModal(row) {
+                $("#myModalLabel").text("到站记录");
+                $.each(row, function (index, val) {
+                    /* iterate through array or object */
+                    if (index == "positionId") {
+                        $addForm.find('input[name="' + index + '"]').val(val);
+                    } else if (index == "carplanId") {
+                        $addForm.find('input[name="' + index + '"]').val(val);
+                    } else if (index == "orderIds") {
+                        $addForm.find('input[name="' + index + '"]').val(val);
+                    }
+                });
+                $modal.modal("show");
+            }
+
+            /*关闭重置表单*/
+            $modal.on('hide.bs.modal', function () {
+                $("#resetBtn").click();
+                SelectPro.selectList.select($formPro, []);
+                SelectCity.selectList.select($formCity, []);
+                SelectArea.selectList.select($formArea, []);
+            });
+            $("#submitBtn").click(function (event) {
+                /* 点击提交按钮 */
+                submitData();
+            });
+
+            function submitData() {
+                var formData = {};
+                formData = $addForm.serializeArray();
+                Lprapm.Ajax.request({
+                    url: '/position/insertPOS',
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            $table.bootstrapTable("refresh");
+                            $modal.modal('hide');
+                        } else {
+                            $.dialog(response.messages);
+                        }
+                    }
+                });
+            }
+
         }
 
         return {
-            "outCar": outCar
+            "recordPos": recordPos
         }
     })

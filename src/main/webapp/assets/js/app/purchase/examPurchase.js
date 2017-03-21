@@ -20,7 +20,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 },
                 'click .remove': function (event, value, row, index) {
                     // console.log("remove:", row);
-                    if (row.purState == "已回复") {
+                    if (row.purState == "已回复" || row.purState == "否") {
                         $.confirm({
                             closeIcon: true,
                             closeIconClass: 'fa fa-close',
@@ -69,7 +69,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }
 
             function editTable(row) {
-                if (row.purState == "否") {
+                if (row.purState == "审核中") {
                     $("#addEPForm").find('input[name="purPerson"]').val(username);
                     $("#myModalLabel").text("修改");
                     $.each(row, function (index, value) {

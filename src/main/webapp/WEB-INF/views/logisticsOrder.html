@@ -387,7 +387,39 @@
             </div>
         </div>
         <!-- 订单跟踪 -->
-        <div id="orderTrack" class="tab-pane fade"></div>
+        <div id="orderTrack" class="tab-pane fade">
+            <div class="row content-main-btn">
+                <form class="form-horizontal" role="form" id="searchTPForm" style="padding-left: 11px;">
+                    <div class="form-group">
+                        <!-- <label class="col-sm-1 control-label">时间:</label> -->
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="createTime" id="createTPTime"
+                                   placeholder="请选择创建时间" style="width:100%;">
+                        </div>
+                        <div class="col-sm-1 text-center" style="padding-top: 9px;padding-right: 0px;">
+                            <b>到</b>
+                        </div>
+                        <div class="col-sm-2">
+                            <input class="form-control Time" type="text" name="endTime" id="endTPTime"
+                                   placeholder="请选择创建时间">
+                        </div>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
+                        </div>
+                        <div class="col-sm-3">
+                            <select name="orderId" class="selectpicker form-control" id="orderId"
+                                    title="选择物流id"></select>
+                        </div>
+                        <button type="button" class="btn btn-success" id="searchTPBtn" style="margin-left: 7%;">
+                            <span class="fa fa-fw fa-search"></span> 查询
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="row content-main-table">
+                <table class="TP-table"></table>
+            </div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="../../assets/js/plugins/require.js"></script>

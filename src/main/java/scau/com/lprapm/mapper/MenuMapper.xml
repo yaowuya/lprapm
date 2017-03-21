@@ -101,8 +101,8 @@
   <select id="searchMenus" resultType="java.util.LinkedHashMap" parameterType="map">
     select
     m.menu_id menuId, m.menu_name menuName, m.menu_i_class menuIClass,
-    m.menu_href menuHref,rm.rm_id rmId,r.role_id roleId,r.role_name roleName
-    from menu m NATURAL JOIN role_menu rm NATURAL JOIN role r
+      m.menu_href menuHref
+      from menu m
     where 1=1
     <if test="menuName != null and menuName != '' ">
       and menu_name LIKE CONCAT('%',#{menuName},'%')

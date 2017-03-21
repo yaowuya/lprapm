@@ -332,31 +332,44 @@ define(['ajaxPackage', 'timePicker', 'select',
                 var myflag = false;
                 $.each(selectTable, function (index, val) {
                     /* iterate through array or object */
-                    if (p && !c && !a) {
-                        if (val.receiptProvinceid != $province.val() || val.provinceid == $province.val()) {
-                            $.dialog("请先选择接收地址进行查询");
-                            myflag = true;
-                            resetData();
-                            return false;
-                        }
-                    } else if (p && c & !a) {
-                        if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val()) {
-                            $.dialog("请先选择接收地址进行查询");
-                            myflag = true;
-                            resetData();
-                            return false;
-                        }
-                    } else if (p && c && a) {
+                    // if (p && !c && !a) {
+                    //     if (val.receiptProvinceid != $province.val() || val.provinceid == $province.val()) {
+                    //         $.dialog("请先选择接收地址进行查询");
+                    //         myflag = true;
+                    //         resetData();
+                    //         return false;
+                    //     }
+                    // } else if (p && c & !a) {
+                    //     if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val()) {
+                    //         $.dialog("请先选择接收地址进行查询");
+                    //         myflag = true;
+                    //         resetData();
+                    //         return false;
+                    //     }
+                    // } else if (p && c && a) {
+                    //     if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val() || val.receiptAreaid != $area.val()) {
+                    //         $.dialog("请先选择接收地址进行查询");
+                    //         myflag = true;
+                    //         resetData();
+                    //         return false;
+                    //     }
+                    // } else if (!p && !c && !a) {
+                    //     alert("message");
+                    //     $.dialog("请先选择接收地址进行查询");
+                    //     myflag = true;
+                    //     return false;
+                    // }
+                    if (p && c && a) {
                         if (val.receiptProvinceid != $province.val() || val.receiptCityid != $city.val() || val.receiptAreaid != $area.val()) {
                             $.dialog("请先选择接收地址进行查询");
                             myflag = true;
                             resetData();
                             return false;
                         }
-                    } else if (!p && !c && !a) {
-                        alert("message");
+                    } else {
                         $.dialog("请先选择接收地址进行查询");
                         myflag = true;
+                        resetData();
                         return false;
                     }
                     if (!myflag) {

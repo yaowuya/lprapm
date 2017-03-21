@@ -92,28 +92,50 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             timePicker.picker("#addPOTime", null);
 
             submitBtn.click(function (event) {
+                event.preventDefault;
                 event.stopPropagation;
-                /* Act on the event */
-                var form = $(this).closest('form');
-                getAddress(form);
-                var formData = form.serializeArray();
-                // console.log(formData);
-                Lprapm.Ajax.request({
-                    url: '/orders/insertOrders',
-                    data: formData,
-                    success: function (response) {
-                        if (response.success) {
-                            console.log("插入成功");
-                            $('button.btn-resetPO').click();
-                        } else {
-                            $.dialog(response.messages);
+                var p = $province.val() == null ? false : true,
+                    c = $city.val() == null ? false : true,
+                    a = $area.val() == null ? false : true;
+                rp = $receiptProvince.val() == null ? false : true,
+                    rc = $receiptCity.val() == null ? false : true,
+                    ra = $receiptArea.val() == null ? false : true;
+
+                if (p && c && a && rp && rc && ra) {
+                    /* Act on the event */
+                    var form = $(this).closest('form');
+                    var formData = form.serializeArray();
+                    // console.log(formData);
+                    Lprapm.Ajax.request({
+                        url: '/orders/insertOrders',
+                        data: formData,
+                        success: function (response) {
+                            if (response.success) {
+                                console.log("插入成功");
+                                $('button.btn-resetPO').click();
+                            } else {
+                                $.dialog(response.messages);
+                            }
                         }
-                    }
-                });
+                    });
+                } else {
+                    $.dialog("请填好地址");
+                }
+
             });
 
-            function getAddress(form) {
-            }
+            $('button.btn-resetPO').on('click', function (event) {
+                event.preventDefault();
+                /* Act on the event */
+                Select.selectList.select($province, []);
+                Select.selectList.select($city, []);
+                Select.selectList.select($area, []);
+                Select.selectList.select($receiptProvince, []);
+                Select.selectList.select($receiptCity, []);
+                Select.selectList.select($receiptArea, []);
+                window.location.reload();
+                // $("#addPurOrder form").find(':input').val("");
+            });
         }
 
         return {

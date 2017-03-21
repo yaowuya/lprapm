@@ -118,6 +118,10 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 visible: true,
                 title: '订单地址'
             }, {
+                field: 'userName',
+                visible: false,
+                title: '用户名称'
+            }, {
                 field: 'receiptName',
                 visible: true,
                 title: '收货人名称'

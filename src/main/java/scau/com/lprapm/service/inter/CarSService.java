@@ -13,4 +13,8 @@ public interface CarSService {
     List<Map<String, Object>> searchCarS(Map<String, Object> params);
 
     void updateCarS(CarPlan carPlan, CarNeed carNeed);
+
+    void surePOS(Map<String, Object> params);
+
+    List<Map<String, Object>> searchPOS(Map<String, Object> params);
 }

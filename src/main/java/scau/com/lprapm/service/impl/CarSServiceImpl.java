@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scau.com.lprapm.dao.CarNeedMapper;
 import scau.com.lprapm.dao.CarPlanMapper;
+import scau.com.lprapm.dao.OrdersMapper;
 import scau.com.lprapm.dao.PositionTrackingMapper;
 import scau.com.lprapm.entity.CarNeed;
 import scau.com.lprapm.entity.CarPlan;
@@ -23,6 +24,8 @@ public class CarSServiceImpl implements CarSService {
     CarPlanMapper carPlanMapper;
     @Autowired
     CarNeedMapper carNeedMapper;
+    @Autowired
+    OrdersMapper ordersMapper;
     @Autowired
     PositionTrackingMapper positionTrackingMapper;
 
@@ -51,5 +54,26 @@ public class CarSServiceImpl implements CarSService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void surePOS(Map<String, Object> params) {
+        Map<String, Object> map = new LinkedHashMap<>();
+        CarNeed carNeed = new CarNeed();
+        int carnId = Integer.parseInt(params.get("carnId").toString());
+        carNeed.setCarnId(carnId);
+        carNeed.setCarnExamState("出发");
+        carNeedMapper.updateByPrimaryKeySelective(carNeed);
+        String[] orderIds = params.get("orderIds").toString().split(",");
+        for (String str : orderIds) {
+            int id = Integer.parseInt(str);
+            map.put("orderId", id);
+            ordersMapper.updateLogState(map);
+        }
+    }
+
+    @Override
+    public List<Map<String, Object>> searchPOS(Map<String, Object> params) {
+        return carPlanMapper.searchPOS(params);
     }
 }

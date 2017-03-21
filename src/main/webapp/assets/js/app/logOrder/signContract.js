@@ -69,7 +69,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             function editTable(row) {
                 if (row.logState == "已回复") {
                     Lprapm.Ajax.request({
-                        url: '/orders/askOrders',
+                        url: '/orders/askContact',
                         data: {
                             "orderId": row.orderId,
                             "isSure": "是"

@@ -118,6 +118,7 @@ public class IpAddress {
     public static Map<String, Object> getAddress() throws IOException {
         Map<String, Object> map = new LinkedHashMap<>();
         String ip = getPublicIP();
+//        System.out.println("ip:-----"+ip);
         String url = "http://api.map.baidu.com/location/ip?ak=4DXVpAggWWfeCYqvLCtccWsYaP1ise7B&ip=" + ip + "&coor=bd09ll";
         JSONObject json = readJsonFromUrl(url);
         //纬度坐标

@@ -30,4 +30,8 @@ public interface OrdersService {
     void askLOP(Map<String, Object> params);
 
     void revokeSC(Map<String, Object> params);
+
+    List<Map<String, Object>> queryOrders(Map<String, Object> params);
+
+    String searchRoleName(int userId);
 }

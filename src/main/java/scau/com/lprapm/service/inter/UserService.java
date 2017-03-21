@@ -22,4 +22,6 @@ public interface UserService {
     int deleteUser(int userId, int urId);
 
     List<Map<String,Object>> searchUserByName(Map<String, Object> params);
+
+    List<Map<String, Object>> searchMyUser(Map<String, Object> params);
 }
