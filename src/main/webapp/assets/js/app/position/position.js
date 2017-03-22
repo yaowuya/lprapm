@@ -10,10 +10,10 @@ define(['ajaxPackage',
             /* Act on the event */
             var ahref = $(this).attr('href').substring(1);
             if (ahref == "recordPos") {
-                /*配车计划*/
+                /*到站记录*/
                 RecordPos.recordPos();
             } else if (ahref == "trackPos") {
-                /*出车管理*/
+                /*物流订单位置追踪*/
                 TrackPos.trackPos();
             } else {
                 console.log("多余的li");

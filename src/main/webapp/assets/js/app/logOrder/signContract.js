@@ -121,7 +121,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             tableColumn = [{
                 field: 'orderId',
                 visible: true,
-                title: '采购订单id',
+                title: '物流订单编号',
             }, {
                 field: 'goodsName',
                 visible: true,
@@ -189,7 +189,7 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
             }, {
                 field: 'logState',
                 visible: true,
-                title: '询价回复状态'
+                title: '物流回复状态'
             }, {
                 field: 'logDept',
                 visible: false,
@@ -228,6 +228,8 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 singleSelect: false, //设置True 将禁止多选
                 striped: true, //设置隔行变色
                 clickToSelect: true, //设置true 将在点击行时，自动选择rediobox 和 checkbox
+                classes: "table table-no-bordered",
+                rowStyle: rowStyle,
                 sortable: true, //是否启用排序
                 sortOrder: 'asc', //定义排序方式 'asc' 或者 'desc'
                 sortName: 'orderId', //定义排序列,通过url方式获取数据填写字段名，否则填写下标
@@ -271,6 +273,15 @@ define(['ajaxPackage', 'timePicker', 'table', 'jqueryConfirm'],
                 return columns;
             }
 
+            function rowStyle(row, index) {
+                var classes = ['active', 'success', 'info', 'warning', 'danger'];
+                if (index % 2 === 0 && index / 2 < classes.length) {
+                    return {
+                        classes: classes[index / 2]
+                    };
+                }
+                return {};
+            }
             function detailFormatter(index, row) {
                 var html = [];
                 $.each(tableColumn, function (index, val) {

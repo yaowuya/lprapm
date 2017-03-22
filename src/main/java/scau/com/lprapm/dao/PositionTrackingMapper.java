@@ -50,6 +50,9 @@ public interface PositionTrackingMapper {
             " <if test=\"userName != null and userName != '' \">" +
             "    and o.user_name = #{userName} " +
             " </if>" +
+            " <if test=\"userId != null and userId != '' \">" +
+            "    and o.user_id = #{userId} " +
+            " </if>" +
             " <if test=\"orderId != null and orderId != '' \">" +
             "    and pt.order_id = #{orderId} " +
             " </if>" +

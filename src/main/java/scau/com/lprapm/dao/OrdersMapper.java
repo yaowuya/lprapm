@@ -48,6 +48,9 @@ public interface OrdersMapper {
             " <if test=\"userId != null and userId != '' \">" +
             "    and user_id = #{userId} " +
             " </if>" +
+            " <if test=\"userName != null and userName != '' \">" +
+            "    and user_name like concat('%',#{userName},'%') " +
+            " </if>" +
             " <if test=\"createTime != null and createTime != '' \">" +
             "    and <![CDATA[create_time >= #{createTime}]]>" +
             " </if>" +

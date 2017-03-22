@@ -2,6 +2,7 @@ package scau.com.lprapm.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import scau.com.lprapm.common.Constant;
 import scau.com.lprapm.dao.CarNeedMapper;
 import scau.com.lprapm.dao.CarPlanMapper;
 import scau.com.lprapm.dao.OrdersMapper;
@@ -11,6 +12,7 @@ import scau.com.lprapm.entity.CarPlan;
 import scau.com.lprapm.entity.PositionTracking;
 import scau.com.lprapm.service.inter.CarSService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,8 @@ public class CarSServiceImpl implements CarSService {
     OrdersMapper ordersMapper;
     @Autowired
     PositionTrackingMapper positionTrackingMapper;
+    @Autowired
+    HttpServletRequest request;
 
     @Override
     public List<Map<String, Object>> searchCarS(Map<String, Object> params) {
@@ -37,20 +41,9 @@ public class CarSServiceImpl implements CarSService {
     @Override
     public void updateCarS(CarPlan carPlan, CarNeed carNeed) {
         try {
-            String[] orderIds = carPlan.getOrderIds().split(",");
-            Map<String, Object> map = new LinkedHashMap<>();
-            map.put("provinceid", carPlan.getProvinceid());
-            map.put("cityid", carPlan.getCityid());
-            map.put("areaid", carPlan.getAreaid());
-            map.put("trackStatus", "出发");
             carNeedMapper.insertCarNeed(carNeed);
             carPlan.setCarnId(carNeed.getCarnId());
             carPlanMapper.insertCarPlan(carPlan);
-            map.put("carplanId", carPlan.getCarplanId());
-            for (String str : orderIds) {
-                map.put("orderId", Integer.parseInt(str));
-                positionTrackingMapper.insertData(map);
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,16 +52,23 @@ public class CarSServiceImpl implements CarSService {
     @Override
     public void surePOS(Map<String, Object> params) {
         Map<String, Object> map = new LinkedHashMap<>();
+        Map<String, Object> addrMap = (Map) request.getSession().getAttribute(Constant.CURRENR_ADDR);
         CarNeed carNeed = new CarNeed();
         int carnId = Integer.parseInt(params.get("carnId").toString());
         carNeed.setCarnId(carnId);
         carNeed.setCarnExamState("出发");
         carNeedMapper.updateByPrimaryKeySelective(carNeed);
+        map.put("provinceid", addrMap.get("provinceid"));
+        map.put("cityid", addrMap.get("cityid"));
+        map.put("areaid", addrMap.get("areaid"));
+        map.put("carnId", carnId);
+        map.put("trackStatus", "出发");
         String[] orderIds = params.get("orderIds").toString().split(",");
         for (String str : orderIds) {
             int id = Integer.parseInt(str);
             map.put("orderId", id);
             ordersMapper.updateLogState(map);
+            positionTrackingMapper.insertData(map);
         }
     }
 

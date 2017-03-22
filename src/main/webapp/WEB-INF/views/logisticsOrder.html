@@ -407,8 +407,7 @@
                             <input type="text" class="form-control" name="goodsName" placeholder="请输入货物名称">
                         </div>
                         <div class="col-sm-3">
-                            <select name="orderId" class="selectpicker form-control" id="orderId"
-                                    title="选择物流id"></select>
+                            <input type="text" class="form-control" name="userName" placeholder="请输入用户名称">
                         </div>
                         <button type="button" class="btn btn-success" id="searchTPBtn" style="margin-left: 7%;">
                             <span class="fa fa-fw fa-search"></span> 查询
@@ -418,6 +417,31 @@
             </div>
             <div class="row content-main-table">
                 <table class="TP-table"></table>
+            </div>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="OTModal" tabindex="-1" role="dialog" aria-labelledby="OTModalLabel"
+                 aria-hidden="true" scrolling="no">
+                <div class="modal-dialog" style="width: 880px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="OTModalLabel">
+                                物流订单地址详情
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <table class="OT-table"></table>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal -->
             </div>
         </div>
     </div>

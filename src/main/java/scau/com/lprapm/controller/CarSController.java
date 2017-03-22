@@ -38,12 +38,7 @@ public class CarSController extends BaseController {
     public JsonResult searchAddress() {
         JsonResult jsonResult = null;
         try {
-            Map<String, Object> map = (Map) request.getSession().getAttribute(Constant.CURRENR_ADDR);
-            String str = "";
-            str = str + map.get("province") + ",";
-            str = str + map.get("city") + ",";
-            str = str + map.get("area") + ",";
-            str = str + map.get("street");
+            String str = getLocationAddr();
             jsonResult = new JsonResult(true, "查询地址成功", str);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,6 +47,15 @@ public class CarSController extends BaseController {
         return jsonResult;
     }
 
+    public String getLocationAddr() {
+        Map<String, Object> map = (Map) request.getSession().getAttribute(Constant.CURRENR_ADDR);
+        String str = "";
+        str = str + map.get("province") + ",";
+        str = str + map.get("city") + ",";
+        str = str + map.get("area") + ",";
+        str = str + map.get("street");
+        return str;
+    }
     @ResponseBody
     @RequestMapping("searchCarS")
     public JsonResult searchCarS() {

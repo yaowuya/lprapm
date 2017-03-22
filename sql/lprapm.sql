@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50168
+Source Server Version : 50520
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50168
+Target Server Version : 50520
 File Encoding         : 65001
 
-Date: 2017-03-22 17:51:52
+Date: 2017-03-23 00:46:07
 */
 
 SET FOREIGN_KEY_CHECKS=0;
