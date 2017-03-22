@@ -73,7 +73,9 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 $("#myModalLabel").text("修改");
                 $.each(row, function (index, value) {
                     /* iterate through array or object */
-                    if (index != "oeState") {
+                    if (index == "oeState") {
+                        $('.selectAskPur').selectpicker('val', []);
+                    } else {
                         $addForm.find("input[name=" + index + "]").val(value);
                     }
                 });

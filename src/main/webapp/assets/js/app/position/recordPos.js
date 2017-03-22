@@ -62,8 +62,8 @@ define(['ajaxPackage', 'timePicker', 'select',
                             closeIcon: true,
                             closeIconClass: 'fa fa-close',
                             columnClass: 'small',
-                            title: '出车登记',
-                            content: '确定要出车吗？',
+                            title: '进站登记',
+                            content: '确定要登记吗？',
                             buttons: {
                                 取消: {
                                     btnClass: 'btn-default',

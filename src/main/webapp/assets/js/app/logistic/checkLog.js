@@ -47,7 +47,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                                                     animation: 'rotateYR',
                                                     closeAnimation: 'rotate',
                                                     backgroundDismiss: true,
-                                                    content: response.messages
+                                                    content: "登记成功"
                                                 });
                                             } else {
                                                 $.dialog('登记失败');
@@ -125,7 +125,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }, {
                 field: 'logState',
                 visible: true,
-                title: '询价回复状态'
+                title: '签订合同回复'
             }, {
                 field: 'oeState',
                 visible: true,

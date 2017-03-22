@@ -330,6 +330,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                     a = $area.val() == null ? false : true;
 
                 var myflag = false;
+                var numAttr = "";
                 $.each(selectTable, function (index, val) {
                     /* iterate through array or object */
                     // if (p && !c && !a) {
@@ -365,6 +366,11 @@ define(['ajaxPackage', 'timePicker', 'select',
                             myflag = true;
                             resetData();
                             return false;
+                        } else if (val.logState == "已出发") {
+                            $.dialog("物流已经配车过,请先筛选");
+                            myflag = true;
+                            resetData();
+                            return false;
                         }
                     } else {
                         $.dialog("请先选择接收地址进行查询");
@@ -373,6 +379,9 @@ define(['ajaxPackage', 'timePicker', 'select',
                         return false;
                     }
                     if (!myflag) {
+                        for (var i = 0; i < val.goodsNumber; i++) {
+                            numAttr += val.goodsPerweight + ",";
+                        }
                         selectIds += val.orderId + ",";
                         selectNames += val.goodsName + ",";
                         allWeight += val.goodsNumber * val.goodsPerweight;
@@ -393,6 +402,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                 selectIds = selectIds.substring(0, selectIds.length - 1);
                 selectNames = selectNames.substring(0, selectNames.length - 1);
                 selectUser = selectUser.substring(0, selectUser.length - 1);
+                numAttr = numAttr.substring(0, numAttr.length - 1);
                 $addForm.find(':input[name="orderNames"]').val(selectNames);
                 $addForm.find(':input[name="orderIds"]').val(selectIds);
                 $addForm.find(':input[name="allNumber"]').val(allNum);
@@ -411,11 +421,26 @@ define(['ajaxPackage', 'timePicker', 'select',
                 $("#calculateBtn").click(function (event) {
                     event.preventDefault();
                     event.stopPropagation();
-                    /* Act on the event */
                     var cartype = $("#selectCarT").val();
+
                     if (cartype != null && cartype != "") {
                         var carNum = Math.ceil(allWeight / cartype);
-                        $addForm.find(':input[name="carnNum"]').val(carNum);
+                        $addForm.find(':input[name="carnNum"]').val(Math.ceil(carNum));
+                        // Lprapm.Ajax.request({
+                        //     url: '/carscheme/caculateCar',
+                        //     data: {
+                        //         "numAttr": numAttr,
+                        //         "carType": cartype
+                        //     },
+                        //     success: function(response) {
+                        //         if (response.success) {
+                        //             $addForm.find(':input[name="carnNum"]').val(Math.ceil(response.data));
+                        //         } else {
+                        //             $.dialog(response.messages);
+                        //         }
+                        //     }
+                        // });
+
                     } else {
                         $.dialog("请选择车辆类型");
                     }
