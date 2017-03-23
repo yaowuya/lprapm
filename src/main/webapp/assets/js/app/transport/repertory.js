@@ -172,9 +172,9 @@ define(['ajaxPackage', 'select',
         }
 
         tableColumn = [{
-            field: '仓储id',
+            field: 'repoId',
             visible: true,
-            title: 'repoId'
+            title: '仓储编号'
         }, {
             field: 'provinceid',
             visible: false,

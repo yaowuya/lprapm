@@ -149,9 +149,21 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: '期望送达日期'
             }, {
+                field: 'province',
+                visible: false,
+                title: '订单省份'
+            }, {
+                field: 'city',
+                visible: false,
+                title: '订单地级市'
+            }, {
+                field: 'area',
+                visible: false,
+                title: '订单县级市'
+            }, {
                 field: 'orderAddress',
                 visible: false,
-                title: '订单地址'
+                title: '订单街道地址'
             }, {
                 field: 'receiptName',
                 visible: true,
@@ -161,9 +173,21 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: '收货人电话'
             }, {
+                field: 'receiptProvince',
+                visible: false,
+                title: '收货人省份'
+            }, {
+                field: 'receiptCity',
+                visible: false,
+                title: '收货人地级市'
+            }, {
+                field: 'receiptArea',
+                visible: false,
+                title: '收货人县级市'
+            }, {
                 field: 'receiptAddress',
                 visible: false,
-                title: '收货地址'
+                title: '收货人街道地址'
             }, {
                 field: 'isAskLog',
                 visible: true,

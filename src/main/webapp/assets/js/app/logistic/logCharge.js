@@ -15,10 +15,10 @@ define(['ajaxPackage',
             /* Act on the event */
             var ahref = $(this).attr('href').substring(1);
             if (ahref == "replyLog") {
-                // 采购审核管理
+                // 物流询价回复
                 ReplyLog.replyLog();
             } else if (ahref == "checkLog") {
-                // 发起采购管理
+                // 出货登记
                 CheckLog.checkLog();
             } else {
                 console.log("多余的li");

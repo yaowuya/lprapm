@@ -129,6 +129,7 @@ public class IpAddress {
         String urlStr = "http://api.map.baidu.com/geocoder/v2/?location=" + lat + "," + lng + "&output=json&pois=1&ak=4DXVpAggWWfeCYqvLCtccWsYaP1ise7B";
         String returnStr = getResult(urlStr, "ip=" + ip, "utf-8");
         JSONObject jsStr = new JSONObject(returnStr);
+        System.out.println(jsStr);
         JSONObject result = jsStr.getJSONObject("result");
         JSONObject addressComponent = result.getJSONObject("addressComponent");
         map.put("province", addressComponent.getString("province"));

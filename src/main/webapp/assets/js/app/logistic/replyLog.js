@@ -143,7 +143,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             tableColumn = [{
                 field: 'orderId',
                 visible: true,
-                title: '采购订单id',
+                title: '物流订单编号',
             }, {
                 field: 'goodsName',
                 visible: true,
@@ -169,9 +169,37 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
                 visible: false,
                 title: '期望送达日期'
             }, {
+                field: 'province',
+                visible: false,
+                title: '订单省份'
+            }, {
+                field: 'city',
+                visible: false,
+                title: '订单地级市'
+            }, {
+                field: 'area',
+                visible: false,
+                title: '订单县级市'
+            }, {
                 field: 'orderAddress',
                 visible: false,
-                title: '订单地址'
+                title: '订单街道地址'
+            }, {
+                field: 'receiptProvince',
+                visible: false,
+                title: '收货人省份'
+            }, {
+                field: 'receiptCity',
+                visible: false,
+                title: '收货人地级市'
+            }, {
+                field: 'receiptArea',
+                visible: false,
+                title: '收货人县级市'
+            }, {
+                field: 'receiptAddress',
+                visible: false,
+                title: '收货人街道地址'
             }, {
                 field: 'isAskPur',
                 visible: false,
@@ -195,7 +223,7 @@ define(['ajaxPackage', 'timePicker', 'select', 'table', 'jqueryConfirm'],
             }, {
                 field: 'logPrice',
                 visible: true,
-                title: '采购报价'
+                title: '物流报价'
             }, {
                 field: 'goodsId',
                 visible: false,

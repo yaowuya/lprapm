@@ -25,18 +25,32 @@ public interface OrderExamMapper {
 
     @Select("<script>" +
             "select order_id orderId, o.goods_id goodsId, " +
-            " o.receipt_id receiptId, user_id userId, o.pur_id purId, o.log_id logId,o.oe_id oeId," +
-            " user_name userName, is_pur isPur,is_sure isSure,is_ask_pur isAskPur, " +
-            " is_ask_log isAskLog,create_time createTime, end_time endTime, " +
+            " user_id userId, o.pur_id purId, o.log_id logId,o.oe_id oeId," +
+            " user_name userName, is_pur isPur,is_sure isSure," +
+            " is_ask_pur isAskPur,is_ask_log isAskLog,create_time createTime, end_time endTime, " +
+            " o.provinceid, o.cityid, o.areaid,p.province,c.city,a.area," +
             " order_address orderAddress, goods_name goodsName, " +
             " goods_number goodsNumber, goods_volume goodsVolume, " +
             " goods_perweight goodsPerweight ," +
-            " oe_dept oeDept, oe_person oePerson," +
-            " oe_Reason oeReason, oe_state oeState," +
-            " log_dept logDept,log_person logPerson,log_price logPrice,log_state logState " +
-            " from orders o,goods g,order_exam oe,log_price lp" +
+            " pur_dept purDept, pur_person purPerson," +
+            " pur_price purPrice, pur_state purState," +
+            " oe_dept oeDept,oe_person oePerson,oe_reason Reason,oe_state oeState," +
+            " log_dept logDept,log_person logPerson,log_price logPrice,log_state logState," +
+            " t.* from" +
+            " (select receipt_id receiptId,receipt_name receiptName, receipt_phone receiptPhone, " +
+            " receipt_address receiptAddress, receipt_state receiptState, " +
+            " receipt_provinceid receiptProvinceid, receipt_cityid receiptCityid," +
+            " receipt_areaid receiptAreaid, " +
+            " rp.province receiptProvince,rc.city receiptCity,ra.area receiptArea," +
+            " receipt_time receiptTime  " +
+            "from receipt r,provinces rp,cities rc,areas ra " +
+            "where receipt_provinceid=rp.provinceid and receipt_cityid=rc.cityid and" +
+            " receipt_areaid=ra.areaid) t,orders o,goods g,pur_price pp,order_exam oe," +
+            " log_price lp,provinces p,cities c,areas a " +
             " where o.goods_id=g.goods_id and " +
-            " o.oe_id=oe.oe_id and o.log_id=lp.log_id " +
+            " o.receipt_id=t.receiptId and o.pur_id=pp.pur_id and o.oe_id=oe.oe_id " +
+            " and o.log_id=lp.log_id and o.provinceid=p.provinceid and " +
+            " o.cityid=c.cityid and o.areaid=a.areaid " +
             " <if test=\"createTime != null and createTime != '' \">" +
             "    and <![CDATA[create_time >= #{createTime}]]>" +
             " </if>" +

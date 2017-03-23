@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : mysql
-Source Server Version : 50520
+Source Server Version : 50168
 Source Host           : localhost:3306
 Source Database       : lprapm
 
 Target Server Type    : MYSQL
-Target Server Version : 50520
+Target Server Version : 50168
 File Encoding         : 65001
 
-Date: 2017-03-23 00:46:07
+Date: 2017-03-23 18:09:56
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -3228,15 +3228,15 @@ CREATE TABLE `car_need` (
   `carn_exam_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `car_ids` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`carn_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='车辆需求信息';
 
 -- ----------------------------
 -- Records of car_need
 -- ----------------------------
-INSERT INTO `car_need` VALUES ('5', '6000', '1', '出发', null, null, null);
-INSERT INTO `car_need` VALUES ('6', '14000', '1', '出发', null, null, null);
-INSERT INTO `car_need` VALUES ('7', '6000', '9', '出发', null, null, null);
-INSERT INTO `car_need` VALUES ('8', '6000', '2', '出发', null, null, null);
+INSERT INTO `car_need` VALUES ('13', '1800', '8', '到站', null, null, null);
+INSERT INTO `car_need` VALUES ('14', '6000', '12', '到站', null, null, null);
+INSERT INTO `car_need` VALUES ('15', '14000', '6', '到站', null, null, null);
+INSERT INTO `car_need` VALUES ('16', '6000', '13', '到站', null, null, null);
 
 -- ----------------------------
 -- Table structure for `car_plan`
@@ -3258,15 +3258,15 @@ CREATE TABLE `car_plan` (
   `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `carplan_time` date DEFAULT NULL,
   PRIMARY KEY (`carplan_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='配车方案';
 
 -- ----------------------------
 -- Records of car_plan
 -- ----------------------------
-INSERT INTO `car_plan` VALUES ('4', '36', '冰冰', '5', '5328', '12', '33', '运输部', '换换', 'test', '440000', '440800', '440882', '2017-03-20');
-INSERT INTO `car_plan` VALUES ('5', '48', '熊肉', '6', '3630', '55', '44', '运输部', '巨鬼王', 'test', '440000', '440800', '440825', '2017-03-21');
-INSERT INTO `car_plan` VALUES ('6', '38', '大米', '7', '53328', '12', '333', '运输部', '巨鬼王', '55', '440000', '440800', '440883', '2017-03-22');
-INSERT INTO `car_plan` VALUES ('7', '86,87,88', '零食,货1,货2', '8', '10395', '165', '144', '运输部', '巨鬼王', 'test', '440000', '440800', '440882', '2017-03-22');
+INSERT INTO `car_plan` VALUES ('12', '103,104', '衣服,纸巾', '13', '13884', '1740', '97', '运输部', '巨鬼王', 'test', '440000', '440800', '440825', '2017-03-23');
+INSERT INTO `car_plan` VALUES ('13', '91,108,109,110', '猪肉,配料,塑料瓶,天堂伞', '14', '66826', '1873', '751', '运输部', '巨鬼王', 'test', '440000', '440800', '440882', '2017-03-23');
+INSERT INTO `car_plan` VALUES ('14', '106,107', '料酒,鹿角', '15', '70368', '1844', '100', '运输部', '巨鬼王', 'test', '440000', '440800', '440883', '2017-03-23');
+INSERT INTO `car_plan` VALUES ('15', '105,111', '饲料,黑糖', '16', '76064', '1543', '50', '运输部', '巨鬼王', '213', '440000', '440800', '440825', '2017-03-23');
 
 -- ----------------------------
 -- Table structure for `car_type`
@@ -3680,74 +3680,40 @@ CREATE TABLE `goods` (
   `goods_volume` double DEFAULT NULL,
   `goods_perweight` double DEFAULT NULL,
   PRIMARY KEY (`goods_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=98 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
+) ENGINE=InnoDB AUTO_INCREMENT=127 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='货物';
 
 -- ----------------------------
 -- Records of goods
 -- ----------------------------
-INSERT INTO `goods` VALUES ('5', '穿山甲', '344', '23', '55');
-INSERT INTO `goods` VALUES ('6', '大鱼', '1231', '23', '5');
-INSERT INTO `goods` VALUES ('7', '冰', '12', '234', '12');
-INSERT INTO `goods` VALUES ('8', '鳄鱼', '32333', '324', '12');
-INSERT INTO `goods` VALUES ('9', '飞熊', '33', '556', '1000');
-INSERT INTO `goods` VALUES ('10', '飞熊', '33', '556', '1000');
-INSERT INTO `goods` VALUES ('17', '大厦', '33', '33', null);
-INSERT INTO `goods` VALUES ('18', '蟠桃', '55', '44', '666');
-INSERT INTO `goods` VALUES ('20', '昆吾', '7', '44', '88');
-INSERT INTO `goods` VALUES ('22', 'as', null, null, null);
-INSERT INTO `goods` VALUES ('23', 'df', null, null, null);
-INSERT INTO `goods` VALUES ('24', 'df', '12', '21', '12');
-INSERT INTO `goods` VALUES ('25', 'sd', null, null, null);
-INSERT INTO `goods` VALUES ('28', '蒋小鱼', null, null, null);
-INSERT INTO `goods` VALUES ('29', '蒋小鱼', null, null, null);
-INSERT INTO `goods` VALUES ('38', '士大夫', null, null, null);
-INSERT INTO `goods` VALUES ('40', '', null, null, null);
-INSERT INTO `goods` VALUES ('41', '鸭肉卷', '45', '45', '345');
-INSERT INTO `goods` VALUES ('42', '冰冰', '12', '33', '444');
-INSERT INTO `goods` VALUES ('43', '僵尸肉', '55', '66', '123');
-INSERT INTO `goods` VALUES ('44', '大米', '12', '333', '4444');
-INSERT INTO `goods` VALUES ('45', '猪肉', '22', '22', '111');
-INSERT INTO `goods` VALUES ('47', '牛肉', '66', '44', '120');
-INSERT INTO `goods` VALUES ('54', '熊肉', '55', '44', '66');
-INSERT INTO `goods` VALUES ('55', '', null, null, null);
-INSERT INTO `goods` VALUES ('56', '鞋子', '99', '55', '7');
-INSERT INTO `goods` VALUES ('57', '', null, null, null);
-INSERT INTO `goods` VALUES ('58', '', null, null, null);
-INSERT INTO `goods` VALUES ('59', '鸭肉', null, null, null);
-INSERT INTO `goods` VALUES ('60', '', null, null, null);
-INSERT INTO `goods` VALUES ('61', '', null, null, null);
-INSERT INTO `goods` VALUES ('62', '', null, null, null);
-INSERT INTO `goods` VALUES ('63', '', null, null, null);
-INSERT INTO `goods` VALUES ('66', '', null, null, null);
-INSERT INTO `goods` VALUES ('68', '', null, null, null);
-INSERT INTO `goods` VALUES ('69', '34', null, null, null);
-INSERT INTO `goods` VALUES ('70', '', null, null, null);
-INSERT INTO `goods` VALUES ('71', '', null, null, null);
-INSERT INTO `goods` VALUES ('72', '青蛙', '23', '32', '324');
-INSERT INTO `goods` VALUES ('73', '青蛙', '23', '32', '324');
-INSERT INTO `goods` VALUES ('74', '兔子', '44', '66', '888');
-INSERT INTO `goods` VALUES ('75', '巨龟', '666', '44', '567');
-INSERT INTO `goods` VALUES ('76', '', null, null, null);
-INSERT INTO `goods` VALUES ('77', '巨龟', '3', '4', '5');
-INSERT INTO `goods` VALUES ('78', '流沙', '45', '34', '66');
-INSERT INTO `goods` VALUES ('79', '烟头', '12', '123', '435');
-INSERT INTO `goods` VALUES ('80', '', null, null, null);
-INSERT INTO `goods` VALUES ('81', '213', null, null, null);
-INSERT INTO `goods` VALUES ('82', '', null, null, null);
-INSERT INTO `goods` VALUES ('83', '', null, null, null);
-INSERT INTO `goods` VALUES ('84', '23', null, null, null);
-INSERT INTO `goods` VALUES ('85', '34', null, null, null);
-INSERT INTO `goods` VALUES ('87', '腌菜', '555', '34', '67');
-INSERT INTO `goods` VALUES ('88', '货物1', '99', '445', '67');
-INSERT INTO `goods` VALUES ('89', '货物2', '45', '334', '77');
-INSERT INTO `goods` VALUES ('90', '鹿肉', '44', '65', '333');
-INSERT INTO `goods` VALUES ('91', '12', null, null, null);
-INSERT INTO `goods` VALUES ('92', '老鼠', '34', '44', '67');
-INSERT INTO `goods` VALUES ('93', '零食', '55', '55', '99');
-INSERT INTO `goods` VALUES ('94', '货1', '55', '45', '56');
-INSERT INTO `goods` VALUES ('95', '货2', '55', '44', '34');
-INSERT INTO `goods` VALUES ('96', '货3', '4', '5', '8');
-INSERT INTO `goods` VALUES ('97', '货4', '5', '7', '9');
+INSERT INTO `goods` VALUES ('98', '猪肉', '15', '56', '500');
+INSERT INTO `goods` VALUES ('99', '猪肉丸', '555', '6', '7');
+INSERT INTO `goods` VALUES ('100', '牛肉', '888', '56', '80');
+INSERT INTO `goods` VALUES ('101', '木材', '554', '65', '55');
+INSERT INTO `goods` VALUES ('102', '鞋子', '888', '45', '20');
+INSERT INTO `goods` VALUES ('103', '蜂蜜', '55', '9', '8');
+INSERT INTO `goods` VALUES ('104', '蜜桃', '888', '45', '12');
+INSERT INTO `goods` VALUES ('105', '核桃', '9999', '5', '5');
+INSERT INTO `goods` VALUES ('106', '核桃', '9999', '5', '5');
+INSERT INTO `goods` VALUES ('107', '年货', '555', '9', '45');
+INSERT INTO `goods` VALUES ('108', '僵尸肉', '55', '8', '80');
+INSERT INTO `goods` VALUES ('109', '长城特产', '88', '65', '55');
+INSERT INTO `goods` VALUES ('110', '大兴安岭特产', '55', '65', '78');
+INSERT INTO `goods` VALUES ('111', '衣服', '888', '52', '7');
+INSERT INTO `goods` VALUES ('112', '纸巾', '852', '45', '9');
+INSERT INTO `goods` VALUES ('113', '饲料', '885', '45', '80');
+INSERT INTO `goods` VALUES ('114', '料酒', '845', '50', '75');
+INSERT INTO `goods` VALUES ('115', '鹿角', '999', '50', '7');
+INSERT INTO `goods` VALUES ('116', '配料', '854', '545', '54');
+INSERT INTO `goods` VALUES ('117', '塑料瓶', '458', '98', '5');
+INSERT INTO `goods` VALUES ('118', '天堂伞', '546', '52', '20');
+INSERT INTO `goods` VALUES ('119', '黑糖', '658', '5', '8');
+INSERT INTO `goods` VALUES ('120', '瓷砖', '654', '52', '154');
+INSERT INTO `goods` VALUES ('121', '火腿', '52', '43', '6');
+INSERT INTO `goods` VALUES ('122', '糖果', '187', '5', '5');
+INSERT INTO `goods` VALUES ('123', '鸡翅', '456', '21', '4');
+INSERT INTO `goods` VALUES ('124', '药丸', '78654', '5', '4');
+INSERT INTO `goods` VALUES ('125', '菜', '54', '54', '21');
+INSERT INTO `goods` VALUES ('126', '冰', '12', '12', '213');
 
 -- ----------------------------
 -- Table structure for `log_price`
@@ -3760,70 +3726,39 @@ CREATE TABLE `log_price` (
   `log_price` double DEFAULT NULL,
   `log_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`log_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='物流报价';
 
 -- ----------------------------
 -- Records of log_price
 -- ----------------------------
-INSERT INTO `log_price` VALUES ('2', null, null, null, '已出发');
-INSERT INTO `log_price` VALUES ('3', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('4', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('5', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('6', '市场部', '换换', '123', '配车中');
-INSERT INTO `log_price` VALUES ('7', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('14', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('15', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('17', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('19', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('22', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('23', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('32', null, null, null, '');
-INSERT INTO `log_price` VALUES ('34', null, null, null, '');
-INSERT INTO `log_price` VALUES ('35', '市场部', '换换', '444', '配车中');
-INSERT INTO `log_price` VALUES ('36', '市场部', '换换', '33', '已出发');
-INSERT INTO `log_price` VALUES ('37', '市场部', '换换', '33', '配车中');
-INSERT INTO `log_price` VALUES ('38', '市场部', '换换', '444', '已出发');
-INSERT INTO `log_price` VALUES ('39', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('41', '市场部', '小赵', '234', '配车中');
-INSERT INTO `log_price` VALUES ('48', '市场部', '小赵', '34', '已出发');
-INSERT INTO `log_price` VALUES ('49', null, null, null, '');
-INSERT INTO `log_price` VALUES ('50', null, null, null, '');
-INSERT INTO `log_price` VALUES ('51', null, null, null, '');
-INSERT INTO `log_price` VALUES ('52', null, null, null, '');
-INSERT INTO `log_price` VALUES ('53', null, null, null, '');
-INSERT INTO `log_price` VALUES ('54', null, null, null, '');
-INSERT INTO `log_price` VALUES ('55', null, null, null, '');
-INSERT INTO `log_price` VALUES ('56', null, null, null, '');
-INSERT INTO `log_price` VALUES ('57', null, null, null, '');
-INSERT INTO `log_price` VALUES ('60', null, null, null, '');
-INSERT INTO `log_price` VALUES ('62', null, null, null, '');
-INSERT INTO `log_price` VALUES ('63', null, null, null, '');
-INSERT INTO `log_price` VALUES ('64', null, null, null, '');
-INSERT INTO `log_price` VALUES ('65', null, null, null, '');
-INSERT INTO `log_price` VALUES ('66', '市场部', '小赵', '123', '配车中');
-INSERT INTO `log_price` VALUES ('67', '市场部', '小赵', '45', '配车中');
-INSERT INTO `log_price` VALUES ('68', null, null, null, '');
-INSERT INTO `log_price` VALUES ('69', null, null, null, '');
-INSERT INTO `log_price` VALUES ('70', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('71', null, null, null, '');
-INSERT INTO `log_price` VALUES ('72', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('73', null, null, null, '');
-INSERT INTO `log_price` VALUES ('74', null, null, null, '');
-INSERT INTO `log_price` VALUES ('75', null, null, null, '');
-INSERT INTO `log_price` VALUES ('76', null, null, null, '');
-INSERT INTO `log_price` VALUES ('77', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('78', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('80', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('81', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('82', '市场部', '小赵', '1234', '配车中');
-INSERT INTO `log_price` VALUES ('83', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('84', '市场部', '小赵', '67', '配车中');
-INSERT INTO `log_price` VALUES ('85', null, null, null, '否');
-INSERT INTO `log_price` VALUES ('86', '市场部', '小赵', '34', '已出发');
-INSERT INTO `log_price` VALUES ('87', '市场部', '小赵', '55', '已出发');
-INSERT INTO `log_price` VALUES ('88', '市场部', '小赵', '67', '已出发');
-INSERT INTO `log_price` VALUES ('89', '市场部', '小赵', '78', '已回复');
-INSERT INTO `log_price` VALUES ('90', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('91', '市场部', '小赵', '234', '已出发');
+INSERT INTO `log_price` VALUES ('92', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('93', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('94', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('95', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('96', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('97', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('98', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('99', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('100', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('101', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('102', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('103', '市场部', '小赵', '123', '已出发');
+INSERT INTO `log_price` VALUES ('104', '市场部', '小赵', '123', '已出发');
+INSERT INTO `log_price` VALUES ('105', '市场部', '小赵', '123', '已出发');
+INSERT INTO `log_price` VALUES ('106', '市场部', '小赵', '123', '已出发');
+INSERT INTO `log_price` VALUES ('107', '市场部', '小赵', '123', '已出发');
+INSERT INTO `log_price` VALUES ('108', '市场部', '小赵', '78', '已出发');
+INSERT INTO `log_price` VALUES ('109', '市场部', '小赵', '23', '已出发');
+INSERT INTO `log_price` VALUES ('110', '市场部', '小赵', '2343', '已出发');
+INSERT INTO `log_price` VALUES ('111', '市场部', '小赵', '2342', '已出发');
+INSERT INTO `log_price` VALUES ('112', '市场部', '小赵', '234', '已回复');
+INSERT INTO `log_price` VALUES ('113', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('114', '市场部', '小赵', '234', '已回复');
+INSERT INTO `log_price` VALUES ('115', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('116', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('117', null, null, null, '否');
+INSERT INTO `log_price` VALUES ('118', null, null, null, '否');
 
 -- ----------------------------
 -- Table structure for `menu`
@@ -3884,69 +3819,39 @@ CREATE TABLE `orders` (
   `areaid` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `order_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='订单';
 
 -- ----------------------------
 -- Records of orders
 -- ----------------------------
-INSERT INTO `orders` VALUES ('3', '5', '2', '2', '11', '2', '2', '换换', '是', '是', '否', '否', '2017-02-08', '2017-02-27', null, null, null, '阿萨德开房间辣圣诞节快拉');
-INSERT INTO `orders` VALUES ('4', '6', '3', '3', '11', '3', '3', '换换', '是', '是', '否', '否', '2017-02-08', '2017-03-10', null, null, null, '类似的看法拉萨的李开复');
-INSERT INTO `orders` VALUES ('5', '7', '4', '4', '11', '4', '4', '换换', '是', '是', '是', '否', '2017-02-08', '2017-03-03', null, null, null, '大声点开了房间卡拉斯的减肥路上打卡机福利卡电视机房里看见俺说的可浪费了斯柯达解放啦圣诞节疯狂了大数据法拉盛打发');
-INSERT INTO `orders` VALUES ('6', '8', null, '5', '11', '5', '5', '换换', '否', '否', '否', '', '2017-03-01', '2017-03-31', null, null, null, '撒的发生发发试试事实上');
-INSERT INTO `orders` VALUES ('7', '9', '6', '6', '11', '6', '6', '换换', '否', '否', '是', '是', '2017-03-01', '2017-04-09', null, null, null, '撒旦法师法师打发的说法是的发生');
-INSERT INTO `orders` VALUES ('8', '10', '7', '7', '11', '7', '7', '换换', '否', '否', '否', '否', '2017-03-01', '2017-04-09', null, null, null, '撒旦法师法师打发的说法是的发生');
-INSERT INTO `orders` VALUES ('15', '17', null, '14', '11', '14', '14', '换换', '否', '否', '否', '', '2017-03-01', null, null, null, null, '');
-INSERT INTO `orders` VALUES ('16', '18', null, '15', '11', '15', '15', '换换', '是', '否', '否', '', '2017-03-07', '2017-04-09', null, null, null, '广东省广州市同和握山石决南街三巷八号');
-INSERT INTO `orders` VALUES ('18', '20', null, '17', '11', '17', '17', '换换', '是', '否', '否', '', '2017-03-07', '2017-03-29', null, null, null, '啊是的浪费空间');
-INSERT INTO `orders` VALUES ('22', '28', '31', '22', '11', '22', '22', '换换', '是', '否', '否', '否', '2017-03-16', '2017-04-01', '210000', '210300', '210303', '士大夫');
-INSERT INTO `orders` VALUES ('23', '29', '32', '23', '11', '23', '23', '换换', '是', '否', '否', '否', '2017-03-16', '2017-04-01', null, null, null, '士大夫');
-INSERT INTO `orders` VALUES ('32', '38', '41', '32', '11', '32', '32', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '的');
-INSERT INTO `orders` VALUES ('34', '40', '43', '34', '11', '34', '34', '换换', '', '否', '否', '否', '2017-03-17', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('35', '41', '44', '35', '11', '35', '35', '换换', '否', '否', '是', '是', '2017-03-17', '2017-03-31', null, null, null, 'test1');
-INSERT INTO `orders` VALUES ('36', '42', '45', '36', '11', '36', '36', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-01', '440000', '440100', '440104', '同和握山石决');
-INSERT INTO `orders` VALUES ('37', '43', '46', '37', '11', '37', '37', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-09', '440000', '440100', '440104', '白云山');
-INSERT INTO `orders` VALUES ('38', '44', '47', '38', '11', '38', '38', '换换', '否', '否', '是', '是', '2017-03-20', '2017-04-08', '440000', '440100', '440104', '城建大厦');
-INSERT INTO `orders` VALUES ('39', '45', '48', '39', '2', '39', '39', '小明', '是', '是', '否', '否', '2017-03-21', '2017-04-09', '440000', '440100', '440104', '同和地铁站');
-INSERT INTO `orders` VALUES ('41', '47', '50', '41', '2', '41', '41', '小明', '是', '是', '是', '是', '2017-03-21', '2017-03-23', '440000', '440100', '440104', '同和');
-INSERT INTO `orders` VALUES ('48', '54', '57', '48', '2', '48', '48', '小明', '否', '否', '是', '是', '2017-03-21', '2017-05-03', '440000', '440100', '440104', '同和');
-INSERT INTO `orders` VALUES ('49', '55', '58', '49', '2', '49', '49', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('50', '56', '59', '50', '2', '50', '50', '小明', '', '否', '否', '否', '2017-03-21', '2017-06-09', '440000', '440100', '440104', '同和庄');
-INSERT INTO `orders` VALUES ('51', '57', '60', '51', '2', '51', '51', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('52', '58', '61', '52', '2', '52', '52', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('53', '59', '62', '53', '2', '53', '53', '小明', '', '否', '否', '否', '2017-03-21', null, '440000', '440100', '440104', '同和抓');
-INSERT INTO `orders` VALUES ('54', '60', '63', '54', '2', '54', '54', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('55', '61', '64', '55', '2', '55', '55', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('56', '62', '65', '56', '2', '56', '56', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('57', '63', '66', '57', '2', '57', '57', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('60', '66', '69', '60', '2', '60', '60', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('62', '68', '71', '62', '2', '62', '62', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('63', '69', '72', '63', '2', '63', '63', '小明', '', '否', '否', '否', '2017-03-21', null, '210000', '210200', '210203', '');
-INSERT INTO `orders` VALUES ('64', '70', '73', '64', '2', '64', '64', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('65', '71', '74', '65', '2', '65', '65', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('66', '73', '75', '66', '2', '66', '66', '小明', '否', '否', '是', '是', '2017-03-21', '2017-03-24', '440000', '440100', '440106', 'test');
-INSERT INTO `orders` VALUES ('67', '74', '76', '67', '2', '67', '67', '小明', '是', '是', '是', '是', '2017-03-21', '2017-03-16', '440000', '440100', '440104', '同和等等撒');
-INSERT INTO `orders` VALUES ('68', '75', '77', '68', '2', '68', '68', '小明', '', '否', '否', '否', '2017-03-21', '2017-04-09', '440000', '440100', '440104', '托尔斯泰');
-INSERT INTO `orders` VALUES ('69', '76', '78', '69', '2', '69', '69', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('70', '77', '79', '70', '2', '70', '70', '小明', '是', '是', '否', '否', '2017-03-21', '2017-03-31', '440000', '440100', '440104', 'test');
-INSERT INTO `orders` VALUES ('71', '78', '80', '71', '2', '71', '71', '小明', '', '否', '否', '否', '2017-03-21', '2017-03-30', '440000', '440100', '440104', '天河');
-INSERT INTO `orders` VALUES ('72', '79', '81', '72', '2', '72', '72', '小明', '是', '是', '否', '否', '2017-03-21', '2017-04-07', '440000', '440100', '440104', '第一幼儿园');
-INSERT INTO `orders` VALUES ('73', '80', '82', '73', '2', '73', '73', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('74', '81', '83', '74', '2', '74', '74', '小明', '', '否', '否', '否', '2017-03-21', null, '440000', '440200', '440201', '123');
-INSERT INTO `orders` VALUES ('75', '82', '84', '75', '2', '75', '75', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('76', '83', '85', '76', '2', '76', '76', '小明', '', '否', '否', '否', '2017-03-21', null, '', '', '', '');
-INSERT INTO `orders` VALUES ('77', '84', '86', '77', '2', '77', '77', '小明', '是', '是', '否', '否', '2017-03-21', null, '130000', '130300', '130304', '');
-INSERT INTO `orders` VALUES ('78', '85', '87', '78', '2', '78', '78', '小明', '是', '是', '否', '否', '2017-03-21', null, '130000', '130300', '130303', '');
-INSERT INTO `orders` VALUES ('80', '87', '89', '80', '2', '80', '80', '小明', '是', '是', '否', '否', '2017-03-21', '2017-03-31', '440000', '440100', '440104', '越秀公寓');
-INSERT INTO `orders` VALUES ('81', '88', '90', '81', '2', '81', '81', '小明', '是', '否', '否', '否', '2017-03-21', '2017-03-23', '440000', '440100', '440104', 'test1');
-INSERT INTO `orders` VALUES ('82', '89', '91', '82', '2', '82', '82', '小明', '否', '否', '是', '是', '2017-03-21', '2017-04-08', '440000', '440100', '440104', 'test2');
-INSERT INTO `orders` VALUES ('83', '90', '92', '83', '2', '83', '83', '小明', '否', '否', '是', '否', '2017-03-21', '2017-04-27', '440000', '440100', '440104', '越秀公园');
-INSERT INTO `orders` VALUES ('84', '91', '93', '84', '2', '84', '84', '小明', '否', '否', '是', '是', '2017-03-21', null, '130000', '130400', '130431', '省份');
-INSERT INTO `orders` VALUES ('85', '92', '94', '85', '2', '85', '85', '小明', '否', '否', '是', '否', '2017-03-21', '2017-05-18', '440000', '440100', '440104', '握山石决');
-INSERT INTO `orders` VALUES ('86', '93', '95', '86', '2', '86', '86', '小明', '否', '否', '是', '是', '2017-03-22', '2017-04-08', '440000', '440100', '440104', 'test');
-INSERT INTO `orders` VALUES ('87', '94', '96', '87', '2', '87', '87', '小明', '否', '否', '是', '是', '2017-03-22', '2017-04-08', '440000', '440100', '440104', 'test');
-INSERT INTO `orders` VALUES ('88', '95', '97', '88', '2', '88', '88', '小明', '否', '否', '是', '是', '2017-03-22', '2017-04-01', '440000', '440100', '440104', 'test');
-INSERT INTO `orders` VALUES ('89', '96', '98', '89', '2', '89', '89', '小明', '否', '否', '是', '否', '2017-03-22', '2017-04-07', '440000', '440100', '440104', 'test');
-INSERT INTO `orders` VALUES ('90', '97', '99', '90', '2', '90', '90', '小明', '否', '否', '否', '否', '2017-03-22', '2017-04-08', '440000', '440100', '440104', '越秀公园');
+INSERT INTO `orders` VALUES ('91', '98', '100', '91', '2', '91', '91', '小明', '是', '是', '是', '是', '2017-03-23', '2017-04-28', '440000', '440100', '440104', '越秀公园');
+INSERT INTO `orders` VALUES ('92', '99', '101', '92', '2', '92', '92', '小明', '是', '是', '否', '否', '2017-03-23', '2017-05-18', '440000', '440100', '440104', '越秀南路');
+INSERT INTO `orders` VALUES ('93', '100', '102', '93', '2', '93', '93', '小明', '是', '是', '否', '否', '2017-03-23', '2017-05-19', '440000', '440100', '440104', '越秀东');
+INSERT INTO `orders` VALUES ('94', '101', '103', '94', '2', '94', '94', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-08', '440000', '440100', '440104', '越秀南路');
+INSERT INTO `orders` VALUES ('95', '102', '104', '95', '2', '95', '95', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-07', '440000', '440100', '440104', '越秀南路');
+INSERT INTO `orders` VALUES ('96', '103', '105', '96', '2', '96', '96', '小明', '是', '是', '否', '否', '2017-03-23', '2017-06-23', '440000', '440100', '440104', '越秀西路');
+INSERT INTO `orders` VALUES ('97', '104', '106', '97', '2', '97', '97', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-28', '440000', '440100', '440104', '越秀北区');
+INSERT INTO `orders` VALUES ('98', '106', '107', '98', '2', '98', '98', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀西区');
+INSERT INTO `orders` VALUES ('99', '107', '108', '99', '2', '99', '99', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀南区');
+INSERT INTO `orders` VALUES ('100', '108', '109', '100', '2', '100', '100', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-08', '440000', '440100', '440104', '越秀市中心政府');
+INSERT INTO `orders` VALUES ('101', '109', '110', '101', '2', '101', '101', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀公园旁边15号');
+INSERT INTO `orders` VALUES ('102', '110', '111', '102', '2', '102', '102', '小明', '是', '是', '否', '否', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀广场');
+INSERT INTO `orders` VALUES ('103', '111', '112', '103', '2', '103', '103', '小明', '否', '否', '是', '是', '2017-03-23', '2017-06-22', '440000', '440100', '440104', '越秀中路');
+INSERT INTO `orders` VALUES ('104', '112', '113', '104', '2', '104', '104', '小明', '否', '否', '是', '是', '2017-03-23', '2017-05-26', '440000', '440100', '440104', '广州人民医院');
+INSERT INTO `orders` VALUES ('105', '113', '114', '105', '2', '105', '105', '小明', '否', '否', '是', '是', '2017-03-23', '2017-03-19', '440000', '440100', '440104', '工行');
+INSERT INTO `orders` VALUES ('106', '114', '115', '106', '2', '106', '106', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-02', '440000', '440100', '440104', '农行');
+INSERT INTO `orders` VALUES ('107', '115', '116', '107', '2', '107', '107', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-02', '440000', '440100', '440104', '电信大厦');
+INSERT INTO `orders` VALUES ('108', '116', '117', '108', '2', '108', '108', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-08', '440000', '440100', '440104', '越富广场');
+INSERT INTO `orders` VALUES ('109', '117', '118', '109', '2', '109', '109', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '纪念堂');
+INSERT INTO `orders` VALUES ('110', '118', '119', '110', '2', '110', '110', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-06', '440000', '440100', '440104', '中国银行');
+INSERT INTO `orders` VALUES ('111', '119', '120', '111', '2', '111', '111', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-02', '440000', '440100', '440104', '越秀广场');
+INSERT INTO `orders` VALUES ('112', '120', '121', '112', '2', '112', '112', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-06', '440000', '440100', '440104', '广东迎宾馆');
+INSERT INTO `orders` VALUES ('113', '121', '122', '113', '2', '113', '113', '小明', '否', '否', '是', '否', '2017-03-23', '2017-08-25', '440000', '440100', '440104', '公元前');
+INSERT INTO `orders` VALUES ('114', '122', '123', '114', '2', '114', '114', '小明', '否', '否', '是', '是', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀南路');
+INSERT INTO `orders` VALUES ('115', '123', '124', '115', '2', '115', '115', '小明', '是', '否', '否', '否', '2017-03-23', '2017-04-09', '440000', '440100', '440104', '越秀中路');
+INSERT INTO `orders` VALUES ('116', '124', '125', '116', '2', '116', '116', '小明', '是', '否', '否', '否', '2017-03-23', '2017-04-08', '440000', '440100', '440104', '越秀小区');
+INSERT INTO `orders` VALUES ('117', '125', '126', '117', '2', '117', '117', '小明', '否', '否', '否', '否', '2017-03-23', '2017-04-01', '440000', '440100', '440104', '公元前');
+INSERT INTO `orders` VALUES ('118', '126', '127', '118', '2', '118', '118', '小明', '否', '否', '否', '否', '2017-03-23', '2017-03-31', '440000', '440100', '440104', '医院');
 
 -- ----------------------------
 -- Table structure for `order_exam`
@@ -3959,77 +3864,39 @@ CREATE TABLE `order_exam` (
   `oe_dept` varchar(30) COLLATE utf8_unicode_ci DEFAULT NULL,
   `oe_reason` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`oe_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='市场部--订单审核';
 
 -- ----------------------------
 -- Records of order_exam
 -- ----------------------------
-INSERT INTO `order_exam` VALUES ('2', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('3', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('4', '审核中', null, null, null);
-INSERT INTO `order_exam` VALUES ('5', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('6', '通过', '换换', '市场审核部', '123');
-INSERT INTO `order_exam` VALUES ('7', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('14', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('18', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('19', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('20', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('21', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('22', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('23', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('24', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('25', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('26', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('28', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('31', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('32', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('41', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('43', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('44', '通过', '换换', '市场审核部', 'test23');
-INSERT INTO `order_exam` VALUES ('45', '通过', '换换', '市场审核部', 'test通过');
-INSERT INTO `order_exam` VALUES ('46', '通过', '换换', '市场审核部', 'test2');
-INSERT INTO `order_exam` VALUES ('47', '通过', '换换', '市场审核部', 'test1');
-INSERT INTO `order_exam` VALUES ('48', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('50', '通过', '小四', '市场审核部', 'test');
-INSERT INTO `order_exam` VALUES ('57', '通过', '小四', '市场审核部', 'test');
-INSERT INTO `order_exam` VALUES ('58', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('59', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('60', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('61', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('62', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('63', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('64', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('65', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('66', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('69', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('71', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('72', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('73', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('74', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('75', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('76', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('77', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('78', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('79', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('80', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('81', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('82', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('83', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('84', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('85', '', null, null, null);
-INSERT INTO `order_exam` VALUES ('86', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('87', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('89', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('90', '否', null, null, null);
-INSERT INTO `order_exam` VALUES ('91', '通过', '小四', '市场审核部', 'test');
-INSERT INTO `order_exam` VALUES ('92', '不通过', '小四', '市场审核部', '12');
-INSERT INTO `order_exam` VALUES ('93', '通过', '小四', '市场审核部', '123');
-INSERT INTO `order_exam` VALUES ('94', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('95', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('96', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('97', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('98', '通过', '小四', '市场审核部', '');
-INSERT INTO `order_exam` VALUES ('99', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('100', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('101', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('102', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('103', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('104', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('105', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('106', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('107', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('108', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('109', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('110', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('111', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('112', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('113', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('114', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('115', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('116', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('117', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('118', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('119', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('120', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('121', '通过', '小四', '市场审核部', 'test');
+INSERT INTO `order_exam` VALUES ('122', '审核中', null, null, null);
+INSERT INTO `order_exam` VALUES ('123', '通过', '小四', '市场审核部', 'st');
+INSERT INTO `order_exam` VALUES ('124', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('125', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('126', '否', null, null, null);
+INSERT INTO `order_exam` VALUES ('127', '否', null, null, null);
 
 -- ----------------------------
 -- Table structure for `position_tracking`
@@ -4045,24 +3912,37 @@ CREATE TABLE `position_tracking` (
   `track_status` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
   `track_time` date DEFAULT NULL,
   PRIMARY KEY (`position_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='位置管理';
 
 -- ----------------------------
 -- Records of position_tracking
 -- ----------------------------
-INSERT INTO `position_tracking` VALUES ('5', '4', '36', '440000', '440800', '440882', '出发', '2017-03-20');
-INSERT INTO `position_tracking` VALUES ('6', '4', '36', '440000', '440200', '440204', '到站', '2017-03-21');
-INSERT INTO `position_tracking` VALUES ('7', '5', '48', '440000', '440800', '440825', '出发', '2017-03-21');
-INSERT INTO `position_tracking` VALUES ('8', '6', '38', '440000', '440800', '440883', '出发', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('9', '4', '36', '440000', '440800', '440882', '到站', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('10', '5', '48', '440000', '440800', '440825', '到站', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('11', '6', '38', '440000', '440800', '440883', '到站', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('12', '7', '86', '440000', '440800', '440882', '出发', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('13', '7', '87', '440000', '440800', '440882', '出发', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('14', '7', '88', '440000', '440800', '440882', '出发', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('15', '7', '86', '440000', '440800', '440882', '到站', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('16', '7', '87', '440000', '440800', '440882', '到站', '2017-03-22');
-INSERT INTO `position_tracking` VALUES ('17', '7', '88', '440000', '440800', '440882', '到站', '2017-03-22');
+INSERT INTO `position_tracking` VALUES ('24', null, '103', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('25', null, '104', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('26', '12', '103', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('27', '12', '104', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('28', '12', '103', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('29', '12', '104', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('30', '12', '103', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('31', '12', '104', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('32', '12', '103', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('33', '12', '104', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('34', null, '91', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('35', null, '108', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('36', null, '109', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('37', null, '110', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('38', null, '106', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('39', null, '107', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('40', null, '105', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('41', null, '111', '440000', '440100', '440104', '出发', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('42', '13', '91', '440000', '440800', '440882', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('43', '13', '108', '440000', '440800', '440882', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('44', '13', '109', '440000', '440800', '440882', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('45', '13', '110', '440000', '440800', '440882', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('46', '14', '106', '440000', '440800', '440883', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('47', '14', '107', '440000', '440800', '440883', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('48', '15', '105', '440000', '440800', '440825', '到站', '2017-03-23');
+INSERT INTO `position_tracking` VALUES ('49', '15', '111', '440000', '440800', '440825', '到站', '2017-03-23');
 
 -- ----------------------------
 -- Table structure for `provinces`
@@ -4164,70 +4044,39 @@ CREATE TABLE `pur_price` (
   `pur_price` double DEFAULT NULL,
   `pur_state` varchar(10) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`pur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='采购报价';
 
 -- ----------------------------
 -- Records of pur_price
 -- ----------------------------
-INSERT INTO `pur_price` VALUES ('2', '采购部', '换换', '44', '采购完成');
-INSERT INTO `pur_price` VALUES ('3', '采购部', '僵尸', '77', '采购完成');
-INSERT INTO `pur_price` VALUES ('4', '采购部', '换换', '88', '已回复');
-INSERT INTO `pur_price` VALUES ('5', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('6', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('7', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('14', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('15', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('17', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('19', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('22', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('23', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('32', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('34', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('35', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('36', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('37', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('38', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('39', '采购部', '僵尸', '66', '采购中');
-INSERT INTO `pur_price` VALUES ('41', '采购部', '僵尸', '66', '采购完成');
-INSERT INTO `pur_price` VALUES ('48', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('49', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('50', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('51', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('52', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('53', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('54', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('55', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('56', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('57', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('60', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('62', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('63', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('64', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('65', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('66', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('67', '采购部', '僵尸', '123', '采购完成');
-INSERT INTO `pur_price` VALUES ('68', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('69', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('70', '采购部', '僵尸', '35', '发起采购中');
-INSERT INTO `pur_price` VALUES ('71', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('72', '采购部', '僵尸', '66', '已回复');
-INSERT INTO `pur_price` VALUES ('73', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('74', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('75', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('76', null, null, null, '');
-INSERT INTO `pur_price` VALUES ('77', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('78', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('80', null, null, null, '审核中');
-INSERT INTO `pur_price` VALUES ('81', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('82', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('83', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('84', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('85', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('86', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('87', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('88', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('89', null, null, null, '否');
-INSERT INTO `pur_price` VALUES ('90', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('91', '采购部', '僵尸', '123', '采购完成');
+INSERT INTO `pur_price` VALUES ('92', '采购部', '僵尸', '23', '发起采购中');
+INSERT INTO `pur_price` VALUES ('93', '采购部', '僵尸', '23', '发起采购中');
+INSERT INTO `pur_price` VALUES ('94', '采购部', '僵尸', '234', '采购完成');
+INSERT INTO `pur_price` VALUES ('95', '采购部', '僵尸', '2343', '采购完成');
+INSERT INTO `pur_price` VALUES ('96', '采购部', '僵尸', '23', '采购完成');
+INSERT INTO `pur_price` VALUES ('97', '采购部', '僵尸', '12', '采购完成');
+INSERT INTO `pur_price` VALUES ('98', '采购部', '僵尸', '31', '采购完成');
+INSERT INTO `pur_price` VALUES ('99', '采购部', '僵尸', '324', '采购完成');
+INSERT INTO `pur_price` VALUES ('100', '采购部', '僵尸', '123', '发起采购中');
+INSERT INTO `pur_price` VALUES ('101', '采购部', '僵尸', '23', '发起采购中');
+INSERT INTO `pur_price` VALUES ('102', '采购部', '僵尸', '12', '发起采购中');
+INSERT INTO `pur_price` VALUES ('103', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('104', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('105', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('106', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('107', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('108', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('109', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('110', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('111', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('112', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('113', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('114', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('115', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('116', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('117', null, null, null, '否');
+INSERT INTO `pur_price` VALUES ('118', null, null, null, '否');
 
 -- ----------------------------
 -- Table structure for `receipt`
@@ -4244,70 +4093,39 @@ CREATE TABLE `receipt` (
   `receipt_state` varchar(1) COLLATE utf8_unicode_ci DEFAULT NULL,
   `receipt_time` date DEFAULT NULL,
   PRIMARY KEY (`receipt_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
+) ENGINE=InnoDB AUTO_INCREMENT=119 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='收货人信息';
 
 -- ----------------------------
 -- Records of receipt
 -- ----------------------------
-INSERT INTO `receipt` VALUES ('2', '佳节123', '18814569878', null, null, null, '法律框架爱上邓丽君按时打卡了房间', '否', null);
-INSERT INTO `receipt` VALUES ('3', '小小', '18845236598', null, null, null, '阿斯顿发送到发送到发送到发送到发送到发多少', '否', null);
-INSERT INTO `receipt` VALUES ('4', '小啊', '15541234587', null, null, null, '盛大发售的疯狂拉升的风景', '否', null);
-INSERT INTO `receipt` VALUES ('5', '白小春', '15541023123', null, null, null, '阿斯顿发反反复复凤飞飞', '否', null);
-INSERT INTO `receipt` VALUES ('6', '李青候', '18845698789', null, null, null, '阿斯顿发的说法都是发发', '否', null);
-INSERT INTO `receipt` VALUES ('7', '李青候', '18845698789', null, null, null, '阿斯顿发的说法都是发发', '否', null);
-INSERT INTO `receipt` VALUES ('14', '', '', null, null, null, '', '否', null);
-INSERT INTO `receipt` VALUES ('15', '中岳', '18845698789', null, null, null, '中国香港', '否', null);
-INSERT INTO `receipt` VALUES ('17', '霓裳', '15578986569', null, null, null, '撒点粉', '否', null);
-INSERT INTO `receipt` VALUES ('19', '', '', '210000', '211100', null, 'dasf', '否', null);
-INSERT INTO `receipt` VALUES ('22', '', '', '210000', '211200', '211223', '范德萨', '否', null);
-INSERT INTO `receipt` VALUES ('23', '', '', null, null, null, '范德萨', '否', null);
-INSERT INTO `receipt` VALUES ('32', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('34', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('35', '烤肉王', '15584036598', null, null, null, 'test1', '否', null);
-INSERT INTO `receipt` VALUES ('36', '晓东', '18854123659', '440000', '440800', '440882', '西湖南路', '否', null);
-INSERT INTO `receipt` VALUES ('37', '小小', '18840316985', '440000', '440600', '440605', '大学', '否', null);
-INSERT INTO `receipt` VALUES ('38', '小东', '18854203265', '440000', '440800', '440883', '吴川一中', '否', null);
-INSERT INTO `receipt` VALUES ('39', '小明子', '15541032659', '440000', '440800', '440882', '雷湖南路', '否', null);
-INSERT INTO `receipt` VALUES ('41', '白浩', '18840325653', '440000', '440800', '440881', '连江一中', '否', null);
-INSERT INTO `receipt` VALUES ('48', '晓得', '18845632587', '440000', '440800', '440825', '许文中学', '否', null);
-INSERT INTO `receipt` VALUES ('49', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('50', '咚咚', '18852032659', '440000', '440800', '440882', '下江', '', null);
-INSERT INTO `receipt` VALUES ('51', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('52', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('53', '', '', '440000', '440800', '440882', '撒点粉', '', null);
-INSERT INTO `receipt` VALUES ('54', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('55', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('56', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('57', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('60', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('62', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('63', '', '', null, '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('64', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('65', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('66', '大哥', '1883250984', '440000', '440800', '440882', 'test', '否', null);
-INSERT INTO `receipt` VALUES ('67', '校庆', '19934950670', '440000', '440800', '440881', '廉江一中', '否', null);
-INSERT INTO `receipt` VALUES ('68', '咚咚', '18834095478', '440000', '440800', '440882', '下江34号', '', null);
-INSERT INTO `receipt` VALUES ('69', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('70', '清单', '', '440000', '440800', '440882', '撒点粉', '否', null);
-INSERT INTO `receipt` VALUES ('71', '晓东', '18834086458', '440000', '440600', '440601', '佛山科技', '', null);
-INSERT INTO `receipt` VALUES ('72', '明明', '18832098678', '440000', '440600', '440601', '佛山科技', '否', null);
-INSERT INTO `receipt` VALUES ('73', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('74', '', '', '440000', '440600', '440604', 'test', '', null);
-INSERT INTO `receipt` VALUES ('75', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('76', '', '', '', '', '', '', '', null);
-INSERT INTO `receipt` VALUES ('77', '', '', '210000', '211300', '211321', '', '否', null);
-INSERT INTO `receipt` VALUES ('78', '', '', '130000', '131000', '131028', '', '否', null);
-INSERT INTO `receipt` VALUES ('80', '小黄', '18845098678', '440000', '440800', '440881', '廉江', '否', null);
-INSERT INTO `receipt` VALUES ('81', '小强', '18864538980', '440000', '440800', '440882', '西湖公园', '否', null);
-INSERT INTO `receipt` VALUES ('82', '小小', '19947689098', '440000', '440600', '440601', 'test3', '否', null);
-INSERT INTO `receipt` VALUES ('83', '小刘', '18843098465', '440000', '440800', '440883', '吴川一中', '否', null);
-INSERT INTO `receipt` VALUES ('84', '', '', '150000', '152500', '152530', '', '否', null);
-INSERT INTO `receipt` VALUES ('85', '小李', '18832980678', '440000', '440800', '440882', '茂德公', '否', null);
-INSERT INTO `receipt` VALUES ('86', '笑笑', '18841032659', '440000', '440800', '440882', '雷湖南路', '否', null);
-INSERT INTO `receipt` VALUES ('87', '东东', '18435896079', '440000', '440800', '440882', 'test', '否', null);
-INSERT INTO `receipt` VALUES ('88', '杰杰', '18845236598', '440000', '440800', '440882', 'test', '否', null);
-INSERT INTO `receipt` VALUES ('89', '小钱', '18840123568', '440000', '440800', '440882', '雷州一中', '否', null);
-INSERT INTO `receipt` VALUES ('90', '小红', '18841032659', '440000', '440800', '440882', '实验中学', '否', null);
+INSERT INTO `receipt` VALUES ('91', '小东12', '18814025464', '440000', '440800', '440882', '雷湖南路', '否', null);
+INSERT INTO `receipt` VALUES ('92', '小平', '15541236589', '440000', '440800', '440882', '雷城大道12号', '否', null);
+INSERT INTO `receipt` VALUES ('93', '小风', '15746582136', '440000', '440800', '440882', '西湖大道44号', '否', null);
+INSERT INTO `receipt` VALUES ('94', '阿飞', '15478953245', '440000', '440800', '440882', '茂德公', '否', null);
+INSERT INTO `receipt` VALUES ('95', '小小', '15421365487', '440000', '440800', '440882', '雷湖中路', '否', null);
+INSERT INTO `receipt` VALUES ('96', '佳节', '15462315487', '440000', '440800', '440883', '吴川一中', '否', null);
+INSERT INTO `receipt` VALUES ('97', '飞流', '15541203126', '440000', '440800', '440883', '吴川四中', '否', null);
+INSERT INTO `receipt` VALUES ('98', '吴川一把', '18841203256', '440000', '440800', '440825', '徐闻小学', '否', null);
+INSERT INTO `receipt` VALUES ('99', '笑笑', '', '440000', '440800', '440825', '徐闻六小', '否', null);
+INSERT INTO `receipt` VALUES ('100', '姜丝', '1547165213', '440000', '440600', '440601', '市辖区9号', '否', null);
+INSERT INTO `receipt` VALUES ('101', '小城', '18840325658', '440000', '440600', '440604', '佛山科大', '否', null);
+INSERT INTO `receipt` VALUES ('102', '小东', '18845135481', '440000', '440600', '440601', '市辖区88号', '否', null);
+INSERT INTO `receipt` VALUES ('103', '阿强1', '18845124562', '440000', '440800', '440825', '徐闻六中', '否', null);
+INSERT INTO `receipt` VALUES ('104', '阿雅', '18841032568', '440000', '440800', '440825', '徐闻农场', '否', null);
+INSERT INTO `receipt` VALUES ('105', '徐闻一哥', '18841032568', '440000', '440800', '440825', '徐闻二中', '否', null);
+INSERT INTO `receipt` VALUES ('106', '大酒哥', '18841023547', '440000', '440800', '440883', '吴川小学', '否', null);
+INSERT INTO `receipt` VALUES ('107', '陆伯伯', '13574655895', '440000', '440800', '440883', '吴川北山', '否', null);
+INSERT INTO `receipt` VALUES ('108', '阿水', '18841245789', '440000', '440800', '440882', '雷州人民医院', '否', null);
+INSERT INTO `receipt` VALUES ('109', '阿六', '18841257456', '440000', '440800', '440882', '雷州六中', '否', null);
+INSERT INTO `receipt` VALUES ('110', '小明', '18841023568', '440000', '440800', '440882', '雷州车站旁', '否', null);
+INSERT INTO `receipt` VALUES ('111', '晓东', '18841023547', '440000', '440800', '440825', '徐闻火炬农场', '否', null);
+INSERT INTO `receipt` VALUES ('112', '小刘', '18814023568', '440000', '440600', '440601', '市辖区99号', '否', null);
+INSERT INTO `receipt` VALUES ('113', '阿菲', '18841023547', '440000', '440600', '440604', '山城一区', '否', null);
+INSERT INTO `receipt` VALUES ('114', '小明明', '18841023568', '440000', '440600', '440604', '佛大', '否', null);
+INSERT INTO `receipt` VALUES ('115', '小农啊', '18844023598', '440000', '440800', '440882', '雷州四中', '否', null);
+INSERT INTO `receipt` VALUES ('116', '雷州人民医院院长', '18841023587', '440000', '440800', '440882', '雷州巴中', '否', null);
+INSERT INTO `receipt` VALUES ('117', '小菜', '18814032547', '440000', '440800', '440882', '卖鱼街', '否', null);
+INSERT INTO `receipt` VALUES ('118', '小明', '18841023147', '440000', '440800', '440882', '企水镇', '否', null);
 
 -- ----------------------------
 -- Table structure for `repertory`
@@ -4323,13 +4141,18 @@ CREATE TABLE `repertory` (
   `province` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   `repo_address` varchar(500) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`repo_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='仓库';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='仓库';
 
 -- ----------------------------
 -- Records of repertory
 -- ----------------------------
 INSERT INTO `repertory` VALUES ('1', '440106', null, '440100', null, '440000', null, '华南农业大学');
 INSERT INTO `repertory` VALUES ('3', '440104', null, '440100', null, '440000', null, '越秀公园');
+INSERT INTO `repertory` VALUES ('4', '440882', null, '440800', null, '440000', null, '雷州茂德公');
+INSERT INTO `repertory` VALUES ('5', '440825', null, '440800', null, '440000', null, '徐闻一中');
+INSERT INTO `repertory` VALUES ('6', '440883', null, '440800', null, '440000', null, '吴川市政府旁');
+INSERT INTO `repertory` VALUES ('7', '440601', null, '440600', null, '440000', null, '市辖区七号');
+INSERT INTO `repertory` VALUES ('8', '440604', null, '440600', null, '440000', null, '佛山科技');
 
 -- ----------------------------
 -- Table structure for `role`
@@ -4451,7 +4274,7 @@ CREATE TABLE `user` (
   `user_dept_phone` varchar(11) COLLATE utf8_unicode_ci DEFAULT NULL,
   `user_dept_desc` varchar(400) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息';
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户信息';
 
 -- ----------------------------
 -- Records of user
@@ -4465,6 +4288,7 @@ INSERT INTO `user` VALUES ('12', '僵尸', '123456', '333@33', '18852315685', '2
 INSERT INTO `user` VALUES ('13', '小四', '12345', '444@qq.com', '18852136587', '1999-06-10', 'woman', '', '', '', '');
 INSERT INTO `user` VALUES ('14', '白浩', '12345', 'baihao@123.com', '12235468795', '1994-07-14', 'man', '', '', '', '');
 INSERT INTO `user` VALUES ('15', '巨鬼王', '12345', 'juguiwang@126.com', '18814052365', '1986-07-18', 'man', '', '', '', '');
+INSERT INTO `user` VALUES ('16', '小钱', '12345', '123@123', '18814065986', null, 'woman', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `user_role`
@@ -4475,7 +4299,7 @@ CREATE TABLE `user_role` (
   `user_id` int(11) DEFAULT NULL,
   `role_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`ur_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户角色映射表';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='用户角色映射表';
 
 -- ----------------------------
 -- Records of user_role
@@ -4489,3 +4313,4 @@ INSERT INTO `user_role` VALUES ('11', '12', '5');
 INSERT INTO `user_role` VALUES ('12', '13', '6');
 INSERT INTO `user_role` VALUES ('13', '14', '7');
 INSERT INTO `user_role` VALUES ('14', '15', '8');
+INSERT INTO `user_role` VALUES ('15', '16', '1');

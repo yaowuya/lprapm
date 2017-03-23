@@ -30,14 +30,17 @@ public interface PositionTrackingMapper {
             " #{trackStatus,jdbcType=VARCHAR},now())")
     void insertData(Map<String, Object> map);
 
+
     @Select("<script>" +
-            "select position_id positionId, carplan_id carplanId, " +
-            " pt.order_id orderId,pt.provinceid,pt.cityid, pt.areaid," +
-            " p.province,c.city,a.area,track_status trackStatus, " +
-            " track_time trackTime,o.user_name userName,g.goods_name goodsName " +
-            "from position_tracking pt,orders o,provinces p,cities c,areas a,goods g " +
-            "where pt.order_id=o.order_id and o.goods_id=g.goods_id and " +
-            "pt.provinceid=p.provinceid and pt.cityid=c.cityid and pt.areaid=a.areaid " +
+            " select p.province,c.city,a.area,t.* \n" +
+            "  from ( \n" +
+            "  select position_id positionId, carplan_id carplanId, " +
+            "  pt.order_id orderId,pt.provinceid,pt.cityid, pt.areaid," +
+            "  r.repo_address repoAddress,track_status trackStatus, " +
+            "  track_time trackTime,o.user_name userName,g.goods_name goodsName " +
+            "  from position_tracking pt,repertory r,orders o,goods g " +
+            "  where pt.order_id=o.order_id and pt.provinceid=r.provinceid " +
+            "  and pt.cityid=r.cityid and pt.areaid=r.areaid and o.goods_id=g.goods_id " +
             " <if test=\"createTime != null and createTime != '' \">" +
             "    and <![CDATA[track_time >= #{createTime}]]>" +
             " </if>" +
@@ -56,6 +59,8 @@ public interface PositionTrackingMapper {
             " <if test=\"orderId != null and orderId != '' \">" +
             "    and pt.order_id = #{orderId} " +
             " </if>" +
+            "  ) t,provinces p,cities c,areas a\n" +
+            "  where t.provinceid=p.provinceid and t.cityid=c.cityid and t.areaid=a.areaid " +
             "</script>")
     List<Map<String, Object>> queryTrack(Map<String, Object> params);
 }

@@ -57,6 +57,7 @@ define(['ajaxPackage', 'timePicker', 'select',
             var operateEvent = { //要放在commonrow之前，因为是赋值函数，要置前
                 'click .edit': function (event, value, row, index) {
                     // console.log("remove:", row);
+                    console.log(row.carnExamState);
                     if (row.carnExamState == "出发") {
                         $.confirm({
                             closeIcon: true,
@@ -81,13 +82,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                     }
                 }
             }
-            var state = {
-                    field: 'state',
-                    checkbox: 'true',
-                    align: 'center',
-                    valign: 'middle'
-                },
-                commonrow = {
+            var commonrow = {
                     field: 'operate',
                     title: '操作',
                     width: 100,
@@ -184,6 +179,10 @@ define(['ajaxPackage', 'timePicker', 'select',
                 field: 'carplanTime',
                 visible: true,
                 title: '创建时间'
+            }, {
+                field: 'carnId',
+                visible: false,
+                title: 'carnId'
             }];
 
             /*表格加载*/
@@ -218,7 +217,7 @@ define(['ajaxPackage', 'timePicker', 'select',
 
             function getColumns(params) {
                 var columns = [];
-                columns.push(state);
+                // columns.push(state);
                 $.each(params, function (index, val) {
                     /* iterate through array or object */
                     var row = {};
@@ -272,6 +271,7 @@ define(['ajaxPackage', 'timePicker', 'select',
 
             function showModal(row) {
                 $("#myModalLabel").text("到站记录");
+                console.log(row);
                 $.each(row, function (index, val) {
                     /* iterate through array or object */
                     if (index == "positionId") {
@@ -280,8 +280,11 @@ define(['ajaxPackage', 'timePicker', 'select',
                         $addForm.find('input[name="' + index + '"]').val(val);
                     } else if (index == "orderIds") {
                         $addForm.find('input[name="' + index + '"]').val(val);
+                    } else if (index == "carnId") {
+                        $addForm.find('input[name="' + index + '"]').val(val);
                     }
                 });
+
                 $modal.modal("show");
             }
 
@@ -292,14 +295,22 @@ define(['ajaxPackage', 'timePicker', 'select',
                 SelectCity.selectList.select($formCity, []);
                 SelectArea.selectList.select($formArea, []);
             });
-            $("#submitBtn").click(function (event) {
+
+            $("#submitBtn").click(function (e) {
                 /* 点击提交按钮 */
+                e = window.event || e;
+                if (e.stopPropagation) {
+                    e.stopPropagation();
+                } else {
+                    e.cancelBubble = true;
+                }
                 submitData();
             });
 
             function submitData() {
                 var formData = {};
                 formData = $addForm.serializeArray();
+                console.log(formData);
                 Lprapm.Ajax.request({
                     url: '/position/insertPOS',
                     data: formData,
@@ -307,6 +318,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                         if (response.success) {
                             $table.bootstrapTable("refresh");
                             $modal.modal('hide');
+                            console.log("a");
                         } else {
                             $.dialog(response.messages);
                         }

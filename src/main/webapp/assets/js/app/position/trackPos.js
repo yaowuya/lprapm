@@ -21,7 +21,7 @@ define(['ajaxPackage', 'timePicker', 'select',
 
             modalColumn = [{
                 field: 'positionId',
-                visible: true,
+                visible: false,
                 title: '物流编号',
             }, {
                 field: 'carplanId',
@@ -64,6 +64,10 @@ define(['ajaxPackage', 'timePicker', 'select',
                 visible: true,
                 title: '县级市'
             }, {
+                field: 'repoAddress',
+                visible: true,
+                title: '街区'
+            }, {
                 field: 'trackStatus',
                 visible: true,
                 title: '位置状态'
@@ -92,7 +96,7 @@ define(['ajaxPackage', 'timePicker', 'select',
                             }); //searchParams返回的是参数格式  return {N_id:abc}
                             return params;
                         },
-                        url: '/orders/queryTrack', //请求接口
+                        url: '/position/queryTrack', //请求接口
                         columns: getModalColumns(modalColumn),
                         onLoadSuccess: function (response) { //请求成功，返回数据
                             // 数据操作

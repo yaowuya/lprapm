@@ -54,9 +54,9 @@ public class OrdersServiceImpl implements OrdersService {
 
     @Override
     public void updateOrders(Orders orders, Goods goods, Receipt receipt) {
-        ordersMapper.updateByPrimaryKey(orders);
-        goodsMapper.updateByPrimaryKey(goods);
-        receiptMapper.updateByPrimaryKey(receipt);
+        ordersMapper.updateByPrimaryKeySelective(orders);
+        goodsMapper.updateByPrimaryKeySelective(goods);
+        receiptMapper.updateByPrimaryKeySelective(receipt);
     }
 
     @Override

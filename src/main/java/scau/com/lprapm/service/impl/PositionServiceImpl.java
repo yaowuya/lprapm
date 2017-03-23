@@ -30,6 +30,11 @@ public class PositionServiceImpl implements PositionService {
     @Override
     public void insertPOS(Map<String, Object> params) {
         String[] orderIds = params.get("orderIds").toString().split(",");
+        CarNeed carNeed = new CarNeed();
+        int carnId = Integer.parseInt(params.get("carnId").toString());
+        carNeed.setCarnExamState("到站");
+        carNeed.setCarnId(carnId);
+        carNeedMapper.updateByPrimaryKeySelective(carNeed);
         for (String str : orderIds) {
             params.put("orderId", Integer.parseInt(str));
             positionTrackingMapper.insertData(params);

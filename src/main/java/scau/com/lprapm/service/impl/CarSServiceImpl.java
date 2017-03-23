@@ -3,10 +3,7 @@ package scau.com.lprapm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scau.com.lprapm.common.Constant;
-import scau.com.lprapm.dao.CarNeedMapper;
-import scau.com.lprapm.dao.CarPlanMapper;
-import scau.com.lprapm.dao.OrdersMapper;
-import scau.com.lprapm.dao.PositionTrackingMapper;
+import scau.com.lprapm.dao.*;
 import scau.com.lprapm.entity.CarNeed;
 import scau.com.lprapm.entity.CarPlan;
 import scau.com.lprapm.entity.PositionTracking;
@@ -31,6 +28,8 @@ public class CarSServiceImpl implements CarSService {
     @Autowired
     PositionTrackingMapper positionTrackingMapper;
     @Autowired
+    AddressDao addressDao;
+    @Autowired
     HttpServletRequest request;
 
     @Override
@@ -41,9 +40,16 @@ public class CarSServiceImpl implements CarSService {
     @Override
     public void updateCarS(CarPlan carPlan, CarNeed carNeed) {
         try {
+            Map<String, Object> map = new LinkedHashMap<>();
+            String[] orderIds = carPlan.getOrderIds().split(",");
             carNeedMapper.insertCarNeed(carNeed);
             carPlan.setCarnId(carNeed.getCarnId());
             carPlanMapper.insertCarPlan(carPlan);
+            for (String str : orderIds) {
+                int id = Integer.parseInt(str);
+                map.put("orderId", id);
+                ordersMapper.editLogState(map);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -58,9 +64,12 @@ public class CarSServiceImpl implements CarSService {
         carNeed.setCarnId(carnId);
         carNeed.setCarnExamState("出发");
         carNeedMapper.updateByPrimaryKeySelective(carNeed);
-        map.put("provinceid", addrMap.get("provinceid"));
-        map.put("cityid", addrMap.get("cityid"));
-        map.put("areaid", addrMap.get("areaid"));
+        String provinceid = addressDao.getProvinceid(addrMap.get("province").toString());
+        String cityid = addressDao.getCityid(addrMap.get("city").toString());
+        String areaid = addressDao.getAreaid(addrMap.get("area").toString());
+        map.put("provinceid", provinceid);
+        map.put("cityid", cityid);
+        map.put("areaid", areaid);
         map.put("carnId", carnId);
         map.put("trackStatus", "出发");
         String[] orderIds = params.get("orderIds").toString().split(",");
