@@ -28,6 +28,28 @@ public class BestLoading {
         return op;
     }
 
+    public int countNum(float c, float[] w, int[] x) {
+        int n = w.length;
+        float weight = c;
+        float sum = 0;
+        int k = 0;
+        Element[] d = new Element[n];
+        for (int i = 0; i < n; i++) {
+            d[i] = new Element(w[i], i);
+        }
+        java.util.Arrays.sort(d);
+        for (int i = 0; i < n && d[i].w <= weight; i++) {
+            sum += d[i].w;
+            if (sum >= c) {
+                sum = 0;
+                k++;
+            }
+        }
+        if (sum > 0) {
+            k++;
+        }
+        return k;
+    }
     static class Element implements Comparable {
         float w;
         int i;
@@ -62,16 +84,19 @@ public class BestLoading {
         }
         return y;
     }
-//    public static void main(String[] args) {
-//        float w[] = {20,10,26,15};//下标从0开始
-//        float c=70;
-//        int[] x=new int[w.length];
-//        BestLoading be= new BestLoading();
-//        System.out.println("最优得到装载重量为："+be.loading(c, w, x));
-//        System.out.println("被装载的集装箱序号为(下标从0开始)：");
-//        for(int i=0;i<w.length;i++){
-//            if(x[i]==1)
-//                System.out.print(i+" ");
-//        }
-//    }
+
+    public static void main(String[] args) {
+        float w[] = {2000, 4400, 545, 1350, 3240, 3420, 234, 45, 43, 432, 342, 3400, 2000, 67, 234, 876, 988, 123, 1234, 435, 2000};//下标从0开始
+        float c = 6000;
+        int[] x = new int[w.length];
+        BestLoading be = new BestLoading();
+        System.out.println("最优得到装载重量为：" + be.loading(c, w, x));
+        System.out.println("被装载的集装箱序号为(下标从0开始)：");
+        for (int i = 0; i < w.length; i++) {
+            if (x[i] == 1)
+                System.out.print(i + " ");
+        }
+        int k = be.countNum(c, w, x);
+        System.out.println("k:" + k);
+    }
 }
