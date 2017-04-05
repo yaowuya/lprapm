@@ -31,8 +31,6 @@ public class CarSController extends BaseController {
     HttpServletRequest request;
     @Autowired
     OrdersService ordersService;
-
-    public static int k = 0;
     @ResponseBody
     @RequestMapping("searchAddress")
     public JsonResult searchAddress() {
@@ -130,8 +128,8 @@ public class CarSController extends BaseController {
             Map<String, Object> params = super.getParamMap();
             String[] numAttr = params.get("numAttr").toString().split(",");
             float carType = Float.parseFloat(params.get("carType").toString());
-            k = 0;
-            int n = getCarNum(numAttr, carType);
+            float[] numAttrs = StringToFloat(numAttr);
+            int n = BestLoading.getNum(numAttrs, carType);
             jsonResult = new JsonResult(true, "计算车辆成功", n);
         } catch (Exception e) {
             e.printStackTrace();
@@ -140,25 +138,6 @@ public class CarSController extends BaseController {
         return jsonResult;
     }
 
-    public int getCarNum(String[] numAttr, float carType) {
-        k++;
-        float[] floatNum = StringToFloat(numAttr);
-        List<String> list = new ArrayList<String>();
-        for (int i = 0; i < numAttr.length; i++) {
-            list.add(numAttr[i]);
-        }
-        int[] count = BestLoading.getIndex(floatNum, carType);
-        while (count.length > 0) {
-            list.remove(count);
-        }
-        if (list == null || list.isEmpty()) {
-            return k;
-        } else {
-            String[] newStr = list.toArray(new String[1]);
-            return getCarNum(newStr, carType);
-        }
-
-    }
 
     public float[] StringToFloat(String[] str) {
         float[] num = new float[str.length];

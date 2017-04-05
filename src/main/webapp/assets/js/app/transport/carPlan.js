@@ -316,6 +316,7 @@ define(['ajaxPackage', 'timePicker', 'select',
             // 点击配车按钮
             $("#insertCPBtn").on('click', function (event) {
                 event.preventDefault();
+                event.stopPropagation();
                 /* Act on the event */
                 $("#myModalLabel").text("配车计划");
                 var selectIds = "",
@@ -406,22 +407,22 @@ define(['ajaxPackage', 'timePicker', 'select',
                     var cartype = $("#selectCarT").val();
 
                     if (cartype != null && cartype != "") {
-                        var carNum = Math.ceil(allWeight / cartype);
-                        $addForm.find(':input[name="carnNum"]').val(Math.ceil(carNum));
-                        // Lprapm.Ajax.request({
-                        //     url: '/carscheme/caculateCar',
-                        //     data: {
-                        //         "numAttr": numAttr,
-                        //         "carType": cartype
-                        //     },
-                        //     success: function(response) {
-                        //         if (response.success) {
-                        //             $addForm.find(':input[name="carnNum"]').val(Math.ceil(response.data));
-                        //         } else {
-                        //             $.dialog(response.messages);
-                        //         }
-                        //     }
-                        // });
+                        // var carNum = Math.ceil(allWeight / cartype);
+                        // $addForm.find(':input[name="carnNum"]').val(Math.ceil(carNum));
+                        Lprapm.Ajax.request({
+                            url: '/carscheme/caculateCar',
+                            data: {
+                                "numAttr": numAttr,
+                                "carType": cartype
+                            },
+                            success: function (response) {
+                                if (response.success) {
+                                    $addForm.find(':input[name="carnNum"]').val(Math.ceil(response.data));
+                                } else {
+                                    $.dialog(response.messages);
+                                }
+                            }
+                        });
 
                     } else {
                         $.dialog("请选择车辆类型");

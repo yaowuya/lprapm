@@ -85,6 +85,13 @@ public class BestLoading {
         return y;
     }
 
+    public static int getNum(float w[], float c) {
+        int[] x = new int[w.length];
+        BestLoading be = new BestLoading();
+        int k = be.countNum(c, w, x);
+        return k;
+    }
+
     public static void main(String[] args) {
         float w[] = {2000, 4400, 545, 1350, 3240, 3420, 234, 45, 43, 432, 342, 3400, 2000, 67, 234, 876, 988, 123, 1234, 435, 2000};//下标从0开始
         float c = 6000;
