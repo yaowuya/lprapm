@@ -39,4 +39,27 @@ public interface CarMapper {
             " </if>" +
             "</script>")
     List<Map<String, Object>> searchVehicle(Map<String, Object> params);
+
+    @Select("<script>" +
+            "select c.car_id carId, c.user_id userId,u.user_true_name userTrueName," +
+            " c.car_license carLicense, " +
+            " c.car_type carType, c.car_volume carVolume, c.car_weight carWeight, " +
+            " c.km_price kmPrice, c.is_free isFree " +
+            "from car c,user u " +
+            "where c.user_id = u.user_id " +
+            " <if test=\"carWeight != null and carWeight != '' \">" +
+            "    and car_weight= #{carWeight} " +
+            " </if>" +
+            " <if test=\"carType != null and carType != '' \">" +
+            "    and car_type like concat('%',#{carType},'%')" +
+            " </if>" +
+            " <if test=\"isFree != null and isFree != '' \">" +
+            "    and is_free= #{isFree} " +
+            " </if>" +
+            " LIMIT ${number} " +
+            "</script>")
+    List<Map<String, Object>> searchCarNeed(Map<String, Object> params);
+
+
+
 }

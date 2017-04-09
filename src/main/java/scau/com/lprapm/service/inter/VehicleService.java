@@ -1,6 +1,7 @@
 package scau.com.lprapm.service.inter;
 
 import scau.com.lprapm.entity.Car;
+import scau.com.lprapm.entity.CarNeed;
 import scau.com.lprapm.entity.CarType;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface VehicleService {
     void updateCarType(CarType carType);
 
     void deleteCarType(int ctId);
+
+    List<Map<String, Object>> searchVDemand(Map<String, Object> params);
+
+    List<Map<String, Object>> searchCarNeed(Map<String, Object> params);
+
+    void insertVDemand(CarNeed carNeed);
 }

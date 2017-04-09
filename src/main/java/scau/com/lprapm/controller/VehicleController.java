@@ -1,5 +1,6 @@
 package scau.com.lprapm.controller;
 
+import com.github.tsohr.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.WebDataBinder;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import scau.com.lprapm.common.JsonResult;
 import scau.com.lprapm.entity.Car;
+import scau.com.lprapm.entity.CarNeed;
 import scau.com.lprapm.entity.CarType;
 import scau.com.lprapm.service.inter.VehicleService;
 
@@ -166,4 +168,49 @@ public class VehicleController extends BaseController {
         }
         return jsonResult;
     }
+
+    @ResponseBody
+    @RequestMapping("searchVDemand")
+    public JsonResult searchVDemand() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            List<Map<String, Object>> list = vehicleService.searchVDemand(params);
+            jsonResult = new JsonResult(true, "查询成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "查询失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("searchCarNeed")
+    public JsonResult searchCarNeed() {
+        JsonResult jsonResult = null;
+        try {
+            Map<String, Object> params = super.getParamMap();
+            List<Map<String, Object>> list = vehicleService.searchCarNeed(params);
+            jsonResult = new JsonResult(true, "查询成功", list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "查询失败");
+        }
+        return jsonResult;
+    }
+
+    @ResponseBody
+    @RequestMapping("insertVDemand")
+    public JsonResult insertVDemand(CarNeed carNeed) {
+        JsonResult jsonResult = null;
+        try {
+            vehicleService.insertVDemand(carNeed);
+            jsonResult = new JsonResult(true, "添加成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonResult = new JsonResult(false, "添加失败");
+        }
+        return jsonResult;
+    }
+
 }

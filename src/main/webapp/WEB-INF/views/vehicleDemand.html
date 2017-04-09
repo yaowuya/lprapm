@@ -31,25 +31,12 @@
             <form class="form-horizontal" role="form" id="searchForm" style="padding-left: 11px;">
                 <div class="form-group">
                     <div class="col-sm-3">
-                        <select name="isFree" class="selectpicker form-control selectAskPur" title="请选择需求审核状态">
-                            <option value="">需求审核状态</option>
-                            <option value='审核中'>审核中</option>
-                            <option value='通过'>通过</option>
-                            <option value='拒绝'>拒绝</option>
+                        <select name="carnExamState" class="selectpicker form-control selectAskPur" title="请选择需求审核状态">
+                            <option value='"通过"'>通过</option>
+                            <option value='"拒绝"'>拒绝</option>
                         </select>
                     </div>
-                    <div class="col-sm-2">
-                        <input class="form-control Time" type="text" name="createTime" id="createEPTime"
-                               placeholder="请选择创建时间" style="width:92%;">
-                    </div>
-                    <div class="col-sm-1 text-center" style="padding-top: 9px; width: 10px;">
-                        <b>到</b>
-                    </div>
-                    <div class="col-sm-2">
-                        <input class="form-control Time" type="text" name="endTime" id="endEPTime"
-                               placeholder="请选择创建时间">
-                    </div>
-                    <div class="col-sm-2">
+                    <div class="col-sm-offset-5 col-sm-2">
                         <input class="form-control" type="text" name="carType" placeholder="请输入车辆类型">
                     </div>
                     <button type="button" class="col-sm-offset-1 btn btn-success" id="searchBtn">
@@ -74,58 +61,45 @@
                         </h4>
                     </div>
                     <form class="modal-body form-horizontal" role="form" id="addForm">
-                        <input type="text" name="carId" class="hide" value="">
+                        <input type="text" name="carnId" class="hide" value="">
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">司机:</label>
-                            <div class="col-sm-9">
-                                <select name="userId" class="selectpicker form-control selectUser" required></select>
+                            <label class="col-sm-3 control-label">车辆类型:</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="carnType" readonly>
                             </div>
-                        </div>
+                            <label class="col-sm-3 control-label">车辆数目:</label>
+                            <div class="col-sm-2">
+                                <input type="number" class="form-control" name="carnNum" min="0" readonly>
+                            </div>
+                            </div>
                         <div class="form-group">
-                            <label class="col-sm-3 control-label">车牌号:</label>
+                            <label class="col-sm-3 control-label">审核部门:</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="carnExamDept" value="车辆管理部" readonly>
+                            </div>
+                            <label class="col-sm-3 control-label">审核人:</label>
+                            <div class="col-sm-2">
+                                <input type="text" class="form-control" name="carExamPerson" readonly>
+                            </div>
+                            </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">审核状态:</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" name="carLicense" min="0" placeholder="请输入车牌号"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">车类型:</label>
-                            <div class="col-sm-8">
-                                <input type="text" class="form-control" name="carType" placeholder="请输入车类型" required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">车体积:</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name="carVolume" min="0" placeholder="请输入车体积"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">车载重:</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name="carWeight" min="0" placeholder="请输入车载重"
-                                       required>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">车费:</label>
-                            <div class="col-sm-8">
-                                <input type="number" class="form-control" name="kmPrice" min="0" placeholder="请输入车载重"
-                                       required>
-                                <span class="help-block">单位为:元/km</span>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-3 control-label">空闲状态:</label>
-                            <div class="col-sm-9">
-                                <select name="isFree" class="selectpicker form-control selectAskPur" title="请选择车辆空闲状态">
-                                    <option value="">请选择车辆空闲状态</option>
-                                    <option value='否'>忙碌中</option>
-                                    <option value='是'>空闲</option>
+                                <select name="carnExamState" class="selectpicker form-control selectAskPur"
+                                        title="请选择需求审核状态">
+                                    <option value="">需求审核状态</option>
+                                    <option value='审核中'>审核中</option>
+                                    <option value='通过'>通过</option>
+                                    <option value='拒绝'>拒绝</option>
                                 </select>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label">车辆:</label>
+                            <div class="col-sm-8">
+                                <table class="car-table"></table>
+                            </div>
+                            </div>
                         <button type="reset" class="btn hide" id="resetBtn">
                             重置
                         </button>
@@ -147,7 +121,7 @@
 <script type="text/javascript" src="../../assets/js/plugins/require.js"></script>
 <script type="text/javascript">
     require(['../../assets/js/common.js'], function () {
-        require(['app/vehicle/vehicleInfo']);
+        require(['app/vehicle/vehicleDemand']);
     });
 </script>
 </body>

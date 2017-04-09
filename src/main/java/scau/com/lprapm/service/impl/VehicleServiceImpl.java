@@ -3,9 +3,11 @@ package scau.com.lprapm.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import scau.com.lprapm.dao.CarMapper;
+import scau.com.lprapm.dao.CarNeedMapper;
 import scau.com.lprapm.dao.CarTypeMapper;
 import scau.com.lprapm.dao.UserMapper;
 import scau.com.lprapm.entity.Car;
+import scau.com.lprapm.entity.CarNeed;
 import scau.com.lprapm.entity.CarType;
 import scau.com.lprapm.service.inter.VehicleService;
 
@@ -23,6 +25,8 @@ public class VehicleServiceImpl implements VehicleService {
     CarMapper carMapper;
     @Autowired
     CarTypeMapper carTypeMapper;
+    @Autowired
+    CarNeedMapper carNeedMapper;
 
     @Override
     public List<Map<String, Object>> searchUser() {
@@ -67,5 +71,27 @@ public class VehicleServiceImpl implements VehicleService {
     @Override
     public void deleteCarType(int ctId) {
         carTypeMapper.deleteByPrimaryKey(ctId);
+    }
+
+    @Override
+    public List<Map<String, Object>> searchVDemand(Map<String, Object> params) {
+        return carNeedMapper.searchVDemand(params);
+    }
+
+    @Override
+    public List<Map<String, Object>> searchCarNeed(Map<String, Object> params) {
+        return carMapper.searchCarNeed(params);
+    }
+
+    @Override
+    public void insertVDemand(CarNeed carNeed) {
+        carNeedMapper.updateByPrimaryKeySelective(carNeed);
+        Car car = new Car();
+        String[] carIds = carNeed.getCarIds().split(",");
+        for (String id : carIds) {
+            car.setCarId(Integer.parseInt(id));
+            car.setIsFree("否");
+            carMapper.updateByPrimaryKeySelective(car);
+        }
     }
 }
