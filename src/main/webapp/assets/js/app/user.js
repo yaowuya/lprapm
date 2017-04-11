@@ -68,11 +68,11 @@ define(['ajaxPackage', 'moment', 'datepicker', 'jqueryValidate', 'angular', 'tab
             $.each(row, function(index, value) {
                 /* iterate through array or object */
                 if (index == "userSex") {
-                    if (value == "man") {
+                    if (value == "男") {
                         $addForm.find("#manOption").attr('checked', 'true');
                         $addForm.find("#womanOption").removeAttr('checked');
                     }
-                    if (value == "woman") {
+                    if (value == "女") {
                         $addForm.find("#manOption").removeAttr('checked');
                         $addForm.find("#womanOption").attr('checked', 'true');
                     }
