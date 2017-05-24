@@ -242,7 +242,7 @@
     <build>
         <finalName>scaulogistics</finalName>
         <sourceDirectory>${basedir}/src/main/java</sourceDirectory>
-        <outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>
+        <!--<outputDirectory>${basedir}/src/main/webapp/WEB-INF/classes</outputDirectory>-->
         <!--用来打包mapper文件夹下的xml文件-->
         <resources>
             <resource>
@@ -300,11 +300,12 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <webappDirectory>
-                        ${basedir}/src/main/webapp
-                    </webappDirectory>
-                </configuration>
+                <version>3.0.0</version>
+                <!--<configuration>-->
+                <!--<webappDirectory>-->
+                <!--${basedir}/src/main/webapp-->
+                <!--</webappDirectory>-->
+                <!--</configuration>-->
             </plugin>
             <!--mybatis generator 逆向工程-->
             <plugin>

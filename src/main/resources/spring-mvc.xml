@@ -10,8 +10,6 @@
 			http://www.springframework.org/schema/context/spring-context-4.3.xsd
 			http://www.springframework.org/schema/mvc
 			http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd">
-	
-
 	<mvc:annotation-driven>
 		 <mvc:message-converters>
 	        <bean class="org.springframework.http.converter.StringHttpMessageConverter">
@@ -26,12 +24,9 @@
 	        </bean>
 	    </mvc:message-converters>
 	</mvc:annotation-driven>
-
 	<!--使用基于注解的自动装配-->
 	<context:annotation-config/>
-
 	<context:component-scan base-package="scau.com.lprapm.controller" />
-
 	<!-- 静态资源处理 -->
 	<mvc:default-servlet-handler />
 	<!-- 开放静态请求 -->
@@ -44,26 +39,19 @@
 			<mvc:mapping path="/**/**" />
 			<mvc:exclude-mapping path="/assets/**"/>
 			<bean class="scau.com.lprapm.interceptor.LoginInterceptor" >
-
 		    </bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
-
-	
 	<!-- 视图 -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     	<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
         <property name="prefix" value="/WEB-INF/views/"/>
         <property name="suffix" value=".html"/>
     </bean>
-
     <!-- 上传 -->
-    
 	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
     	<property name="resolveLazily" value="true" />
     	<property name="maxUploadSize" value="20971520" />
     	<property name="defaultEncoding" value="utf-8" />
     </bean>
-
-
 </beans>

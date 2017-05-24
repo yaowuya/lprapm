@@ -3,12 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-
 	<settings>
 		<!--使用jdbc的getGeneratedKeys获得自增主键-->
 		<setting name="useGeneratedKeys" value="true" />
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="logImpl" value="LOG4J2" />
 	</settings>
-
 </configuration>
