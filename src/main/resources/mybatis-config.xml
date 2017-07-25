@@ -4,10 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<settings>
-		<!--使用jdbc的getGeneratedKeys获得自增主键-->
+        <!--使用jdbc的getGeneratedKeys获得自增主键  如果设置为 true 则这个设置强制使用自动生成主键-->
 		<setting name="useGeneratedKeys" value="true" />
-        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime} -->
+        <!-- 开启驼峰命名转换:Table{create_time} -> Entity{createTime}
+        是否开启自动驼峰命名规则（camel case）映射，即从经典数据库列名 A_COLUMN 到经典 Java 属性名 aColumn 的类似映射
+        -->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
+        <!--指定 MyBatis 所用日志的具体实现，未指定时将自动查找-->
 		<setting name="logImpl" value="LOG4J2" />
 	</settings>
 </configuration>
